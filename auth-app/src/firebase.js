@@ -13,8 +13,15 @@ var firebaseConfig = {
     appId: "1:496590033273:web:c2f3ca11a7ddf2c6fa9fa8"
   };
 
-firebase.initializeApp(firebaseConfig);
-// export var auth = firebase.auth();
-// export var database = firebase.database();
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+else {
+  firebase.app();
+}
+
+var auth = firebase.auth();
+var database = firebase.database();
+var provider = new firebase.auth.GoogleAuthProvider();
 
 

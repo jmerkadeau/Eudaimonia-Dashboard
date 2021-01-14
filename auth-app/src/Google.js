@@ -5,7 +5,7 @@ class Google extends Component{
     render() {
         return(
             <div className="App">
-                <button className="googleButton" onClick={this.props.googleSignIn} >
+                <button className="googleButton">
                     Sign in with Google
                 </button>
             </div>

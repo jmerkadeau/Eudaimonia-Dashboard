@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from 'react';
 import './ProfilePage.css';
 
-const ProfilePage = () => {
-    return(
-        <div className="outer">
+class ProfilePage extends Component{
+    render() {
+        return(
+            <div className="outer">
             <div className="inner">
                 <div className="profPic">
                 </div>
@@ -21,7 +22,10 @@ const ProfilePage = () => {
             </button>
         </div>
 
-    );
+        );
+    }
+
 }
+
 
 export default ProfilePage;
