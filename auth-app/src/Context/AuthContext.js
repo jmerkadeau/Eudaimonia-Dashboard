@@ -3,6 +3,7 @@ import { auth } from '../Fire';
 
 const AuthContext = React.createContext();
 
+//not using context right now
 export function useAuth() {
     return useContext(AuthContext);
 }

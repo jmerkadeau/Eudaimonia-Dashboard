@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
-
 var firebaseConfig = {
     apiKey: "AIzaSyBj7fmZRv_SCFXClGvWKN_QFr-_vxv_42w",
     authDomain: "user-auth-development.firebaseapp.com",
@@ -15,13 +14,10 @@ var firebaseConfig = {
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-}
-else {
+}else {
   firebase.app();
 }
 
-var auth = firebase.auth();
-var database = firebase.database();
-var provider = new firebase.auth.GoogleAuthProvider();
-
-
+export var auth = firebase.auth();
+export var database = firebase.database();
+export var provider = new firebase.auth.GoogleAuthProvider();
