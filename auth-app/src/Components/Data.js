@@ -4,13 +4,15 @@ import { auth, database } from '../Firebase.js';
 // import Histogram from './Histogram.js';
 // import BarGraph from './BarGraph.js';
 import './Data.css';
-import { moodLog } from './MoodData.js';
+//import { moodLog } from './MoodData.js';
 import { webLog } from './WebData.js';
 import { date } from './GetDate.js'
+import { timeByDom } from './WebsiteByMood.js';
+import WebByMoodGraph from './WebByMoodGraph.js';
 
-// import {
-//   BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-// } from 'recharts';
+import {
+  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+} from 'recharts';
 
 
 function Data() {
@@ -148,8 +150,12 @@ function Data() {
     console.log(webLog);
   }
 
-  const showMood = () => {
-    console.log(moodLog);
+  // const showMood = () => {
+  //   console.log(moodLog);
+  // }
+
+  const anxious = () => {
+    console.log(timeByDom);
   }
 
 
@@ -167,12 +173,18 @@ function Data() {
         <button onClick={web}>
         web
         </button>
-        <button onClick={showMood}>
+        {/* <button onClick={showMood}>
           show mood data
-        </button>
+        </button> */}
         <button onClick={showWeb}>
           show web data
         </button>
+        <button onClick={anxious}>
+          anxious
+        </button>
+        <div>
+          <WebByMoodGraph/>
+        </div>
         {/* <div>
           <BarGraph/>
         </div> */}

@@ -8,7 +8,7 @@ import { auth, database } from '../Firebase.js';
 const uid = 'BQJQmkLEsmSLFn6WF2JWWlXZzVo1';
 var webs = [];
 var webObj = {};
-const date = '1-26-2021';
+const date = '1-31-2021';
 
 const timeToInteger = (time) => {
   var t = time.split(':');
@@ -25,9 +25,11 @@ ref.once('value', (snapshot) => {
     const domain = a.key;
     var intervals = a.val();
     Object.keys(intervals).forEach(function (key) {
+      const start = timeToInteger(key);
+      const end = timeToInteger(intervals[key]);
       webObj = {
-        'start': key,
-        'end': intervals[key],
+        'start': start,
+        'end': end,
         'domain': domain
       };
       webs.push(webObj);

@@ -3,7 +3,7 @@ import '../App.css';
 import GSI from './../GSI.png';
 
 
-import { auth, database, provider } from './../Firebase.js';
+import { auth, database, provider } from '../Firebase.js';
 
 function LandingPage(){
   

@@ -54,7 +54,7 @@ function BarGraph() {
         }
       }
       return (hba);
-  }
+    }
 
   // const ms
   const ref1 = database.ref('moods/'+uid+'/'+'1-26-2021');
