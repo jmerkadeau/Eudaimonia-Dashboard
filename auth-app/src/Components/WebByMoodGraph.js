@@ -1,11 +1,11 @@
 import React from 'react';
-import { timeByDom } from './WebsiteByMood.js'
+import anxious from './WebsiteByMood.js'
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
 function WebByMoodGraph() {
-    const data = timeByDom;
+    const data = anxious();
 
     return(
         <div>

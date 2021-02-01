@@ -57,45 +57,43 @@ const anxious = async () => {
     for (let [key, value] of Object.entries(moodLog)){
         console.log(`${key}:${value}`);
     }
-    // for (var key in moodLog){
-    //     console.log(key);
-    // }
-    //     console.log(moodLog[i]);
-    //     if (moodLog[i].mood === 'Anxious'){
-    //         var time = moodLog[i].time;
-    //         // add conditional loop for if time < 3600
-    //         // x is the array of the web times for the hour leading up to the mood log
-    //         const x  = hourBeforeArray(time)
-    //         console.log(x);
-    //         const distinctDomains = [...new Set(x.map(x => x.domain))];
-    //         console.log(distinctDomains);
-    //         for (var j = 0; j < distinctDomains.length; j++){
-    //             var domTime = 0;
-    //             for (var k = 0; k < x.length; k++){
-    //                 if (x[k].domain === distinctDomains[j]){
-    //                     console.log('works!!!')
-    //                     domTime += x[k].timeDiff;
-    //                 }
-    //             }
-    //             const domainTime = {
-    //                 'domain' : distinctDomains[j],
-    //                 'time' : domTime
-    //             }
-    //             timeByDomain.push(domainTime);
-    //         }
-    //     }
-    // }
-    // const topFive = timeByDomain.sort(compare);
-    // console.log(timeByDomain);
-    // const anxiousData = [
-    //     {name: topFive[0].domain, seconds: topFive[0].time},
-    //     {name: topFive[1].domain, seconds: topFive[1].time},
-    //     {name: topFive[2].domain, seconds: topFive[2].time},
-    //     {name: topFive[3].domain, seconds: topFive[3].time},
-    //     {name: topFive[4].domain, seconds: topFive[4].time},        
-    // ]
-    //return(anxiousData);
-    return([]);
+    for (var i = 0; i < moodLog.length; i++){
+        // console.log(key);
+        console.log(moodLog[i]);
+        if (moodLog[i].mood === 'Anxious'){
+            var time = moodLog[i].time;
+            // add conditional loop for if time < 3600
+            // x is the array of the web times for the hour leading up to the mood log
+            const x  = hourBeforeArray(time)
+            console.log(x);
+            const distinctDomains = [...new Set(x.map(x => x.domain))];
+            console.log(distinctDomains);
+            for (var j = 0; j < distinctDomains.length; j++){
+                var domTime = 0;
+                for (var k = 0; k < x.length; k++){
+                    if (x[k].domain === distinctDomains[j]){
+                        console.log('works!!!')
+                        domTime += x[k].timeDiff;
+                    }
+                }
+                const domainTime = {
+                    'domain' : distinctDomains[j],
+                    'time' : domTime
+                }
+                timeByDomain.push(domainTime);
+            }
+        }
+    }
+    const topFive = timeByDomain.sort(compare);
+    const anxiousData = [
+        {name: topFive[0].domain, seconds: topFive[0].time},
+        {name: topFive[1].domain, seconds: topFive[1].time},
+        {name: topFive[2].domain, seconds: topFive[2].time},
+        {name: topFive[3].domain, seconds: topFive[3].time},
+        {name: topFive[4].domain, seconds: topFive[4].time},        
+    ]
+    console.log(anxiousData);
+    return(anxiousData);
 
 
 
@@ -111,4 +109,4 @@ const anxious = async () => {
 // export default tim;
 
 // // console.log(timeByDomain);
-export const timeByDom = anxious();
+export default anxious;

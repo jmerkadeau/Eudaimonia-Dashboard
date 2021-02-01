@@ -8,7 +8,7 @@ async function getMoodLog() {
     //const userInfo = auth.currentUser;
     //const uid = userInfo.uid;
     const uid = 'BQJQmkLEsmSLFn6WF2JWWlXZzVo1';
-    var moods = {};
+    var moods = [];
     var moodObj = {};
 
     const timeToInteger = (time) => {
@@ -21,7 +21,7 @@ async function getMoodLog() {
     }
 
     const ref = database.ref('moods/'+uid+'/'+date);
-    ref.once('value', (snapshot) => {
+    await ref.once('value', (snapshot) => {
         snapshot.forEach((a) => {
             const t = a.key;
             const time = timeToInteger(t);
@@ -32,7 +32,8 @@ async function getMoodLog() {
                 'time' : time,
                 'mood' : mood          
             }
-            moods [ time ] =  mood ;
+            // moods [ time ] =  mood ;
+            moods.push(moodObj);
         })
     })
     return(moods);

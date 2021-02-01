@@ -7,7 +7,7 @@ import './Data.css';
 //import { moodLog } from './MoodData.js';
 import { webLog } from './WebData.js';
 import { date } from './GetDate.js'
-import { timeByDom } from './WebsiteByMood.js';
+import anxious from './WebsiteByMood.js';
 import WebByMoodGraph from './WebByMoodGraph.js';
 
 import {
@@ -154,9 +154,10 @@ function Data() {
   //   console.log(moodLog);
   // }
 
-  const anxious = () => {
-    console.log(timeByDom);
-  }
+  // const anxious = () => {
+
+  //   console.log(timeByDom);
+  // }
 
 
 

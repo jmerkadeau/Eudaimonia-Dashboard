@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-import { auth } from './../Firebase.js';
+import { auth } from '../Firebase.js';
 import { date } from './GetDate.js';
 
 
