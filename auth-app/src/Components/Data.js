@@ -7,7 +7,7 @@ import './Data.css';
 //import { moodLog } from './MoodData.js';
 import { webLog } from './WebData.js';
 import { date } from './GetDate.js'
-import anxious from './WebsiteByMood.js';
+import { getAnxious } from './WebsiteByMood.js';
 import WebByMoodGraph from './WebByMoodGraph.js';
 
 import {
@@ -16,6 +16,7 @@ import {
 
 
 function Data() {
+  //var a = await getAnxious();
 
   const userInfo = auth.currentUser;
   const uid = userInfo.uid;
@@ -180,7 +181,7 @@ function Data() {
         <button onClick={showWeb}>
           show web data
         </button>
-        <button onClick={anxious}>
+        <button onClick={getAnxious}>
           anxious
         </button>
         <div>
