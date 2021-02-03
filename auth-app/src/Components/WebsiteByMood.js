@@ -60,13 +60,21 @@ var getAnxious = async () => {
     }
     const topFive = timeByDomain.sort(compare);
     console.log(topFive);
-    const anxiousData = [
-        {name: topFive[0].domain, seconds: topFive[0].time},
-        {name: topFive[1].domain, seconds: topFive[1].time},
-        {name: topFive[2].domain, seconds: topFive[2].time},
-        {name: topFive[3].domain, seconds: topFive[3].time},
-        {name: topFive[4].domain, seconds: topFive[4].time},        
-    ]
+    var anxiousData = [];
+    if (topFive === undefined || topFive.length == 0){
+        anxiousData = [
+            {name: 'none', seconds: 0}
+        ];
+    }
+    else{
+        anxiousData = [
+            {name: topFive[0].domain, seconds: topFive[0].time},
+            {name: topFive[1].domain, seconds: topFive[1].time},
+            {name: topFive[2].domain, seconds: topFive[2].time},
+            {name: topFive[3].domain, seconds: topFive[3].time},
+            {name: topFive[4].domain, seconds: topFive[4].time},        
+        ]
+    }
     console.log(anxiousData);
     return(anxiousData);
 };
@@ -97,13 +105,21 @@ var getConfident = async () => {
     }
     const topFive = timeByDomain.sort(compare);
     console.log(topFive);
-    const confidentData = [
-        {name: topFive[0].domain, seconds: topFive[0].time},
-        {name: topFive[1].domain, seconds: topFive[1].time},
-        {name: topFive[2].domain, seconds: topFive[2].time},
-        {name: topFive[3].domain, seconds: topFive[3].time},
-        {name: topFive[4].domain, seconds: topFive[4].time},        
-    ]
+    var confidentData = [];
+    if (topFive === undefined || topFive.length == 0){
+        confidentData = [
+            {name: 'none', seconds: 0}
+        ];
+    }
+    else{
+        confidentData = [
+            {name: topFive[0].domain, seconds: topFive[0].time},
+            {name: topFive[1].domain, seconds: topFive[1].time},
+            {name: topFive[2].domain, seconds: topFive[2].time},
+            {name: topFive[3].domain, seconds: topFive[3].time},
+            {name: topFive[4].domain, seconds: topFive[4].time},        
+        ]
+    }
     console.log(confidentData);
     return(confidentData);
 };
@@ -134,13 +150,21 @@ var getSad = async () => {
     }
     const topFive = timeByDomain.sort(compare);
     console.log(topFive);
-    const sadData = [
-        {name: topFive[0].domain, seconds: topFive[0].time},
-        {name: topFive[1].domain, seconds: topFive[1].time},
-        {name: topFive[2].domain, seconds: topFive[2].time},
-        {name: topFive[3].domain, seconds: topFive[3].time},
-        {name: topFive[4].domain, seconds: topFive[4].time},        
-    ]
+    var sadData = [];
+    if (topFive === undefined || topFive.length == 0){
+        sadData = [
+            {name: 'none', seconds: 0}
+        ];
+    }
+    else{
+        sadData = [
+            {name: topFive[0].domain, seconds: topFive[0].time},
+            {name: topFive[1].domain, seconds: topFive[1].time},
+            {name: topFive[2].domain, seconds: topFive[2].time},
+            {name: topFive[3].domain, seconds: topFive[3].time},
+            {name: topFive[4].domain, seconds: topFive[4].time},        
+        ]
+    }
     console.log(sadData);
     return(sadData);
 };
@@ -171,13 +195,21 @@ var getHappy = async () => {
     }
     const topFive = timeByDomain.sort(compare);
     console.log(topFive);
-    const happyData = [
-        {name: topFive[0].domain, seconds: topFive[0].time},
-        {name: topFive[1].domain, seconds: topFive[1].time},
-        {name: topFive[2].domain, seconds: topFive[2].time},
-        {name: topFive[3].domain, seconds: topFive[3].time},
-        {name: topFive[4].domain, seconds: topFive[4].time},        
-    ]
+    var happyData = [];
+    if (topFive === undefined || topFive.length == 0){
+        happyData = [
+            {name: 'none', seconds: 0}
+        ];
+    }
+    else{
+        happyData = [
+            {name: topFive[0].domain, seconds: topFive[0].time},
+            {name: topFive[1].domain, seconds: topFive[1].time},
+            {name: topFive[2].domain, seconds: topFive[2].time},
+            {name: topFive[3].domain, seconds: topFive[3].time},
+            {name: topFive[4].domain, seconds: topFive[4].time},        
+        ]
+    }
     console.log(happyData);
     return(happyData);
 };
