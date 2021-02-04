@@ -18,6 +18,8 @@
 .env.test.local
 .env.production.local
 
+.eslintcache
+
 .firebase
 .firebaserc
 /database-debug.log
