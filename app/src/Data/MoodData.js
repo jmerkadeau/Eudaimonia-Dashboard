@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth, database } from '../Firebase.js';
+import { auth, database } from './Firebase.js';
 import { date } from './GetDate.js';
 
 async function getMoodLog() {
@@ -26,7 +26,7 @@ async function getMoodLog() {
 
             moodObj = {
                 'time' : time,
-                'mood' : mood          
+                'mood' : mood
             }
             moods.push(moodObj);
         })

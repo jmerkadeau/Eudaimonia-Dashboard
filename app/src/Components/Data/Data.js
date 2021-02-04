@@ -1,6 +1,6 @@
 import React from 'react';
 import './Data.css';
-import WebByMoodGraph from './WebByMoodGraph.js';
+import WebByMoodGraph from '../WebByMood/WebByMoodGraph.js';
 
 
 // Main page for the data section but all the work is done in other files

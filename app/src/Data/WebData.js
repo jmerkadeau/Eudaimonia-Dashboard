@@ -1,5 +1,5 @@
 import React from 'react';
-import { auth, database } from '../Firebase.js';
+import { auth, database } from './Firebase.js';
 import { date } from './GetDate.js';
 
 async function getWebLog() {
@@ -31,10 +31,10 @@ async function getWebLog() {
         };
         webs.push(webObj);
       });
-  
+
     });
   });
-  return(webs);
+  return (webs);
 }
 
 export default getWebLog;
