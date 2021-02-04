@@ -6,6 +6,11 @@ import Nav from './Nav.js';
 
 function Home() {
     return(
+        // Uses react-router-dom to allow the user to go between Profile and Data
+        // User is automatically sent to Profile when logged in
+        //
+        // I don't think Router and Switch are both necessary but I haven't messed
+        // around with them
         <div className='home'>
             <Router>
                 <Nav />

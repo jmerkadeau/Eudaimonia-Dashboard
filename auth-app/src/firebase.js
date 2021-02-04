@@ -18,6 +18,9 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
+//Initializes the firebase app so that other files
+//can access the user info and the data
+
 export var auth = firebase.auth();
 export var database = firebase.database();
 export var provider = new firebase.auth.GoogleAuthProvider();

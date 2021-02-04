@@ -1,25 +1,21 @@
 import React from 'react';
-import './App.css';
-
 import { auth } from './Firebase.js';
-
 import { useAuthState } from 'react-firebase-hooks/auth';
-
 import LandingPage from './Components/LandingPage.js';
 import Home from './Components/Home.js';
 
-//import Card from 'react-bootstrap/Card';
-
-
-
 function App() {
+  const [user] = useAuthState(auth);
 
-  const [u] = useAuthState(auth);
+  //firebase's useAuthState hook gets the user's info
+  
+  //if user is signed in, sends to Home.js
+  //if not, sends to LandingPage.js
 
   return (
     <div className="app">
       <section>
-        {u ? <Home/> : <LandingPage/>}
+        {user ? <Home/> : <LandingPage/>}
       </section>  
     </div>
   );
