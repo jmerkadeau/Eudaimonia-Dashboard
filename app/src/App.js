@@ -4,6 +4,9 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import LandingPage from './Components/LandingPage/LandingPage.js';
 import Home from './Components/Home/Home.js';
 
+import SignInSide from "./Components/LandingPage/SignInSide.js";
+import Dashboard from "./Components/Dashboard/Dashboard.js";
+
 function App() {
   const [user] = useAuthState(auth);
 
@@ -18,6 +21,7 @@ function App() {
         {user ? <Home /> : <LandingPage />}
       </section>
     </div>
+    // <SignInSide></SignInSide>
   );
 }
 
