@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Profile from '../Profile/Profile.js';
 import Mood from '../Mood/Mood.js';
+import Web from '../Web/Web.js';
+
 import Nav from '../Nav/Nav.js';
 
 function Home() {
@@ -17,6 +19,9 @@ function Home() {
         <Switch>
           <Route path='/' exact component={() => <Profile />} />
           <Route path='/mood' exact component={() => <Mood />} />
+          <Route path='/web' exact component={() => <Web />} />
+
+
         </Switch>
       </Router>
 

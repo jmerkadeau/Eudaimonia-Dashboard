@@ -13,6 +13,9 @@ function Nav() {
           <Link className='navLink' to='/mood' >
             Mood
           </Link>
+          <Link className='navLink' to='/web' >
+            Web
+          </Link>
         </div>
       </nav>
     </div>
