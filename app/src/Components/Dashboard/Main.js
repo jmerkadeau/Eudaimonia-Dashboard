@@ -25,6 +25,11 @@ import ListRouter from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import Mood from './Mood.js';
+import Dashboard from './Dashboard.js';
+import Web from './Web.js';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SideDrawer from './SideDrawer.js';
 
 function Copyright() {
   return (
@@ -134,50 +139,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Main() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper className={fixedHeightPaper}>
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper className={fixedHeightPaper}>
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-            <Box pt={4}>
-              <Copyright />
-            </Box>
-          </Container>
-        </main>
+        <CssBaseline />
+        <Router>
+            <SideDrawer />
+            <Switch>
+                <Route path='/' exact component={() => <Dashboard />} />
+                <Route path='/mood' exact component={() => <Mood />} />
+                <Route path='/web' exact component={() => <Web />} />
+            </Switch>
+        </Router>
 
-      </div>
+        </div>
     </ThemeProvider>
+
   );
 }

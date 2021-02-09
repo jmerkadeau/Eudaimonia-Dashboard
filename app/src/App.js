@@ -3,6 +3,10 @@ import { auth } from './Data/Firebase.js';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import LandingPage from './Components/LandingPage/LandingPage.js';
 import Home from './Components/Home/Home.js';
+import Dashboard from './Components/Dashboard/Dashboard.js';
+import Router from './Components/Dashboard/Router.js'
+import Main from './Components/Dashboard/Main.js'
+import SignInSide from './Components/LandingPage/NewLanding.js';
 
 function App() {
   const [user] = useAuthState(auth);
@@ -15,7 +19,8 @@ function App() {
   return (
     <div className="app">
       <section>
-        {user ? <Home /> : <LandingPage />}
+        {user? <Home /> : <LandingPage />}
+        {/* {user ? <Main /> : <SignInSide />} */}
       </section>
     </div>
   );
