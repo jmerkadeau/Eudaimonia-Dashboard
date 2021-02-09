@@ -150,9 +150,6 @@ export default function Main() {
   const classes = useStyles();
   let urlElements = window.location.href.split('/');
   let currentPage = urlElements[3];
-  if (currentPage === null){
-      currentPage = 'Summary';
-  }
   const [title, setTitle] = React.useState(currentPage);
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
