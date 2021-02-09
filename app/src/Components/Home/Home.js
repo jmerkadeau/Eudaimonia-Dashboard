@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Profile from '../Profile/Profile.js';
-import Data from '../Data/Data.js';
+import Mood from '../Mood/Mood.js';
 import Nav from '../Nav/Nav.js';
 
 function Home() {
@@ -16,7 +16,7 @@ function Home() {
         <Nav />
         <Switch>
           <Route path='/' exact component={() => <Profile />} />
-          <Route path='/data' exact component={() => <Data />} />
+          <Route path='/mood' exact component={() => <Mood />} />
         </Switch>
       </Router>
 
