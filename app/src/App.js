@@ -8,9 +8,6 @@ import Router from './Components/Dashboard/Router.js'
 import Main from './Components/Dashboard/Main.js'
 import SignInSide from './Components/LandingPage/NewLanding.js';
 
-import SignInSide from "./Components/LandingPage/SignInSide.js";
-import Dashboard from "./Components/Dashboard/Dashboard.js";
-
 function App() {
   const [user] = useAuthState(auth);
 
@@ -22,7 +19,7 @@ function App() {
   return (
     <div className="app">
       <section>
-        {user? <Home /> : <LandingPage />}
+        {user ? <Home /> : <LandingPage />}
         {/* {user ? <Main /> : <SignInSide />} */}
       </section>
     </div>
