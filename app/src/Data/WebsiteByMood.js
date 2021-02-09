@@ -105,4 +105,4 @@ var getMoodData = async (m) => {
   return (topFive);
 };
 
-export { getMoodData, getTopMoodsToday }
+export { getMoodData, getTopMoodsToday};
