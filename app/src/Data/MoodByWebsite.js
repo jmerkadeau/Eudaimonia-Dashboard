@@ -87,8 +87,10 @@ var getWebData = async () => {
   const moodLog = await getMoodLog();
   const webLog = await getWebLog();
   const topSites = getTopWebsitesByTime(webLog);
+  // console.log(moodLog);
   for (var i = 0; i < moodLog.length; i++) {
-    const mood = moodLog[i].mood;
+    var mood = moodLog[i].mood;
+    console.log(mood);
     var time = moodLog[i].time;
     const prevHourWeb = hourAfterArray(time, webLog);
     const distinctDomains = [...new Set(prevHourWeb.map(prevHourWeb => prevHourWeb.domain))];
@@ -111,13 +113,13 @@ var getWebData = async () => {
         moodsAfterWebsite[distinctDomains[j]][mood] = 1;
       }
     }
-    return [topSites, moodsAfterWebsite];
     // console.log(moodsAfterWebsite);
 
 
     // x = x.concat(y);
 
   }
+  return [topSites, moodsAfterWebsite];
   // console.log(x);
   // console.log(x.length);
   // console.log(x.slice());
