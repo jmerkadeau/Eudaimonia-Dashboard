@@ -19,11 +19,13 @@ function WebByMoodGraph(props) {
     // we need for the graphs.
     // I initially get Anxious and Focused just to have two graphs up to start.
     // It is an async/await function so that it waits until
-    async function getData() {
-      // console.log("get Data run");
+    function getData() {
+      console.log("[WebByMoodGraph] get Data run");
       var currentMood = props.currentMood;
+      console.log(currentMood);
+      // const moodLog = props.moodLog;
       // console.log(`current mood is ${currentMood}`);
-      const currentMoodData = await getMoodData(currentMood);
+      const currentMoodData = props.moodData;
       // const focused = await getMoodData1('Focused');
       setData1(currentMoodData);
       setTitle1(currentMood);
@@ -35,7 +37,7 @@ function WebByMoodGraph(props) {
     //   getData();
     // }
     getData();
-  }, [props.currentMood]);
+  }, [props.currentMood, props.moodData]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 

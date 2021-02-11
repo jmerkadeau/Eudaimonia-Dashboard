@@ -16,7 +16,7 @@ function TopWebGraph(props) {
     // I initially get Anxious and Focused just to have two graphs up to start.
     // It is an async/await function so that it waits until
     async function getData() {
-      console.log("[MoodByWebGraph] get Data run");
+      // console.log("[TopWebGraph] get Data run");
       setData(props.topSites);
 
     }

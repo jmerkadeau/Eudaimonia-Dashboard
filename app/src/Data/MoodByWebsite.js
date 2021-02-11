@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import getMoodLog from './MoodData.js';
-import getWebLog from './WebData.js';
 
 
 // hourBeforeArray creates an array with all of
@@ -81,16 +79,15 @@ function getTopWebsitesByTime(webLog) {
   return (top);
 }
 
-var getWebData = async () => {
-  console.log("getWebData run");
+var getWebData = (moodLog, webLog) => {
+  // console.log("[MoodByWebsite] getWebData run");
   var moodsAfterWebsite = {};
-  const moodLog = await getMoodLog();
-  const webLog = await getWebLog();
+  // const webLog = await getWebLog();
   const topSites = getTopWebsitesByTime(webLog);
   // console.log(moodLog);
   for (var i = 0; i < moodLog.length; i++) {
     var mood = moodLog[i].mood;
-    console.log(mood);
+    // console.log(mood);
     var time = moodLog[i].time;
     const prevHourWeb = hourAfterArray(time, webLog);
     const distinctDomains = [...new Set(prevHourWeb.map(prevHourWeb => prevHourWeb.domain))];
@@ -113,34 +110,8 @@ var getWebData = async () => {
         moodsAfterWebsite[distinctDomains[j]][mood] = 1;
       }
     }
-    // console.log(moodsAfterWebsite);
-
-
-    // x = x.concat(y);
-
   }
   return [topSites, moodsAfterWebsite];
-  // console.log(x);
-  // console.log(x.length);
-  // console.log(x.slice());
-
-
-  // console.log(moodsAfterWebsite);
-  // const sortedTimeByDomain = timeByDomain.sort(compare);
-  // console.log(sortedTimeByDomain);
-  // var topFive = [];
-  // for (var l = 0; l < 5; l++) {
-  //   // console.log(sortedTimeByDomain[l]);
-  //   if (sortedTimeByDomain[l] != null) {
-  //     var twoEDomain = sortedTimeByDomain[l].domain;
-  //     var fixedDomain = twoEDomain.replaceAll('%2E', '.')
-  //     topFive[l] = { name: fixedDomain, seconds: sortedTimeByDomain[l].time }
-  //   }
-  // }
-  // if (topFive === undefined || topFive.length === 0) {
-  //   topFive = [{ name: `You have not logged ${mood} today`, seconds: 0 }];
-  // }
-  // return (topFive);
 };
 
 export { getWebData };

@@ -37,8 +37,7 @@ function compare(a, b) {
   return comparison;
 }
 
-var getTopMoodsToday = async () => {
-  const moodLog = await getMoodLog();
+var getTopMoodsToday = (moodLog) => {
   var moodFrequency = {};
   var orderedMoods = [];
   // console.log("getTopMoodsToday");
@@ -59,11 +58,9 @@ var getTopMoodsToday = async () => {
   return [orderedMoods, moodFrequency];
 };
 
-var getMoodData = async (m) => {
+var getDataForMood = (mood, moodLog, webLog) => {
   var timeByDomain = [];
-  const mood = await m;
-  const moodLog = await getMoodLog();
-  const webLog = await getWebLog();
+  // create top 5 websites by mood
   var x = []
   for (var i = 0; i < moodLog.length; i++) {
     if (moodLog[i].mood === mood) {
@@ -89,7 +86,7 @@ var getMoodData = async (m) => {
     timeByDomain.push(domainTime);
   }
   const sortedTimeByDomain = timeByDomain.sort(compare);
-  // console.log(timeByDomain);
+  console.log(sortedTimeByDomain);
   var topFive = [];
   for (var l = 0; l < 5; l++) {
     // console.log(sortedTimeByDomain[l]);
@@ -105,4 +102,4 @@ var getMoodData = async (m) => {
   return (topFive);
 };
 
-export { getMoodData, getTopMoodsToday};
+export { getDataForMood, getTopMoodsToday };

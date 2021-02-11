@@ -5,10 +5,7 @@ import {
 } from 'recharts';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
-function TopMoodsPie() {
-
-
-  const [loading, setLoading] = useState(true);
+function TopMoodsPie(props) {
   const [pieData, setPieData] = useState([]);
 
 
@@ -18,11 +15,14 @@ function TopMoodsPie() {
     // we need for the graphs.
     // I initially get Anxious and Focused just to have two graphs up to start.
     // It is an async/await function so that it waits until
-    async function getData() {
+    function getData() {
       // console.log("get Data run");
 
       // console.log(`current mood is ${currentMood}`);
-      var [orderedMoods, moodFrequency] = await getTopMoodsToday();
+      // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
+      const orderedMoods = props.orderedMoods;
+      const moodFrequency = props.moodFrequency;
+
       // console.log(orderedMoods);
       var pieChartData = [];
       orderedMoods.forEach(function (mood) {
@@ -36,15 +36,10 @@ function TopMoodsPie() {
       // console.log("setPieData running");
       // console.log(pieChartData);
       setPieData(pieChartData);
-      // CreateButtons();
 
-      setLoading(false);
-    }
-    if (loading) {
-      getData();
     }
     getData();
-  }, []);
+  }, [props.orderedMoods, props.moodFrequency]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 

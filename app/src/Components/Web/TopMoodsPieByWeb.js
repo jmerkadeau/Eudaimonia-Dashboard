@@ -18,22 +18,26 @@ function TopMoodsPieByWeb(props) {
     // I initially get Anxious and Focused just to have two graphs up to start.
     // It is an async/await function so that it waits until
     async function getData() {
-      console.log("GET DATA RUN");
-      console.log(props.moodByWebData);
+      // console.log("[topMoodsPieByWeb] getData run");
+      // console.log(props.moodByWebData);
       const currentSite = props.currentSite.replaceAll('.', '%2E');
       const moodByWebData = props.moodByWebData;
       // console.log(currentSite);
       // console.log(moodByWebData);
-      const temp = moodByWebData[currentSite];
-      console.log(temp);
-      var pieChartData = [];
-      for (var key in temp) {
-        pieChartData.push({
-          name: key,
-          value: temp[key]
-        });
+      if (currentSite in moodByWebData) {
+        const temp = moodByWebData[currentSite];
+        var pieChartData = [];
+        for (var key in temp) {
+          pieChartData.push({
+            name: key,
+            value: temp[key]
+          });
+        }
+        setPieData(pieChartData);
+      } else {
+        console.log("No moods associated with site from today");
+        setPieData([]);
       }
-      setPieData(pieChartData);
 
     }
 

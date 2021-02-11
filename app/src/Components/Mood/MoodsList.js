@@ -14,7 +14,7 @@ function MoodsList(props) {
     // Function to create buttons for each mood.
     // It works but it might be better to just have it hard coded
     // since it never changes
-    const setMoodData = async (e) => {
+    const setMoodData = (e) => {
       const mood = e.target.className;
       props.setCurrentMood(mood);
       // console.log(mood);
@@ -22,9 +22,11 @@ function MoodsList(props) {
       // const a = await getMoodData(mood);
     };
 
-    async function createButtons() {
+    function createButtons() {
       // console.log("createButtons run");
-      var [orderedMoods, moodFrequency] = await getTopMoodsToday();
+      // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
+      const orderedMoods = props.orderedMoods;
+      const moodFrequency = props.moodFrequency;
 
       // console.log(typeof []);
 

@@ -11,23 +11,19 @@ import { getWebData } from '../../Data/MoodByWebsite';
 class Web extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentSite: "", topSitesState: [], moodByWebData: [] };
-    this.setCurrentSite = this.setCurrentSite.bind(this);
-  }
-  // const[currentMood, setCurrentMoodState] = useState("Frustrated");
-  async componentDidMount() {
-    const [topSites, moodByWebData] = await getWebData();
-    // console.log(topSites);
-    this.setState({
+    // console.log(props.moodLog);
+    const [topSites, moodByWebData] = getWebData(props.moodLog, props.webLog);
+    this.state = {
       currentSite: topSites[0].name,
       topSitesState: topSites,
-      moodByWebData: moodByWebData
-    });
-    // console.log(`state ${this.state.moodByWebData}`);
+      moodByWebData: moodByWebData,
+      moodLog: props.moodLog,
+      webLog: props.webLog
+    };
+    this.setCurrentSite = this.setCurrentSite.bind(this);
   }
-
   setCurrentSite(domain) {
-    console.log(`onCurrentMoodChange Run ${domain}`);
+    // console.log(`onCurrentMoodChange Run ${domain}`);
     this.setState({ currentSite: domain });
     // console.log(`state ${this.state.currentMood}`);
   }
