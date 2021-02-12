@@ -59,7 +59,7 @@ function WebByMoodGraph(props) {
     <ThemeProvider theme={theme}>
     <div>
       <Title>Mood: {title1}</Title>
-      <ResponsiveContainer width='150%' height={400}>
+      <ResponsiveContainer width='100%' height={400}>
         <BarChart data={data1} margin={{ top: 16, right: 16, left: 24, bottom: 0 }}>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey="name" />
