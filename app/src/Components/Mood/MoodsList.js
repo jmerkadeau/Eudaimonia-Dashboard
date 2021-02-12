@@ -3,7 +3,19 @@ import { getMoodData, getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import {
   PieChart, Pie, Tooltip
 } from 'recharts';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+
+
 // I only imported the elements of recharts that I needed, there are a lot more you can use
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#347aeb",
+      light: "#3d7feb",
+    }
+  }
+});
 
 function MoodsList(props) {
 
@@ -41,18 +53,24 @@ function MoodsList(props) {
       // console.log(allMoods);
       // console.log(moodFrequency);
       let buttonSet1 = document.getElementById('moodButtonSet');
+      var buttonSet = [];
       for (var i = 0; i < allMoods.length; i++) {
         let newButton = document.createElement('button');
+        // let newButton = React.createElement(Button, {variant: 'contained', color: 'primary', onClick: () => {setMoodData()}}, allMoods[i] + ": " + moodFrequency[allMoods[i]]);
         if (allMoods[i] in moodFrequency) {
           newButton.innerHTML = allMoods[i] + ": " + moodFrequency[allMoods[i]];
         } else {
           newButton.innerHTML = allMoods[i] + ": 0";
         }
+        // buttonSet.push(newButton);
         buttonSet1.appendChild(newButton);
         newButton.addEventListener('click', setMoodData);
         newButton.className = allMoods[i];
-        // console.log(newButton.className);
+        console.log(newButton.className);
       }
+
+      // const DivContainer = React.createElement('div', {}, buttonSet);  
+  
     }
     if (loading) {
       createButtons();
@@ -62,9 +80,12 @@ function MoodsList(props) {
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.å
   return (
-    <div>
-      <div id='moodButtonSet'></div>
-    </div>
+    <ThemeProvider>
+      <div>
+        <div id='moodButtonSet'></div>
+        {/* <DivContainer></DivContainer> */}
+      </div><br/>
+    </ThemeProvider>
   )
 }
 export default MoodsList;

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getMoodData, getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
 } from 'recharts';
+import { ResponsiveContainer } from 'recharts';
+import Title from './../Dashboard/Title.js';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
 function WebByMoodGraph(props) {
@@ -41,22 +45,33 @@ function WebByMoodGraph(props) {
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#347aeb",
+        light: "#3d7feb"
+      }
+    }
+  });
+
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
-      <h3>
-        Mood: {title1}
-      </h3>
-      <BarChart width={1000} height={500} data={data1} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="seconds" fill="#8884d8" />
-      </BarChart>
+      <Title>Mood: {title1}</Title>
+      <ResponsiveContainer width='150%' height={400}>
+        <BarChart data={data1} margin={{ top: 16, right: 16, left: 24, bottom: 0 }}>
+          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+          <XAxis dataKey="name" />
+          <YAxis/>
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="seconds" fill={theme.palette.primary.main} />
+        </BarChart>
+      </ResponsiveContainer>
       <br />
     </div>
+    </ThemeProvider>
   )
 }
 export default WebByMoodGraph;

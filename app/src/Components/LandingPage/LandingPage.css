@@ -18,7 +18,7 @@
     transition-property: background-color;
   }
   #googleButton:hover{
-    background-color: lightblue;
+    background-color: #3d7feb;
     cursor: pointer;
   }
   

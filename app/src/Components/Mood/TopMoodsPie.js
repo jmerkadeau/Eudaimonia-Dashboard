@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import {
-  PieChart, Pie, Tooltip
+  PieChart, Pie, Tooltip, Cell
 } from 'recharts';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
@@ -44,9 +44,24 @@ function TopMoodsPie(props) {
   // per render and only rerenders on state change.
 
 
+  const COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'pink'];
+
+
   return (
     <PieChart width={400} height={400}>
-      <Pie dataKey="value" isAnimationActive={true} data={pieData} />
+      {/* <Pie
+          data={pieData}
+          fill="#8884d8"
+          dataKey="value"
+          label
+          isAnimationActive={true}
+        >
+        <Tooltip />
+        {pieData.map((entry, index) => (
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+        ))}
+      </Pie> */}
+      <Pie dataKey="value" isAnimationActive={true} data={pieData} label='key' />
       <Tooltip />
     </PieChart>
   )

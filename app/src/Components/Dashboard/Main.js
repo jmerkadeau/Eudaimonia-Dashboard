@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -28,21 +28,15 @@ import Orders from './Orders';
 import Mood from './Mood.js';
 import Dashboard from './Dashboard.js';
 import Web from './Web.js';
+import Policy from './Policy.js';
+import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Project Eudaimonia
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
+import getMoodLog from '../../Data/MoodData.js';
+import getWebLog from '../../Data/WebData.js';
+
 
 const drawerWidth = 240;
 
@@ -55,7 +49,7 @@ const theme = createMuiTheme({
   }
 });
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -137,25 +131,50 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
-}));
+});
 
-export default function Main() {
-  const classes = useStyles();
-  return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <Router>
-            <SideDrawer />
-            <Switch>
-                <Route path='/' exact component={() => <Dashboard />} />
-                <Route path='/mood' exact component={() => <Mood />} />
-                <Route path='/web' exact component={() => <Web />} />
-            </Switch>
-        </Router>
+class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { moodLog: [], webLog: [], isLoading: true };
+  }
 
+  async componentDidMount() {
+    const moodLog = await getMoodLog();
+    const webLog = await getWebLog();
+    // console.log(moodLog);
+    this.setState({
+      moodLog: moodLog,
+      webLog: webLog,
+      isLoading: false
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      this.state.isLoading ?
+        <div></div>
+        :
+        <div className='home'>
+          <ThemeProvider theme={theme}>
+            <div className={classes.root}>
+              <CssBaseline />
+              <Router>
+                  <SideDrawer />
+                  <Switch>
+                      <Route path='/dashboard' exact component={() => <Dashboard />} />
+                      <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog}/>} />
+                      <Route path='/dashboard/web' exact component={() => <Web />} />
+                      <Route path='/dashboard/policy' exact component={() => <Policy />} />
+                  </Switch>
+              </Router>
+
+              </div>
+          </ThemeProvider>
         </div>
-    </ThemeProvider>
-
-  );
+    )
+  }
 }
+
+export default withStyles(styles, { withTheme: true })(Main);

@@ -37,14 +37,14 @@ class Home extends React.Component {
         :
         <div className='home'>
           <Router>
-            <Nav />
-            <Switch>
-              <Route path='/' exact component={() => <Profile />} />
-              <Route path='/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
-              <Route path='/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
+            <Nav /> 
+            {/* <Switch> */}
+              <Route path='/dashboard' exact component={() => <Profile />} />
+              <Route path='/dashboard/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
+              <Route path='/dashboard/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
 
 
-            </Switch>
+            {/* </Switch> */}
           </Router>
 
         </div>

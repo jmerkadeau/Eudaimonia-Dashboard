@@ -7,13 +7,13 @@ function Nav() {
     <div className='nav'>
       <nav className='navbar'>
         <div className='navContent'>
-          <Link className='navLink' to='/'>
+          <Link className='navLink' to='/dashboard'>
             Profile
           </Link>
-          <Link className='navLink' to='/mood' >
+          <Link className='navLink' to='/dashboard/mood' >
             Mood
           </Link>
-          <Link className='navLink' to='/web' >
+          <Link className='navLink' to='/dashboard/web' >
             Web
           </Link>
         </div>

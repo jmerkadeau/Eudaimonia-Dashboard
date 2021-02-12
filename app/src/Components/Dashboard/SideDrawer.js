@@ -36,6 +36,7 @@ import SideDrawer from './SideDrawer.js';
 import ComputerIcon from '@material-ui/icons/Computer';
 import MoodIcon from '@material-ui/icons/Mood';
 import TodayIcon from '@material-ui/icons/Today';
+import PolicyIcon from '@material-ui/icons/Policy';
 import SignOut from './../LandingPage/SignOut.js'
 
 function Copyright() {
@@ -167,6 +168,9 @@ export default function Main() {
   const setWeb = () => {
       setTitle('Web');
   }
+  const setPolicy = () => {
+    setTitle('Policy');
+  }
   const Testing = () => {
     let urlElements = window.location.href.split('/')
     console.log(urlElements[3])
@@ -215,25 +219,31 @@ export default function Main() {
                 </div>
                 <Divider />
                 <MenuList>
-                    <MenuItem component={ReactLink} to="/" icon={TodayIcon} id='Summary' onClick={setSummary}>
+                    <MenuItem component={ReactLink} to="/dashboard" icon={TodayIcon} id='Summary' onClick={setSummary}>
                         <ListItemIcon>
                             <TodayIcon />
                         </ListItemIcon>
                         <ListItemText primary='Summary' />  
                     </MenuItem>
-                    <MenuItem component={ReactLink} to="/Mood" icon={MoodIcon} id='Mood' onClick={setMood}>
+                    <MenuItem component={ReactLink} to="/dashboard/mood" icon={MoodIcon} id='Mood' onClick={setMood}>
                         <ListItemIcon>
                             <MoodIcon />
                         </ListItemIcon>
                         <ListItemText primary='Mood' />  
                     </MenuItem>
-                    <MenuItem component={ReactLink} to="/Web" icon={ComputerIcon} id='Web' onClick={setWeb}>
+                    <MenuItem component={ReactLink} to="/dashboard/web" icon={ComputerIcon} id='Web' onClick={setWeb}>
                         <ListItemIcon>
                             <ComputerIcon />
                         </ListItemIcon>
                         <ListItemText primary='Web' />  
                     </MenuItem>
-                    <MenuItem icon={ComputerIcon} id='Web' icon={TodayIcon} onClick={Testing}>
+                    <MenuItem component={ReactLink} to="/Policy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
+                        <ListItemIcon>
+                            <PolicyIcon />
+                        </ListItemIcon>
+                        <ListItemText primary='Policy' />  
+                    </MenuItem>
+                    <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
                         <ListItemIcon>
                             <ComputerIcon />
                         </ListItemIcon>
