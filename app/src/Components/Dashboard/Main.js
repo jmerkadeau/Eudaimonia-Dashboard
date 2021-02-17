@@ -30,7 +30,7 @@ import Dashboard from './Dashboard.js';
 import Web from './Web.js';
 import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useHistory, Redirect} from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 
 
@@ -39,6 +39,7 @@ import getWebLog from '../../Data/WebData.js';
 
 
 const drawerWidth = 240;
+
 
 const theme = createMuiTheme({
   palette: {
@@ -150,7 +151,12 @@ class Main extends React.Component {
     });
   }
 
+  // createHistory = () => {
+  //   const { history } = useHistory();
+  // }
+
   render() {
+
     const { classes } = this.props;
     return (
       this.state.isLoading ?
@@ -160,13 +166,15 @@ class Main extends React.Component {
           <ThemeProvider theme={theme}>
             <div className={classes.root}>
               <CssBaseline />
+              {/* <Router history={history}> */}
               <Router>
                   <SideDrawer />
                   <Switch>
+                      <Route path='/' exact component={() => <Dashboard />} />
                       <Route path='/dashboard' exact component={() => <Dashboard />} />
                       <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog}/>} />
                       <Route path='/dashboard/web' exact component={() => <Web />} />
-                      <Route path='/dashboard/policy' exact component={() => <Policy />} />
+                      <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                   </Switch>
               </Router>
 

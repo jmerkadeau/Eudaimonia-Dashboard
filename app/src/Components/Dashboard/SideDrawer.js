@@ -150,8 +150,24 @@ const useStyles = makeStyles((theme) => ({
 export default function Main() {
   const classes = useStyles();
   let urlElements = window.location.href.split('/');
-  let currentPage = urlElements[3];
-  const [title, setTitle] = React.useState(currentPage);
+  let currentPage = urlElements[4];
+  let check = window.location.pathname;
+  console.log(check);
+
+  const changeTitle = () => {
+    switch(window.location.pathname){
+      case '/dashboard/mood':
+        return 'Mood';
+      case '/dashboard/web':
+        return 'Web';
+      case '/dashboard/privacy':
+        return 'Privacy';
+      default:
+        return 'Summary';
+    }
+  }
+
+  const [title, setTitle] = React.useState(changeTitle());
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -169,7 +185,7 @@ export default function Main() {
       setTitle('Web');
   }
   const setPolicy = () => {
-    setTitle('Policy');
+    setTitle('Privacy');
   }
   const Testing = () => {
     let urlElements = window.location.href.split('/')
@@ -195,9 +211,12 @@ export default function Main() {
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         {title}
                     </Typography>
-                    <Button variant='contained' color='primary' onClick={SignOut}>
-                        Sign Out
-                    </Button>
+                    {/* <ReactLink to="/"> */}
+                      <SignOut></SignOut>
+                      {/* <Button variant='contained' color='primary' onClick={SignOut}>
+                          Sign Out
+                      </Button> */}
+                    {/* </ReactLink> */}
                     <IconButton color="black">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
@@ -237,11 +256,11 @@ export default function Main() {
                         </ListItemIcon>
                         <ListItemText primary='Web' />  
                     </MenuItem>
-                    <MenuItem component={ReactLink} to="/Policy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
+                    <MenuItem component={ReactLink} to="/dashboard/privacy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
                         <ListItemIcon>
                             <PolicyIcon />
                         </ListItemIcon>
-                        <ListItemText primary='Policy' />  
+                        <ListItemText primary='Privacy' />  
                     </MenuItem>
                     <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
                         <ListItemIcon>

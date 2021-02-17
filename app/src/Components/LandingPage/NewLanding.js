@@ -22,6 +22,10 @@ import TopBar from './TopBar.js';
 import HideAppBar from './TopBar2.js';
 import { Link as RouterLink } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignIn from './SignIn.js'
+import Intro from './Sections/Intro.js';
+import Services from './Sections/OurServices.js';
+
 
 function Copyright() {
   return (
@@ -87,7 +91,8 @@ const useStyles = makeStyles((theme) => ({
   },
   bottomGrid: {
     marginTop: theme.spacing(60),
-  }
+  },
+
 }));
 
 const googleSignIn = () => {
@@ -115,48 +120,58 @@ const googleSignIn = () => {
 
 export default function SignInSide() {
   const classes = useStyles();
+  return(
+    <div className={classes.root}>
+      <Intro />
+      <Services />
 
-  return (
-    <React.Fragment>
-      {/* <Router>
-      <Switch>
-        <Route path='/' exact component={() => <NewLanding />} />
-        <Route path='/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
-      </Switch>
-    </Router> */}
-    <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.left}>
-            <Avatar alt='Eudaimonia Logo' src={projectLogo} className={classes.logo} />
-            <Typography variant='h2' color='primary' >
-                Project Eudaimonia
-            </Typography>
-            <Grid className={classes.bottomGrid}>
-            <RouterLink to="/privacy">
-                  Privacy Policy
-            </RouterLink>
-            </Grid>
+    </div>
 
-        </Grid>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <div className={classes.paper}>
-            <Card className={classes.card}>
-                <CardContent className={classes.content}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
-                </CardContent>
-                <CardActions className={classes.cardActions}>
-                    <img src={GSI} onClick={googleSignIn} id="googleButton" alt="Sign in with Google" />
-                </CardActions>
-            </Card>
-            </div>
-            <Copyright/>
-        </Grid>
-    </Grid>
-    </React.Fragment>
-  );
+  )
+
+
+  // return (
+  //   <React.Fragment>
+  //     {/* <Router>
+  //     <Switch>
+  //       <Route path='/' exact component={() => <NewLanding />} />
+  //       <Route path='/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
+  //     </Switch>
+  //   </Router> */}
+  //   <Grid container component="main" className={classes.root}>
+  //       <CssBaseline />
+  //       <Grid item xs={false} sm={4} md={7} className={classes.left}>
+  //           <Avatar alt='Eudaimonia Logo' src={projectLogo} className={classes.logo} />
+  //           <Typography variant='h2' color='primary' >
+  //               Project Eudaimonia
+  //           </Typography>
+  //           <Grid className={classes.bottomGrid}>
+  //           <RouterLink to="/privacy">
+  //                 Privacy Policy
+  //           </RouterLink>
+  //           </Grid>
+
+  //       </Grid>
+  //       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+  //           <div className={classes.paper}>
+  //           <Card className={classes.card}>
+  //               <CardContent className={classes.content}>
+  //                   <Avatar className={classes.avatar}>
+  //                       <LockOutlinedIcon />
+  //                   </Avatar>
+  //                   <Typography component="h1" variant="h5">
+  //                       Sign in
+  //                   </Typography>
+  //               </CardContent>
+  //               <CardActions className={classes.cardActions}>
+  //                 <SignIn />
+  //                   {/* <img src={GSI} onClick={googleSignIn} id="googleButton" alt="Sign in with Google" /> */}
+  //               </CardActions>
+  //           </Card>
+  //           </div>
+  //           <Copyright/>
+  //       </Grid>
+  //   </Grid>
+  //   </React.Fragment>
+  // );
 }

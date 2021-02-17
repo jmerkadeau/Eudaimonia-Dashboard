@@ -13,7 +13,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 function Copyright() {
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
+      <Typography variant="body2" color="textSecondary" align="center" >
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
           Project Eudaimonia
@@ -40,10 +40,12 @@ const styles = theme => ({
         marginRight: 'auto',
     },
     container: {
-        padding: theme.spacing(5),
+        margin: theme.spacing(5),
+        alignItems: 'center',
       },
       paper: {
-        marginTop: theme.spacing(5),
+        width: 790,
+        margin: theme.spacing(2),
         padding: theme.spacing(2),
         display: 'flex',
         overflow: 'auto',
@@ -52,6 +54,7 @@ const styles = theme => ({
       },
       altpaper: {
           margin: theme.spacing(2),
+          textAlign: 'center',
           display: 'flex',
           overflow: 'auto',
           flexDirection: 'column',
@@ -60,6 +63,23 @@ const styles = theme => ({
       fixedHeight: {
         height: 240,
       },
+      pieTitle: {
+        margin: theme.spacing(2),
+        align: 'center',
+      },
+      graphTitle: {
+        margin: theme.spacing(2),
+        align: 'center',
+        paddingLeft: theme.spacing(1.5),
+      },
+      centerIt: {
+        alignItems: 'center',
+        marginRight: 'auto',
+        marginLeft: 'auto',
+      },
+      bottom: {
+        margin: theme.spacing(3),
+      }
 });
 
 
@@ -92,47 +112,47 @@ class MoodPage extends React.Component {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
       return(
           <ThemeProvider theme={theme}>
-              <div className={classes.root}>
-                  <Container className={classes.container}>
-                      <Typography color={'primary'} variant='h2'>
-                          Mood Page
-                      </Typography>
-                      <Grid container spacing={3}>
-                          <Paper className={classes.altpaper}>
-                            <TopMoodsPie orderedMoods={this.state.orderedMoods} 
-                            moodFrequency={this.state.moodFrequency}></TopMoodsPie>
-                          </Paper>
-                      </Grid>
-                      <Grid container spacing={3}>
-                          <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={classes.paper}>
-                                <MoodsList setCurrentMood={this.onCurrentMoodChange} 
-                                orderedMoods={this.state.orderedMoods} 
-                                moodFrequency={this.state.moodFrequency}></MoodsList>
-                                <WebByMoodGraph currentMood={this.state.currentMood} 
-                                moodData={this.state.moodData} />
-                            </Paper>
-                          </Grid>
-
-                          
-                      </Grid>
-                  </Container>
+            <div className={classes.root}>
+              <Container className={classes.container}>
+                  {/* <Typography color={'primary'} variant='h2'>
+                      Mood Page
+                  </Typography> */}
+                  <Grid container spacing={3}>
+                      <Paper className={classes.altpaper}>
+                        <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                          Moods Logged Today:
+                        </Typography>
+                        <TopMoodsPie orderedMoods={this.state.orderedMoods} 
+                        moodFrequency={this.state.moodFrequency}></TopMoodsPie>
+                      </Paper>
+                      <Paper className={classes.altpaper}>
+                        <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                          Moods Logged All-Time:
+                        </Typography>
+                        <TopMoodsPie orderedMoods={this.state.orderedMoods} 
+                        moodFrequency={this.state.moodFrequency}></TopMoodsPie>
+                      </Paper>
+                  </Grid>
+                  <Grid container spacing={3} className={classes.centerIt}>
+                    <Grid item xs={12} md={8} lg={9}>
+                      <Paper className={classes.paper}>
+                          <MoodsList setCurrentMood={this.onCurrentMoodChange} 
+                          orderedMoods={this.state.orderedMoods} 
+                          moodFrequency={this.state.moodFrequency}></MoodsList>
+                          <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
+                            Mood: {this.state.currentMood}
+                          </Typography>
+                          <WebByMoodGraph currentMood={this.state.currentMood} 
+                          moodData={this.state.moodData} />
+                      </Paper>
+                    </Grid>
+                  </Grid>
+              </Container>
+              <div className={classes.bottom}>
+                <Copyright />
               </div>
-    {/* 
-      <div className='mood' >
-        <h1>
-          Mood
-          </h1>
-        <div>
-          <WebByMoodGraph currentMood={this.state.currentMood} moodData={this.state.moodData} />
-        </div>
-        <div>
-          <MoodsList setCurrentMood={this.onCurrentMoodChange} orderedMoods={this.state.orderedMoods} moodFrequency={this.state.moodFrequency}></MoodsList>
-        </div>
-        <div>
-          <TopMoodsPie orderedMoods={this.state.orderedMoods} moodFrequency={this.state.moodFrequency}></TopMoodsPie>
-        </div>
-      </div> */}
+
+            </div>
           </ThemeProvider>
           
       )

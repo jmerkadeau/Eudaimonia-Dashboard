@@ -11,14 +11,14 @@
   }
   
   #googleButton{
-    background-color: white;
+    background-color: #347aeb;
     border-radius: 2%/8%;
     width: 50%;
     transition-duration: 500ms;
     transition-property: background-color;
   }
   #googleButton:hover{
-    background-color: #3d7feb;
+    background-color: red;
     cursor: pointer;
   }
   

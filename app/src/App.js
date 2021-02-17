@@ -8,9 +8,14 @@ import Router from './Components/Dashboard/Router.js'
 import Main from './Components/Dashboard/Main.js'
 import SignInSide from './Components/LandingPage/NewLanding.js';
 import Land from './Components/LandingPage/Land.js';
+import { BrowserRouter, Route, Switch, Redirect, useHistory } from "react-router-dom";
+
 
 function App() {
   const [user] = useAuthState(auth);
+
+  const history = useHistory();
+  const sendMain = () => history.push('/dashboard');
 
   //firebase's useAuthState hook gets the user's info
 
@@ -21,7 +26,18 @@ function App() {
     <div className="app">
       <section>
         {/* {user ? <Home /> : <LandingPage />} */}
-        {user ? <Main /> : <Land />}
+        {/* {user ? <Main /> : <Land />} */}
+        {user ? <Main path={sendMain} />: <Land />}
+
+        {/* <BrowserRouter>
+          <Switch>
+            <Route path='/' render={() => (
+              user? <Redirect to='/dashboard' /> : <Land />
+              // !user? <Land /> : <Main/>
+            )} />
+          </Switch>
+        </BrowserRouter> */}
+
       </section>
     </div>
     // <SignInSide></SignInSide>
