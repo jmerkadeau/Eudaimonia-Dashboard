@@ -40,7 +40,10 @@ function TopMoodsPie(props) {
 
 
 
-  const COLORS = ['red', 'blue', 'green', 'yellow', 'purple', 'pink'];
+  // const colors = ['#2961BC', '#2E6DD3', '#347AEB', '#4887ED', '#5C94EF', '#70A1F1', 
+  // '#85AFF3'];
+  const colors = ['#2455A4', '#2E6DD3', '#4887ED',
+  '#70A1F1', '#99BCF5', '#C2D7F9', '#EAF1FD'];
   let renderLabel = function(entry) {
     return entry.name;
   }
@@ -57,16 +60,19 @@ function TopMoodsPie(props) {
 
 
   return (
-    <PieChart width={400} height={400}>
+    <PieChart width={400} height={300}>
       <Pie
         dataKey="value"
         isAnimationActive={true}
         data={pieData}
         cx={200}
-        cy={200}
-        outerRadius={150}
+        cy={150}
+        outerRadius={100}
         fill="#347aeb"
         label={renderLabel}>
+          {pieData.map((entry, index) => (
+            <Cell fill={colors[index]} />
+          ))}
       </Pie>
     {/* <Tooltip content={<CustomTooltip />}/> */}
       <Tooltip/>

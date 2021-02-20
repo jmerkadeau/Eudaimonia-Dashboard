@@ -22,12 +22,15 @@ const theme = createMuiTheme({
 });
 const useStyles = makeStyles((theme) => ({
   mar: {
-    margin: theme.spacing(0.5)
+    // margin: theme.spacing(0.5)
   },
   pad: {
     padding: theme.spacing(5),
     backgroundColor: '#0069d9',
   },
+  bg: {
+    marginTop: theme.spacing(8),
+  }
 }));
 
 
@@ -35,6 +38,9 @@ export default function MoodsList(props) {
   const classes=useStyles();
 
   const [loading, setLoading] = useState(true);
+  // const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState('outlined');
+
   //
   const [allMoods, setAllMoods] = useState([]);
   const [open, setOpen] = useState(false);
@@ -62,6 +68,10 @@ export default function MoodsList(props) {
     setOpen(false);
   };
 
+  const selectThis = (i) => {
+    setSelected('contained');
+  }
+
   useEffect(() => {
     // Function to create buttons for each mood.
     // It works but it might be better to just have it hard coded
@@ -69,9 +79,6 @@ export default function MoodsList(props) {
     const setMoodData = (e) => {
       const mood = e.target.className;
       props.setCurrentMood(mood);
-      // console.log(mood);
-      // const mood = e;
-      // const a = await getMoodData(mood);
     };
 
     function createButtons() {
@@ -92,27 +99,6 @@ export default function MoodsList(props) {
 
       // allMoods is sorted by here
       setAllMoods(allMoods);
-
-      // // console.log(allMoods);
-      // // console.log(moodFrequency);
-      // let buttonSet1 = document.getElementById('moodButtonSet');
-      // var buttonSet = [];
-      // for (var i = 0; i < allMoods.length; i++) {
-      //   let newButton = document.createElement('button');
-      //           // let newButton = React.createElement(Button, {variant: 'contained', color: 'primary', onClick: () => {setMoodData()}}, allMoods[i] + ": " + moodFrequency[allMoods[i]]);
-      //   if (allMoods[i] in moodFrequency) {
-      //     newButton.innerHTML = allMoods[i] + ": " + moodFrequency[allMoods[i]];
-      //   } else {
-      //     newButton.innerHTML = allMoods[i] + ": 0";
-      //   }
-      //         // buttonSet.push(newButton);
-      //   buttonSet1.appendChild(newButton);
-      //   newButton.addEventListener('click', setMoodData);
-      //   newButton.className = allMoods[i];
-      //   console.log(newButton.className);
-      // }
-
-      // const DivContainer = React.createElement('div', {}, buttonSet);  
   
     }
     if (loading) {
@@ -120,14 +106,10 @@ export default function MoodsList(props) {
       setLoading(false);
     }
   }, []);
-  // The empty array at the end of UseEffect makes it only run once
-  // per render and only rerenders on state change.å
+
   const setMoodData = (e, mood) => {
     console.log(mood)
     props.setCurrentMood(mood);
-    // console.log(mood);
-    // const mood = e;
-    // const a = await getMoodData(mood);
   };
   const moodFrequency = props.moodFrequency;
   for (var i = 0; i < allMoods.length; i++){
@@ -140,23 +122,24 @@ export default function MoodsList(props) {
   // const classes = styles;
   return(
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <div className={classes.bg}>
+      <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
+        {allMoods.map((option, index) => (
+          <Button onClick={(event) => {setMoodData(event, option); selectThis();}} variant='outlined' color='primary' className={classes.mar} id={index}>
+            {option}
+          </Button>
+        ))}
+      </ButtonGroup>
+      </div>
+
+      {/* <Container className={classes.root}>
         {allMoods.map((option, index) => (
           <Button onClick={(event) => setMoodData(event, option)} variant='contained' color='primary' className={classes.mar}>
             {option + ": " + moodFrequency[option]}
           </Button>
         ))}
-      </Container>
+      </Container> */}
     </ThemeProvider>
   )
-  // return (
-  //   <ThemeProvider>
-  //     <div>
-  //       <div id='moodButtonSet'></div>
-  //       {/* <DivContainer></DivContainer> */}
-  //     </div><br/>
-  //   </ThemeProvider>
-  // )
+
 }
-// export default withStyles(styles, {withTheme: true })(MoodsList);
-// export default MoodsList;
