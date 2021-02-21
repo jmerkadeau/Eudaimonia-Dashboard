@@ -25,6 +25,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from './SignIn.js'
 import Intro from './Sections/Intro.js';
 import Services from './Sections/OurServices.js';
+import DataPrivacy from './Sections/DataPrivacy.js';
+import Features from './Sections/Features.js';
 
 
 function Copyright() {
@@ -124,6 +126,10 @@ export default function SignInSide() {
     <div className={classes.root}>
       <Intro />
       <Services />
+      <Features />
+      <DataPrivacy />
+      <Copyright />
+      <br/><br/>
 
     </div>
 

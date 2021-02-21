@@ -13,10 +13,16 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(10),
+        marginTop: theme.spacing(15),
+        marginBottom: theme.spacing(15)
     },
     rightText: {
-        paddingRight: theme.spacing(10),
+        marginRight: theme.spacing(15),
+    },
+    photo: {
+      marginTop: theme.spacing(1),
+      marginLeft: theme.spacing(15),
+      width: '80%'
     }
 }))
 
@@ -30,11 +36,12 @@ const Services = () => {
         <section className={classes.root}>
         <div className="container">
           <Grid container spacing={isMobile ? 4 : 10} justify="space-between">
-            <Grid item sm={6} xs={12}>
+            <Grid item sm={6} xs={12} >
               <img
                 src={stockTyping}
                 alt="graduate"
-                className="max-h-500 max-w-full border-radius-12"
+                className={classes.photo}
+                // className="max-h-500 max-w-full border-radius-12"
               />
             </Grid>
             <Grid item sm={6} xs={12}>

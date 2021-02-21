@@ -69,7 +69,7 @@ function WebByMoodGraph(props) {
             <Bar dataKey="seconds" fill={theme.palette.primary.main} />
           </BarChart>
         </ResponsiveContainer>
-        <br />
+        {/* <br /> */}
       </div>
     </ThemeProvider>
   )

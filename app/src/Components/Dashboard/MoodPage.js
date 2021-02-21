@@ -44,7 +44,7 @@ const styles = theme => ({
         alignItems: 'center',
       },
       paper: {
-        width: 790,
+        width: 850,
         margin: theme.spacing(2),
         padding: theme.spacing(2),
         display: 'flex',
@@ -70,7 +70,7 @@ const styles = theme => ({
       graphTitle: {
         margin: theme.spacing(2),
         align: 'center',
-        paddingLeft: theme.spacing(1.5),
+        paddingLeft: theme.spacing(8.5),
       },
       centerIt: {
         alignItems: 'center',
@@ -79,6 +79,12 @@ const styles = theme => ({
       },
       bottom: {
         margin: theme.spacing(3),
+      },
+      flex: {
+        display: 'flex',
+      },
+      grid1: {
+        width: 700,
       }
 });
 
@@ -135,15 +141,29 @@ class MoodPage extends React.Component {
                   </Grid>
                   <Grid container spacing={3} className={classes.centerIt}>
                     <Grid item xs={12} md={8} lg={9}>
-                      <Paper className={classes.paper}>
+                      <Paper className={classes.paper} display='inline'>
+                        <div className={classes.flex}>
+                          <Grid>
                           <MoodsList setCurrentMood={this.onCurrentMoodChange} 
+                          orderedMoods={this.state.orderedMoods} 
+                          moodFrequency={this.state.moodFrequency}></MoodsList>
+                          </Grid>
+                          <Grid className={classes.grid1}>
+                          <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
+                            Mood: {this.state.currentMood}
+                          </Typography>
+                          <WebByMoodGraph currentMood={this.state.currentMood} 
+                          moodData={this.state.moodData} />
+                          </Grid>
+                          {/* <MoodsList setCurrentMood={this.onCurrentMoodChange} 
                           orderedMoods={this.state.orderedMoods} 
                           moodFrequency={this.state.moodFrequency}></MoodsList>
                           <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
                             Mood: {this.state.currentMood}
                           </Typography>
                           <WebByMoodGraph currentMood={this.state.currentMood} 
-                          moodData={this.state.moodData} />
+                          moodData={this.state.moodData} /> */}
+                        </div>
                       </Paper>
                     </Grid>
                   </Grid>
