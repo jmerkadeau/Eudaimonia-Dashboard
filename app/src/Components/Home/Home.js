@@ -7,20 +7,25 @@ import Nav from '../Nav/Nav.js';
 
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
+import { getAllTimeWebByMood, getAllTimeMoodByWeb } from '../../Data/AllTimeData.js';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { moodLog: [], webLog: [], isLoading: true };
+    this.state = { moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
   }
 
   async componentDidMount() {
     const moodLog = await getMoodLog();
     const webLog = await getWebLog();
-    // console.log(moodLog);
+    const allTimeWebByMood = await getAllTimeWebByMood();
+    const allTimeMoodByWeb = await getAllTimeMoodByWeb();
+    console.log(allTimeWebByMood);
     this.setState({
       moodLog: moodLog,
       webLog: webLog,
+      allTimeWebByMood: allTimeWebByMood,
+      allTimeMoodByWeb: allTimeMoodByWeb,
       isLoading: false
     });
   }
@@ -37,11 +42,11 @@ class Home extends React.Component {
         :
         <div className='home'>
           <Router>
-            <Nav /> 
+            <Nav />
             {/* <Switch> */}
-              <Route path='/dashboard' exact component={() => <Profile />} />
-              <Route path='/dashboard/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
-              <Route path='/dashboard/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} />} />
+            <Route path='/dashboard' exact component={() => <Profile />} />
+            <Route path='/dashboard/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWebByMood={this.state.allTimeWebByMood}/>} />
+            <Route path='/dashboard/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMoodByWeb={this.state.allTimeMoodByWeb}/>} />
 
 
             {/* </Switch> */}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getMoodData, getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import { ResponsiveContainer } from 'recharts';
 import Title from './../Dashboard/Title.js';
@@ -29,7 +29,7 @@ function WebByMoodGraph(props) {
       console.log(currentMood);
       // const moodLog = props.moodLog;
       // console.log(`current mood is ${currentMood}`);
-      const currentMoodData = props.moodData;
+      const currentMoodData = props.graphData;
       // const focused = await getMoodData1('Focused');
       setData1(currentMoodData);
       setTitle1(currentMood);
@@ -41,7 +41,7 @@ function WebByMoodGraph(props) {
     //   getData();
     // }
     getData();
-  }, [props.currentMood, props.moodData]);
+  }, [props.currentMood, props.graphData]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 
@@ -57,20 +57,20 @@ function WebByMoodGraph(props) {
 
   return (
     <ThemeProvider theme={theme}>
-    <div>
-      {/* <Title>Mood: {title1}</Title> */}
-      <ResponsiveContainer width='100%' height={400}>
-        <BarChart data={data1} margin={{ top: 16, right: 16, left: 24, bottom: 0 }}>
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis dataKey="name" />
-          <YAxis/>
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="seconds" fill={theme.palette.primary.main} />
-        </BarChart>
-      </ResponsiveContainer>
-      <br />
-    </div>
+      <div>
+        {/* <Title>Mood: {title1}</Title> */}
+        <ResponsiveContainer width='100%' height={400}>
+          <BarChart data={data1} margin={{ top: 16, right: 16, left: 24, bottom: 0 }}>
+            {/* <CartesianGrid strokeDasharray="3 3" /> */}
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="seconds" fill={theme.palette.primary.main} />
+          </BarChart>
+        </ResponsiveContainer>
+        <br />
+      </div>
     </ThemeProvider>
   )
 }

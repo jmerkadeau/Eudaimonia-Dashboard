@@ -18,7 +18,8 @@ class Web extends React.Component {
       topSitesState: topSites,
       moodByWebData: moodByWebData,
       moodLog: props.moodLog,
-      webLog: props.webLog
+      webLog: props.webLog,
+      allTimeMoodByWeb: props.allTimeMoodByWeb
     };
     this.setCurrentSite = this.setCurrentSite.bind(this);
   }

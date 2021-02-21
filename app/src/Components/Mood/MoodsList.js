@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function MoodsList(props) {
-  const classes=useStyles();
+  const classes = useStyles();
 
   const [loading, setLoading] = useState(true);
   //
@@ -112,8 +112,8 @@ export default function MoodsList(props) {
       //   console.log(newButton.className);
       // }
 
-      // const DivContainer = React.createElement('div', {}, buttonSet);  
-  
+      // const DivContainer = React.createElement('div', {}, buttonSet);
+
     }
     if (loading) {
       createButtons();
@@ -123,22 +123,22 @@ export default function MoodsList(props) {
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.å
   const setMoodData = (e, mood) => {
-    console.log(mood)
+    // console.log(mood)
     props.setCurrentMood(mood);
     // console.log(mood);
     // const mood = e;
     // const a = await getMoodData(mood);
   };
   const moodFrequency = props.moodFrequency;
-  for (var i = 0; i < allMoods.length; i++){
-    if (moodFrequency[allMoods[i]] == undefined){
+  for (var i = 0; i < allMoods.length; i++) {
+    if (moodFrequency[allMoods[i]] == undefined) {
       moodFrequency[allMoods[i]] = 0;
     }
   }
 
 
   // const classes = styles;
-  return(
+  return (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
         {allMoods.map((option, index) => (
