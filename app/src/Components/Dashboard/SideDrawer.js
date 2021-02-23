@@ -162,6 +162,8 @@ export default function Main() {
         return 'Web';
       case '/dashboard/privacy':
         return 'Privacy';
+        case '/privacy':
+          return 'Privacy';
       default:
         return 'Summary';
     }
@@ -187,10 +189,10 @@ export default function Main() {
   const setPolicy = () => {
     setTitle('Privacy');
   }
-  const Testing = () => {
-    let urlElements = window.location.href.split('/')
-    console.log(urlElements[3])
-  }
+  // const Testing = () => {
+  //   let urlElements = window.location.href.split('/')
+  //   console.log(urlElements[3])
+  // }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -262,12 +264,12 @@ export default function Main() {
                         </ListItemIcon>
                         <ListItemText primary='Privacy' />  
                     </MenuItem>
-                    <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
+                    {/* <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
                         <ListItemIcon>
                             <ComputerIcon />
                         </ListItemIcon>
                         <ListItemText primary='Testing' />  
-                    </MenuItem>
+                    </MenuItem> */}
                 </MenuList>
                 {/* <List>{mainListItems}</List> */}
                 {/* <Divider /> */}

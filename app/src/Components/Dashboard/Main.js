@@ -174,6 +174,7 @@ class Main extends React.Component {
                       <Route path='/dashboard' exact component={() => <Dashboard />} />
                       <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog}/>} />
                       <Route path='/dashboard/web' exact component={() => <Web />} />
+                      <Route path='/privacy' exact component={() => <Policy />} />
                       <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                   </Switch>
               </Router>
