@@ -1,11 +1,13 @@
 import React from 'react';
 import SignIn from './../SignIn.js';
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Container, Typography, Avatar, Grid } from '@material-ui/core';
+import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
 import projectLogo from './../../../projectLogo.png';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import shadows from '@material-ui/core/styles/shadows';
 import outlinedLogo from './outlinedLogo.png';
+import GSI from './../../../GSI.png'
+
 
 // Old theme here:
 // const theme = createMuiTheme({
@@ -21,6 +23,9 @@ const theme = createMuiTheme({
       primary: {
         main: "#4887ED",
         light: "#70A1F1",
+      },
+      secondary: {
+          main: '#FFFFFF'
       }
     }
 });
@@ -54,8 +59,8 @@ const useStyles = makeStyles((theme) => ({
     },
     google: {
         width: 400,
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        // marginLeft: 'auto',
+        // marginRight: 'auto',
 
     },
     left: {
@@ -84,6 +89,25 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         marginRight: theme.spacing(35)
 
+    },
+    buttons: {
+        
+    },
+    extensionButton: {
+        marginRight: theme.spacing(5),
+        marginTop: theme.spacing(1.5)
+    },
+    googleButton: {
+        marginLeft: theme.spacing(10)
+
+    },
+    userSection: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginLeft: theme.spacing(5)
+    },
+    whiteText: {
+        color: '#FFFFFF'
     }
   }));
 
@@ -117,6 +141,9 @@ const Intro = () => {
                 {/* <Typography variant='h2' className={classes.white}>
                     Project Eudaimonia
                 </Typography> */}
+                <Typography variant='h4' className={classes.white}>
+                    Data-driven solution for healthy web habits
+                </Typography>
 
 
                 <Typography variant='h5' className={classes.subtitle1}>
@@ -126,9 +153,45 @@ const Intro = () => {
                     (n.) lit. "human flourishing"; a contented state of
                     being happy and healthy and prosperous
                 </Typography>
-                <div className={classes.google}>
+                <Container className={classes.userSection}>
+
+                <Grid item className={classes.buttons}>
+                    <Typography className={classes.whiteText}>
+                            New User
+                    </Typography>
+
+
+
+                    <a style={{ textDecoration: 'none',}} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
+                    <Button variant='contained' size='large' color='secondary' className={classes.extensionButton} style={{textTransform: 'none', maxWidth: '95%', maxHeight: '54%', minWidth: '95%', minHeight: '54%', fontSize: 'large'}}>
+                        Install Chrome Extension
+                    </Button>
+                    </a>
+                </Grid>
+
+
+
+                <Grid item className={classes.buttons}>
+                    <Typography className={classes.whiteText}>
+                            Returning User
+                    </Typography>
+                    {/* <Typography>
+                        or
+                    </Typography> */}
+
+                    {/* <Container item>
+                    <Button variant='text' color='primary' onClick={SignIn} className={classes.googleButton} startIcon={<img src={GSI} style={{maxWidth: '75%', maxHeight: '75%', minWidth: '75%', minHeight: '75%'}}></img>}>
+                    </Button>
+                    </Container> */}
                     <SignIn />
-                </div>
+
+                    {/* <SignIn /> */}
+                    {/* <div className={classes.google}>
+                        <SignIn />
+                    </div> */}
+                </Grid>
+                </Container>
+
             </Grid>
         </Box>
         </ThemeProvider>

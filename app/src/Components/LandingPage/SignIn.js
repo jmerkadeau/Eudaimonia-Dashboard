@@ -2,7 +2,30 @@ import React from 'react';
 import { auth, database, provider } from '../../Data/Firebase.js';
 import { useHistory } from "react-router-dom";
 import GSI from '../../GSI.png';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
 
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#4887ED",
+      light: "#70A1F1",
+    },
+    secondary: {
+        main: '#FFFFFF'
+    }
+  }
+});
+
+const useStyles = makeStyles((theme) => ({
+  extensionButton: {
+      marginRight: theme.spacing(5),
+      marginTop: theme.spacing(1.5)
+  },
+}));
 function SignIn() {
   let history = useHistory();
 
@@ -29,10 +52,14 @@ function SignIn() {
     history.push('/dashboard');
   }
 
+  const classes = useStyles();
   return(
-    <div>
-        <img src={GSI} onClick={sendToLand} id="googleButton" alt="Sign in with Google" />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container item>
+        <Button variant='text' color='primary' onClick={sendToLand} className={classes.googleButton} startIcon={<img src={GSI} style={{maxWidth: '75%', maxHeight: '75%', minWidth: '75%', minHeight: '75%'}}></img>}>
+        </Button>
+      </Container>
+    </ThemeProvider>
   );
 }
 

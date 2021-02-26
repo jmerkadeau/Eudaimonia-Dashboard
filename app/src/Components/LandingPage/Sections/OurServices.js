@@ -13,16 +13,20 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(15),
+        marginTop: theme.spacing(10),
         marginBottom: theme.spacing(15)
     },
     rightText: {
-        marginRight: theme.spacing(15),
+        marginRight: theme.spacing(20),
     },
     photo: {
-      marginTop: theme.spacing(1),
+      marginTop: theme.spacing(12),
       marginLeft: theme.spacing(15),
       width: '80%'
+    },
+    title: {
+      textAlign: 'center',
+      marginRight: theme.spacing(25)
     }
 }))
 
@@ -45,21 +49,30 @@ const Services = () => {
               />
             </Grid>
             <Grid item sm={6} xs={12}>
-                <Typography variant='h2' color='primary'>
-                    Our Services
+                <Typography variant='h2' color='primary' className={classes.title}>
+                    Our Mission
                 </Typography><br/>
+                <Typography variant='h4' color='primary'>
+                  The Problem
+                </Typography>
                 <Typography className={classes.rightText}>
-                    Project Eudaimonia is our solution. With data privacy in mind, 
-                    we’ve developed a secure cloud platform to help users better 
-                    understand how the internet affects their mental health. We combine 
-                    the functionality of productivity trackers like RescueTime with a 
-                    simple and clean user interface for mood logging. 
+                Studies have consistently shown that excessive web consumption leads 
+                to increased feelings of anxiety, isolation, and depression. It’s not 
+                just the amount of time you spend online, but also the type of content 
+                you consume. However, there is a lack of substantial research on how 
+                specific sites influence your mental health.
                 </Typography><br/>
+                <Typography variant='h4' color='primary'>
+                  Our Solution
+                </Typography>
                 <Typography className={classes.rightText}>
-                Through our modern and clean dashboard, users can visualize their mood 
-                and the patterns of web usage throughout the day. Using statistical and 
-                machine-learning techniques, our platform helps users analyze and better 
-                understand the effects that specific sites have on their mental health.
+                Project Eudaimonia is our solution. With data privacy in mind, we’ve 
+                developed a secure cloud platform enabling you to better understand how 
+                web usage patterns affect your own mood throughout the day.  We combine 
+                the functionality of productivity trackers like RescueTime with a simple 
+                and clean user interface for mood logging. By sharing our technology and 
+                our vision, we empower you to improve your own mental health through key 
+                insights and the adoption of healthier online habits.
                 </Typography>
 
               {/* <h1 className="mt-0 text-48 font-normal mb-8 inline-block">

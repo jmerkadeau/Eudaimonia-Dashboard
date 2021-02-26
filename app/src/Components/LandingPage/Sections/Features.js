@@ -38,8 +38,8 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
     },
     center: {
         textAlign: 'center',
-        marginLeft: theme.spacing(6),
-        marginRight: theme.spacing(6),
+        marginLeft: theme.spacing(8),
+        marginRight: theme.spacing(8),
     },
     iconSizing: {
         width: 80,
@@ -59,6 +59,9 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         fontWeight: '600',
+    },
+    header: {
+      marginBottom: theme.spacing(5)
     }
   }));
 const Features = () => {
@@ -71,12 +74,12 @@ const Features = () => {
       {
         title: "Visualize",
         icon: PieChartIcon,
-        text: "With our modern and simple dashboard, it's easy to visualize the relationship between your web usage and your mood.",
+        text: "With our intuitive dashboard, it's easy to visualize the relationship between your web usage and your mood.",
       },
       {
         title: "Analyze",
         icon: EmojiObjectsIcon,
-        text: "Using statistical and machine-learning techniques, our platform helps you understand the effect web usage has on your mood.",
+        text: "Statistical and machine-learning techniques help you understand and improve your web activity patterns.",
       },
     ];
 
@@ -92,6 +95,9 @@ const Features = () => {
                         Our platform will help you gain a better understanding of how the internet affects your mental health.
                     </Typography>
                 </Grid> */}
+                <Typography variant='h2' color='primary' className={classes.header}>
+                  How It Works
+                </Typography>
                 <Grid item className={classes.grid2}>
                     {serviceList.map((item, ind) => (
                         <Grid key={ind} item sm={4} xs={12} className={classes.center}>

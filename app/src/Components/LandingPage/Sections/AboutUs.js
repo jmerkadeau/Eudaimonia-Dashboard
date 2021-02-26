@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'rgba(72, 135, 237, 1)',
         marginRight: 'auto',
         marginLeft: 'auto',
-        marginTop: theme.spacing(10)
+        marginTop: theme.spacing(10),
+        marginBottom: theme.spacing(5)
     },
     title: {
         textAlign: 'center',
@@ -55,13 +56,20 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     description: {
+        marginRight: theme.spacing(40),
+        marginLeft: theme.spacing(40),
         // display: 'flex',
-        marginRight: 'auto',
-        marginLeft: 'auto',
+        // marginRight: 'auto',
+        // marginLeft: 'auto',
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(10),
         textAlign: 'center',
         color: 'white'
+    },
+    signature: {
+        textAlign: 'right',
+        marginRight: theme.spacing(5),
+        fontSize: '20px'
     }
   
 }));
@@ -72,7 +80,7 @@ const AboutUs = () => {
     <ThemeProvider theme={theme}>
         <section className={classes.root}>
         <Container>
-            <Typography variant='h3' className={classes.title}>Our Story</Typography>
+            <Typography variant='h2' className={classes.title}>Our Story</Typography>
             <Grid item sm={6} xs={12} className={classes.profiles}>
                 <Grid className={classes.frame}>
                 <img
@@ -93,16 +101,21 @@ const AboutUs = () => {
             </Grid>
             <Grid item sm={6} xs={12} className={classes.description}>
                 <Typography>
-                With the pandemic and stay-at-home orders, we've found ourselves
-                online more than ever. Studies have consistently shown that excessive 
-                web consumption leads to increased feelings of anxiety, isolation, and 
-                even depression. However, it’s not just the amount of time you spend 
-                online, the type of content matters as well.
+                With the pandemic and stay-at-home orders, I found myself online more than ever. 
+                At the same time, my mood started fluctuating more throughout the day. I found 
+                myself feeling increasingly anxious and isolated. Some days, I would feel intense 
+                FOMO (fear of missing out). Sharing this experience with Joseph, we realized that 
+                our online activities significantly impacted our thoughts and how we feel afterwards. 
+                Unfortunately, the effects are often negative. 
                 </Typography><br/><br/>
                 <Typography>
-                We started working on Project Eudaimonia to help ourselves with this problem. 
-                Now that we've developed it into a secure cloud platform, we want to help you 
-                better understand how the internet affects your mental health.
+                To help ourselves tackle this problem, Joseph and I started developing Project 
+                Eudaimonia. After months of work, our solution is getting to the point where we 
+                can share it with our friends and community. Hopefully, you’ll find it as useful 
+                as we have for better understanding the effects of web usage on mental health.
+                </Typography>
+                <Typography variant='body1' className={classes.signature}>
+                    - Stanley
                 </Typography>
                 {/* {[1, 2, 3].map((item) => (
                 <div key={item} className="flex items-center">
