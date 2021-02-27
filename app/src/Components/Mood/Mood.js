@@ -24,10 +24,11 @@ class Mood extends React.Component {
 
     // get webByMoodToday from moodLog and webLog
     var webByMoodToday = getWebByMoodToday(props.moodLog, props.webLog);
+    // console.log(webByMoodToday);
     // turn webByMoods into graphable form (objects in ordered list rather than dict)
     var webByMoodTodayGraphable = getGraphableWebByMoodData(webByMoodToday, 10);
     var webByMoodAllTimeGraphable = getGraphableWebByMoodData(props.allTimeWebByMood, 10);
-
+    // console.log(webByMoodTodayGraphable);
     this.state = {
       currentMood: orderedMoodsToday[0],
       allTime: false,

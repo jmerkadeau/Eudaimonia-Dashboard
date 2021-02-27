@@ -124,6 +124,8 @@ var getDataForMood = (mood, moodLog, webLog) => {
 };
 
 var getWebByMoodToday = (moodLog, webLog) => {
+  console.log(moodLog);
+  console.log(webLog);
   // console.log("getWebByMoodToday");
   var output = {};
   // create top 5 websites by mood
@@ -134,11 +136,17 @@ var getWebByMoodToday = (moodLog, webLog) => {
     // x is the array of the web times for the hour leading up to the mood log
     const y = hourBeforeArray(time, webLog);
     if (moodLog[i].mood in intervalsByMood) {
-      intervalsByMood[moodLog[i].mood].concat(y);
+      // console.log("HERE0", moodLog[i].mood, y);
+      // console.log("HERE", intervalsByMood[moodLog[i].mood]);
+      intervalsByMood[moodLog[i].mood] = intervalsByMood[moodLog[i].mood].concat(y);
+      // console.log("HERE2", intervalsByMood[moodLog[i].mood]);
+
     } else {
       intervalsByMood[moodLog[i].mood] = y;
     }
+    // console.log(intervalsByMood);
   }
+  // console.log(intervalsByMood);
   for (var mood in intervalsByMood) {
     const x = intervalsByMood[mood];
     const distinctDomains = [...new Set(x.map(x => x.domain))];
