@@ -9,12 +9,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
+  palette: {
+    primary: {
+      main: "#4887ED",
+      light: "#70A1F1",
     }
+  }
 });
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({

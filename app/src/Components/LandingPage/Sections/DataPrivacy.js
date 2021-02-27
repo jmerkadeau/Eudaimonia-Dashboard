@@ -7,12 +7,12 @@ import { Grid, Typography } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
+  palette: {
+    primary: {
+      main: "#4887ED",
+      light: "#70A1F1",
     }
+  }
 });
 
 
@@ -32,8 +32,8 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
       width: "100vw",
       top: 0,
       left: "calc(-100vw + 50% - 300px)",
-      background: '#347aeb',
-      opacity: 0.1,
+      background: '#4887ED',
+      opacity: 0.2,
       borderTopRightRadius: 300,
       borderBottomRightRadius: 300,
       zIndex: -1,
@@ -46,8 +46,8 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
       width: "100vw",
       top: 0,
       right: "calc(-100vw + 50% - 300px)",
-      background: '#347aeb',
-      opacity: 0.1,
+      background: '#4887ED',
+      opacity: 0.2,
       borderTopLeftRadius: 300,
       borderBottomLeftRadius: 300,
       zIndex: -1,

@@ -27,6 +27,7 @@ import Intro from './Sections/Intro.js';
 import Services from './Sections/OurServices.js';
 import DataPrivacy from './Sections/DataPrivacy.js';
 import Features from './Sections/Features.js';
+import AboutUs from './Sections/AboutUs.js';
 
 
 function Copyright() {
@@ -127,6 +128,7 @@ export default function SignInSide() {
       <Intro />
       <Services />
       <Features />
+      <AboutUs />
       <DataPrivacy />
       <Copyright />
       <br/><br/>
