@@ -1,45 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './Web.css';
-// import WebByMoodGraph from './WebByMoodGraph.js';
-// import MoodsList from './MoodsList.js';
 import TopMoodsPieByWeb from './TopMoodsPieByWeb';
 import TopWebGraph from './TopWebGraph.js';
-import { getWebData } from '../../Data/MoodByWebsite';
+import { getWebData, getTimeByDomainToday, getTimeByDomainAllTime } from '../../Data/MoodByWebsite';
 
 
 // Main page for the data section but all the work is done in other files
 class Web extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(props.moodLog);
-    const [topSites, moodByWebData] = getWebData(props.moodLog, props.webLog);
+    const todayMoodByWeb = getWebData(props.moodLog, props.webLog);
+    const todayTopSites = getTimeByDomainToday(props.webLog);
+    const allTimeTopSites = getTimeByDomainAllTime(props.allTimeWeb);
     this.state = {
-      currentSite: topSites[0].name,
-      topSitesState: topSites,
-      moodByWebData: moodByWebData,
-      moodLog: props.moodLog,
-      webLog: props.webLog,
-      allTimeMoodByWeb: props.allTimeMoodByWeb
+      // currentSite
+      currentSite: todayTopSites[0].name,
+      // allTime Toggle
+      allTime: false,
+      // topSites (today, allTime, which one)
+      todayTopSites: todayTopSites,
+      allTimeTopSites: allTimeTopSites,
+      topSites: todayTopSites,
+      // moodByWeb (today, allTime, which one)
+      todayMoodByWeb: todayMoodByWeb,
+      allTimeMoodByWeb: props.allTimeMoodByWeb,
+      graphData: todayMoodByWeb,
+      // Texts
+      buttonText: "View All Time",
+      headerText: "Web Today"
     };
+    // Bind functions to this object so can use this object's state
     this.setCurrentSite = this.setCurrentSite.bind(this);
+    this.switchTime = this.switchTime.bind(this);
+
   }
+  // Set current site to display in graph
   setCurrentSite(domain) {
-    // console.log(`onCurrentMoodChange Run ${domain}`);
     this.setState({ currentSite: domain });
-    // console.log(`state ${this.state.currentMood}`);
+  }
+
+  // Switch Between All-time Data vs Today Data
+  switchTime() {
+    if (this.state.allTime === false) {
+      // set to All Time
+      this.setState({
+        graphData: this.state.allTimeMoodByWeb,
+        topSites: this.state.allTimeTopSites,
+        allTime: true,
+        buttonText: "View Today",
+        headerText: "Web All-Time"
+      });
+    } else {
+      // set to Today
+      this.setState({
+        graphData: this.state.todayMoodByWeb,
+        topSites: this.state.todayTopSites,
+        allTime: false,
+        buttonText: "View All Time",
+        headerText: "Web Today"
+      });
+    }
   }
   render() {
-    // var thisMood = this.state.currentMood;
     return (
       <div className='web' >
-        <h1>
-          Web Data
-          </h1>
+        <h1>{this.state.headerText}</h1>
         <div>
-          <TopWebGraph topSites={this.state.topSitesState} setSite={this.setCurrentSite} />
+          <div><button onClick={this.switchTime} style={{ height: '30px', width: '100px' }}>{this.state.buttonText}</button></div>
+          <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
         </div>
         <div>
-          <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.moodByWebData}></TopMoodsPieByWeb>
+          <h3>
+            {this.state.currentSite}
+          </h3>
+          <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
         </div>
       </div>
     )

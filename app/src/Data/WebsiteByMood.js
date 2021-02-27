@@ -1,8 +1,3 @@
-import React, { Component } from 'react';
-import getMoodLog from './MoodData.js';
-import getWebLog from './WebData.js';
-
-
 // hourBeforeArray creates an array with all of
 // the logged web visirs that a start time within one
 // hour before the time of the specified mood log
@@ -37,6 +32,7 @@ function compare(a, b) {
   return comparison;
 }
 
+// Legacy Function
 var getTopMoodsToday = (moodLog) => {
   var moodFrequency = {};
   var orderedMoods = [];
@@ -57,7 +53,31 @@ var getTopMoodsToday = (moodLog) => {
   // console.log(orderedMoods);
   return [orderedMoods, moodFrequency];
 };
+var getMoodFrequencyToday = (moodLog) => {
+  var moodFrequency = {};
+  // console.log("getTopMoodsToday");
+  // console.log(moodLog);
+  for (var i = 0; i < moodLog.length; i++) {
+    if (moodLog[i].mood in moodFrequency) {
+      moodFrequency[moodLog[i].mood] += 1;
+    } else {
+      moodFrequency[moodLog[i].mood] = 1;
+    }
+  }
 
+  // console.log(orderedMoods);
+  return moodFrequency;
+};
+var getOrderedMoods = (moodFrequency) => {
+  var orderedMoods = Object.keys(moodFrequency);
+  function compareFrequency(a, b) {
+    return moodFrequency[b] - moodFrequency[a];
+  }
+  orderedMoods.sort(compareFrequency);
+  return orderedMoods;
+};
+
+// Legacy Function
 var getDataForMood = (mood, moodLog, webLog) => {
   var timeByDomain = [];
   // create top 5 websites by mood
@@ -182,12 +202,19 @@ var getGraphableWebByMoodData = (webByMood, topN = 5) => {
       }
     }
     if (topFive === undefined || topFive.length === 0) {
-      topFive = [{ name: `You have not logged ${mood} today`, seconds: 0 }];
+      topFive = [{ name: `You have not logged ${mood} yet`, seconds: 0 }];
     }
     topNDict[mood] = topFive;
   }
   return (topNDict);
-}
+};
 
 
-export { getDataForMood, getTopMoodsToday, getWebByMoodToday, getGraphableWebByMoodData };
+export {
+  getDataForMood, // Legacy Function
+  getTopMoodsToday, // Legacy Function
+  getWebByMoodToday,
+  getGraphableWebByMoodData,
+  getMoodFrequencyToday,
+  getOrderedMoods
+};

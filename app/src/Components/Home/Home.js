@@ -7,7 +7,7 @@ import Nav from '../Nav/Nav.js';
 
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
-import { getAllTimeWebByMood, getAllTimeMoodByWeb } from '../../Data/AllTimeData.js';
+import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from '../../Data/AllTimeData.js';
 
 class Home extends React.Component {
   constructor(props) {
@@ -20,12 +20,17 @@ class Home extends React.Component {
     const webLog = await getWebLog();
     const allTimeWebByMood = await getAllTimeWebByMood();
     const allTimeMoodByWeb = await getAllTimeMoodByWeb();
-    console.log(allTimeWebByMood);
+    const allTimeMood = await getAllTimeMood();
+    const allTimeWeb = await getAllTimeWeb();
+    // console.log(allTimeWeb);
+    // console.log(allTimeMood);
     this.setState({
       moodLog: moodLog,
       webLog: webLog,
       allTimeWebByMood: allTimeWebByMood,
       allTimeMoodByWeb: allTimeMoodByWeb,
+      allTimeMood: allTimeMood,
+      allTimeWeb: allTimeWeb,
       isLoading: false
     });
   }
@@ -45,8 +50,8 @@ class Home extends React.Component {
             <Nav />
             {/* <Switch> */}
             <Route path='/dashboard' exact component={() => <Profile />} />
-            <Route path='/dashboard/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWebByMood={this.state.allTimeWebByMood}/>} />
-            <Route path='/dashboard/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMoodByWeb={this.state.allTimeMoodByWeb}/>} />
+            <Route path='/dashboard/mood' exact component={() => <Mood webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
+            <Route path='/dashboard/web' exact component={() => <Web webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
 
 
             {/* </Switch> */}

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MoodsList(props) {
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   // const [selected, setSelected] = useState(0);
   const [selected, setSelected] = useState('outlined');
 
@@ -101,11 +101,10 @@ export default function MoodsList(props) {
       setAllMoods(allMoods);
 
     }
-    if (loading) {
-      createButtons();
-      setLoading(false);
-    }
-  }, []);
+    createButtons();
+    // console.log("[MoodsList] useEffect Run");
+
+  }, [props]);
 
   const setMoodData = (e, mood) => {
     // console.log(mood)
