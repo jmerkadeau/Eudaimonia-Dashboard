@@ -34,8 +34,8 @@ function compare(a, b) {
   }
   return comparison;
 }
-
-function getTopWebsitesByTime(webLog) {
+// for each domain, get time spent today
+function getTimeByDomainToday(webLog) {
   var timeByDomain = [];
   const webLogWithTime = [];
   for (var i = 0; i < webLog.length; i++) {
@@ -79,11 +79,40 @@ function getTopWebsitesByTime(webLog) {
   return (top);
 }
 
+// for each domain, get time spent all time
+function getTimeByDomainAllTime(allTimeWeb) {
+  // console.log(allTimeWeb);
+  var timeByDomain = [];
+  for (var key in allTimeWeb) {
+    // console.log(key, allTimeWeb[key]);
+    const a = {
+      'domain': key,
+      'time': allTimeWeb[key]
+    };
+    timeByDomain.push(a);
+  }
+  const sortedTimeByDomain = timeByDomain.sort(compare);
+  // console.log(sortedTimeByDomain);
+  var top = [];
+  const TOP_LIMIT = 10;
+  for (var l = 0; l < TOP_LIMIT; l++) {
+    // console.log(sortedTimeByDomain[l]);
+    if (sortedTimeByDomain[l] != null) {
+      var twoEDomain = sortedTimeByDomain[l].domain;
+      var fixedDomain = twoEDomain.replaceAll('%2E', '.');
+      top[l] = { name: fixedDomain, seconds: sortedTimeByDomain[l].time };
+    }
+  }
+  // console.log(top);
+  return (top);
+};
+
+// create moodByWeb data for today
 var getWebData = (moodLog, webLog) => {
   // console.log("[MoodByWebsite] getWebData run");
   var moodsAfterWebsite = {};
   // const webLog = await getWebLog();
-  const topSites = getTopWebsitesByTime(webLog);
+  // const topSites = getTopWebsitesByTime(webLog);
   // console.log(moodLog);
   for (var i = 0; i < moodLog.length; i++) {
     var mood = moodLog[i].mood;
@@ -111,7 +140,8 @@ var getWebData = (moodLog, webLog) => {
       }
     }
   }
-  return [topSites, moodsAfterWebsite];
+  // console.log(moodsAfterWebsite);
+  return moodsAfterWebsite;
 };
 
-export { getWebData };
+export { getWebData, getTimeByDomainToday, getTimeByDomainAllTime };

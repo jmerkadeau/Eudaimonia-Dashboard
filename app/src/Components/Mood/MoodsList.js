@@ -35,9 +35,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function MoodsList(props) {
-  const classes=useStyles();
+  const classes = useStyles();
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   // const [selected, setSelected] = useState(0);
   const [selected, setSelected] = useState('outlined');
 
@@ -99,37 +99,36 @@ export default function MoodsList(props) {
 
       // allMoods is sorted by here
       setAllMoods(allMoods);
-  
+
     }
-    if (loading) {
-      createButtons();
-      setLoading(false);
-    }
-  }, []);
+    createButtons();
+    // console.log("[MoodsList] useEffect Run");
+
+  }, [props]);
 
   const setMoodData = (e, mood) => {
-    console.log(mood)
+    // console.log(mood)
     props.setCurrentMood(mood);
   };
   const moodFrequency = props.moodFrequency;
-  for (var i = 0; i < allMoods.length; i++){
-    if (moodFrequency[allMoods[i]] == undefined){
+  for (var i = 0; i < allMoods.length; i++) {
+    if (moodFrequency[allMoods[i]] == undefined) {
       moodFrequency[allMoods[i]] = 0;
     }
   }
 
 
   // const classes = styles;
-  return(
+  return (
     <ThemeProvider theme={theme}>
       <div className={classes.bg}>
-      <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
-        {allMoods.map((option, index) => (
-          <Button onClick={(event) => {setMoodData(event, option); selectThis();}} variant='outlined' color='primary' className={classes.mar} id={index}>
-            {option}
-          </Button>
-        ))}
-      </ButtonGroup>
+        <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
+          {allMoods.map((option, index) => (
+            <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='outlined' color='primary' className={classes.mar} id={index}>
+              {option}
+            </Button>
+          ))}
+        </ButtonGroup>
       </div>
 
       {/* <Container className={classes.root}>

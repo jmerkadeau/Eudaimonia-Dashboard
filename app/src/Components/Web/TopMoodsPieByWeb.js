@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import {
   PieChart, Pie, Tooltip
 } from 'recharts';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
 function TopMoodsPieByWeb(props) {
-
-
   const [pieData, setPieData] = useState([]);
 
 
   useEffect(() => {
-    // console.log("useEffect run");
     // This function is where WebsiteByMood.js is called to collect the data
     // we need for the graphs.
-    // I initially get Anxious and Focused just to have two graphs up to start.
-    // It is an async/await function so that it waits until
-    async function getData() {
-      // console.log("[topMoodsPieByWeb] getData run");
-      // console.log(props.moodByWebData);
+
+    // compare function to order items in pieData
+    function compare(a, b) {
+      const timeA = a.value;
+      const timeB = b.value;
+
+      let comparison = 0;
+      if (timeA > timeB) {
+        comparison = -1;
+      }
+      else if (timeA < timeB) {
+        comparison = 1;
+      }
+      return comparison;
+    }
+
+    function createPieChartData() {
+      // console.log("[topMoodsPieByWeb] createPieChartData run");
       const currentSite = props.currentSite.replaceAll('.', '%2E');
       const moodByWebData = props.moodByWebData;
-      // console.log(currentSite);
-      // console.log(moodByWebData);
       if (currentSite in moodByWebData) {
         const temp = moodByWebData[currentSite];
         var pieChartData = [];
@@ -33,6 +40,7 @@ function TopMoodsPieByWeb(props) {
             value: temp[key]
           });
         }
+        pieChartData.sort(compare);
         setPieData(pieChartData);
       } else {
         console.log("No moods associated with site from today");
@@ -41,7 +49,7 @@ function TopMoodsPieByWeb(props) {
 
     }
 
-    getData();
+    createPieChartData();
   }, [props.moodByWebData, props.currentSite]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.

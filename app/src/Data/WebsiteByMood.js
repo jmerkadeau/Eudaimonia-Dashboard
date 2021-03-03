@@ -1,8 +1,3 @@
-import React, { Component } from 'react';
-import getMoodLog from './MoodData.js';
-import getWebLog from './WebData.js';
-
-
 // hourBeforeArray creates an array with all of
 // the logged web visirs that a start time within one
 // hour before the time of the specified mood log
@@ -37,6 +32,7 @@ function compare(a, b) {
   return comparison;
 }
 
+// Legacy Function
 var getTopMoodsToday = (moodLog) => {
   var moodFrequency = {};
   var orderedMoods = [];
@@ -57,7 +53,31 @@ var getTopMoodsToday = (moodLog) => {
   // console.log(orderedMoods);
   return [orderedMoods, moodFrequency];
 };
+var getMoodFrequencyToday = (moodLog) => {
+  var moodFrequency = {};
+  // console.log("getTopMoodsToday");
+  // console.log(moodLog);
+  for (var i = 0; i < moodLog.length; i++) {
+    if (moodLog[i].mood in moodFrequency) {
+      moodFrequency[moodLog[i].mood] += 1;
+    } else {
+      moodFrequency[moodLog[i].mood] = 1;
+    }
+  }
 
+  // console.log(orderedMoods);
+  return moodFrequency;
+};
+var getOrderedMoods = (moodFrequency) => {
+  var orderedMoods = Object.keys(moodFrequency);
+  function compareFrequency(a, b) {
+    return moodFrequency[b] - moodFrequency[a];
+  }
+  orderedMoods.sort(compareFrequency);
+  return orderedMoods;
+};
+
+// Legacy Function
 var getDataForMood = (mood, moodLog, webLog) => {
   var timeByDomain = [];
   // create top 5 websites by mood
@@ -86,7 +106,8 @@ var getDataForMood = (mood, moodLog, webLog) => {
     timeByDomain.push(domainTime);
   }
   const sortedTimeByDomain = timeByDomain.sort(compare);
-  console.log(sortedTimeByDomain);
+  // console.log(sortedTimeByDomain);
+
   var topFive = [];
   for (var l = 0; l < 5; l++) {
     // console.log(sortedTimeByDomain[l]);
@@ -102,4 +123,106 @@ var getDataForMood = (mood, moodLog, webLog) => {
   return (topFive);
 };
 
-export { getDataForMood, getTopMoodsToday };
+var getWebByMoodToday = (moodLog, webLog) => {
+  console.log(moodLog);
+  console.log(webLog);
+  // console.log("getWebByMoodToday");
+  var output = {};
+  // create top 5 websites by mood
+  var intervalsByMood = {};
+  for (var i = 0; i < moodLog.length; i++) {
+    // console.log(moodLog[i]);
+    var time = moodLog[i].time;
+    // x is the array of the web times for the hour leading up to the mood log
+    const y = hourBeforeArray(time, webLog);
+    if (moodLog[i].mood in intervalsByMood) {
+      // console.log("HERE0", moodLog[i].mood, y);
+      // console.log("HERE", intervalsByMood[moodLog[i].mood]);
+      intervalsByMood[moodLog[i].mood] = intervalsByMood[moodLog[i].mood].concat(y);
+      // console.log("HERE2", intervalsByMood[moodLog[i].mood]);
+
+    } else {
+      intervalsByMood[moodLog[i].mood] = y;
+    }
+    // console.log(intervalsByMood);
+  }
+  // console.log(intervalsByMood);
+  for (var mood in intervalsByMood) {
+    const x = intervalsByMood[mood];
+    const distinctDomains = [...new Set(x.map(x => x.domain))];
+    // console.log(mood, distinctDomains);
+    for (var j = 0; j < distinctDomains.length; j++) {
+      var domTime = 0;
+      for (var k = 0; k < x.length; k++) {
+        if (x[k].domain === distinctDomains[j]) {
+          domTime += x[k].timeDiff;
+        }
+      }
+
+      if (mood in output) {
+        if (distinctDomains[j] in output[mood]) {
+          output[mood][distinctDomains[j]] += domTime;
+        } else {
+          output[mood][distinctDomains[j]] = domTime;
+        }
+      } else {
+        const domainTime = {
+          [distinctDomains[j]]: domTime
+        };
+        output[mood] = domainTime;
+      }
+    }
+  }
+  return (output);
+};
+var getGraphableWebByMoodData = (webByMood, topN = 5) => {
+  var output = {};
+  for (var mood in webByMood) {
+    const domainTimes = webByMood[mood];
+    // console.log(mood, domainTimes);
+    for (var domain in domainTimes) {
+      const domainTime = {
+        'domain': domain,
+        'time': domainTimes[domain]
+      };
+      if (mood in output) {
+        output[mood].push(domainTime);
+
+      } else {
+        output[mood] = [domainTime];
+      }
+    }
+  }
+  // get top N
+  var topNDict = {};
+  for (var mood in output) {
+    // console.log(mood, output[mood]);
+    var timeByDomain = output[mood];
+    const sortedTimeByDomain = timeByDomain.sort(compare);
+    // console.log(sortedTimeByDomain);
+    var topFive = [];
+    for (var l = 0; l < topN; l++) {
+      // console.log(sortedTimeByDomain[l]);
+      if (sortedTimeByDomain[l] != null) {
+        var twoEDomain = sortedTimeByDomain[l].domain;
+        var fixedDomain = twoEDomain.replaceAll('%2E', '.');
+        topFive[l] = { name: fixedDomain, seconds: sortedTimeByDomain[l].time }
+      }
+    }
+    if (topFive === undefined || topFive.length === 0) {
+      topFive = [{ name: `You have not logged ${mood} yet`, seconds: 0 }];
+    }
+    topNDict[mood] = topFive;
+  }
+  return (topNDict);
+};
+
+
+export {
+  getDataForMood, // Legacy Function
+  getTopMoodsToday, // Legacy Function
+  getWebByMoodToday,
+  getGraphableWebByMoodData,
+  getMoodFrequencyToday,
+  getOrderedMoods
+};
