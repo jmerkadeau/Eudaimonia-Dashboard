@@ -5,27 +5,8 @@ import GSI from '../../GSI.png';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
 import { makeStyles } from "@material-ui/core/styles";
+import GoogleButton from 'react-google-button';
 
-
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4887ED",
-      light: "#70A1F1",
-    },
-    secondary: {
-        main: '#FFFFFF'
-    }
-  }
-});
-
-const useStyles = makeStyles((theme) => ({
-  extensionButton: {
-      marginRight: theme.spacing(5),
-      marginTop: theme.spacing(1.5)
-  },
-}));
 function SignIn() {
   let history = useHistory();
 
@@ -49,17 +30,11 @@ function SignIn() {
         console.log(errorCode);
         console.log(errorMessage);
       });
-    history.push('/dashboard');
+    history.push('/');
   }
 
-  const classes = useStyles();
   return(
-    <ThemeProvider theme={theme}>
-      <Container item>
-        <Button variant='text' color='primary' onClick={sendToLand} className={classes.googleButton} startIcon={<img src={GSI} style={{maxWidth: '75%', maxHeight: '75%', minWidth: '75%', minHeight: '75%'}}></img>}>
-        </Button>
-      </Container>
-    </ThemeProvider>
+        <GoogleButton type='light' onClick={sendToLand}/>
   );
 }
 

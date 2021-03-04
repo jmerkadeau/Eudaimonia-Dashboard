@@ -29,6 +29,9 @@ import DataPrivacy from './Sections/DataPrivacy.js';
 import Features from './Sections/Features.js';
 import AboutUs from './Sections/AboutUs.js';
 import OurValues from './Sections/OurValues.js'
+import theme from './Sections/Theme.js';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+
 
 
 function Copyright() {
@@ -125,6 +128,7 @@ const googleSignIn = () => {
 export default function SignInSide() {
   const classes = useStyles();
   return(
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <Intro />
       <Services />
@@ -136,6 +140,7 @@ export default function SignInSide() {
       <br/><br/>
 
     </div>
+    </ThemeProvider>
 
   )
 

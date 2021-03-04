@@ -2,16 +2,27 @@ import React from "react";
 import { Grid, Icon, Button, useMediaQuery, Container, Typography, ThemeProvider, createMuiTheme, makeStyles, Fab } from "@material-ui/core";
 import stockTyping from './../../../stockTyping.jpg';
 import { Link as RouterLink } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './Theme.js';
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4887ED",
-      light: "#70A1F1",
-    }
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#58A1C1",
+//       light: "#7BB5CE",
+//     },
+//     gray: {
+//       main: '#98AFBA',
+//       dark: '#354A54'
+//   }
+//   },
+//   typography: {
+//     fontFamily: {
+
+//     }
+//   }
+// });
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,10 +31,12 @@ const useStyles = makeStyles((theme) => ({
     },
     leftText: {
         marginLeft: theme.spacing(20),
-        paddingRight: theme.spacing(5)
+        paddingRight: theme.spacing(5),
+        color: '#616161'
     },
     leftSubHeaders: {
         marginLeft: theme.spacing(20),
+        color: '#999999'
     },
     photo: {
       marginTop: theme.spacing(15),
@@ -44,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(10),
         marginTop: theme.spacing(2),
     },
+    privacyFab: {
+      backgroundColor: '#999999',
+      color: 'white',
+      '&:hover': {
+        backgroundColor: '#616161',
+    }
+    },
 }))
 
 const OurValues = () => {
@@ -53,6 +73,7 @@ const OurValues = () => {
 
     return(
         <ThemeProvider theme={theme}>
+        <CssBaseline />
         <section className={classes.root}>
         <div className="container">
           <Grid container spacing={isMobile ? 4 : 10} justify="space-between">
@@ -88,7 +109,7 @@ const OurValues = () => {
                 </Typography>
                 <div className={classes.privacyButton}>
                 <RouterLink style={{ textDecoration: 'none'}} to="/privacy">
-                    <Fab className="mr-6 px-6" variant="extended" color="primary">
+                    <Fab className={classes.privacyFab} variant="extended">
                     Privacy Policy
                     </Fab>
                 </RouterLink>

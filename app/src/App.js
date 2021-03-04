@@ -25,9 +25,9 @@ function App() {
   return (
     <div className="app">
       <section>
-        {user ? <Home /> : <LandingPage />}
+        {/* {user ? <Home /> : <LandingPage />} */}
         {/* {user ? <Main /> : <Land />} */}
-        {/* {user ? <Main path={sendMain} />: <Land />} */}
+        {user ? <Main path={sendMain} />: <Land />}
 
         {/* <BrowserRouter>
           <Switch>

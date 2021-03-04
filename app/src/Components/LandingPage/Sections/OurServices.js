@@ -1,15 +1,17 @@
 import React from "react";
 import { Grid, Icon, Button, useMediaQuery, Container, Typography, ThemeProvider, createMuiTheme, makeStyles } from "@material-ui/core";
 import stockTyping from './../../../stockTyping.jpg';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './Theme.js';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4887ED",
-      light: "#70A1F1",
-    }
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#58A1C1",
+//       light: "#7BB5CE",
+//     },
+//   }
+// });
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,6 +39,7 @@ const Services = () => {
 
     return(
         <ThemeProvider theme={theme}>
+        <CssBaseline />
         <section className={classes.root}>
         <div className="container">
           <Grid container spacing={isMobile ? 4 : 10} justify="space-between">
@@ -52,28 +55,27 @@ const Services = () => {
                 <Typography variant='h2' color='primary' className={classes.title}>
                     Our Mission
                 </Typography><br/>
-                <Typography variant='h4' color='primary'>
+                <Typography variant='h5' color='primary'>
                   The Problem
                 </Typography>
                 <Typography className={classes.rightText}>
+                
+
                 Studies have consistently shown that excessive web consumption leads 
-                to increased feelings of anxiety, isolation, and depression. It’s not 
-                just the amount of time you spend online, but also the type of content 
-                you consume. However, there is a lack of substantial research on how 
-                specific sites influence your mental health.
-                </Typography><br/>
-                <Typography variant='h4' color='primary'>
+                to increased feelings of anxiety, isolation, and depression. <br/><br/> However, 
+                there is a lack of substantial research on how specific sites influence 
+                your mental health.<br/><hr/>
+                </Typography>
+                <Typography variant='h5' color='primary'>
                   Our Solution
                 </Typography>
                 <Typography className={classes.rightText}>
-                Project Eudaimonia is our solution. With data privacy in mind, we’ve 
-                developed a secure cloud platform enabling you to better understand how 
-                web usage patterns affect your own mood throughout the day.  We combine 
-                the functionality of productivity trackers like RescueTime with a simple 
-                and clean user interface for mood logging. By sharing our technology and 
+                With data privacy in mind, we’ve developed a secure cloud platform enabling you to better understand how 
+                web usage patterns affect your own mood throughout the day. <br/><br/> By sharing our technology and 
                 our vision, we empower you to improve your own mental health through key 
                 insights and the adoption of healthier online habits.
                 </Typography>
+
 
               {/* <h1 className="mt-0 text-48 font-normal mb-8 inline-block">
                 Our Services

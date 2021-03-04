@@ -7,15 +7,17 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './Theme.js';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4887ED",
-      light: "#70A1F1",
-    }
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#58A1C1",
+//       light: "#7BB5CE",
+//     },
+//   }
+// });
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
     root: {
@@ -86,6 +88,7 @@ const Features = () => {
     const classes = useStyles();
     return (
       <ThemeProvider theme={theme}>
+      <CssBaseline />
         
         <section className={classes.root} id="services8">
             <div className="container">
