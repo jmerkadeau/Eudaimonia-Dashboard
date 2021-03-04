@@ -124,8 +124,8 @@ var getDataForMood = (mood, moodLog, webLog) => {
 };
 
 var getWebByMoodToday = (moodLog, webLog) => {
-  console.log(moodLog);
-  console.log(webLog);
+  // console.log(moodLog);
+  // console.log(webLog);
   // console.log("getWebByMoodToday");
   var output = {};
   // create top 5 websites by mood
@@ -216,7 +216,13 @@ var getGraphableWebByMoodData = (webByMood, topN = 5) => {
   }
   return (topNDict);
 };
-
+var getMoodCount = (moodData) => {
+  var count = 0;
+  for (var mood in moodData) {
+    count += moodData[mood];
+  }
+  return count;
+};
 
 export {
   getDataForMood, // Legacy Function
@@ -224,5 +230,6 @@ export {
   getWebByMoodToday,
   getGraphableWebByMoodData,
   getMoodFrequencyToday,
-  getOrderedMoods
+  getOrderedMoods,
+  getMoodCount
 };
