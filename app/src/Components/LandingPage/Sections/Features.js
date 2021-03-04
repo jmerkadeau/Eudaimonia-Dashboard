@@ -7,15 +7,17 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './Theme.js';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4887ED",
-      light: "#70A1F1",
-    }
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#58A1C1",
+//       light: "#7BB5CE",
+//     },
+//   }
+// });
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
     root: {
@@ -38,8 +40,8 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
     },
     center: {
         textAlign: 'center',
-        marginLeft: theme.spacing(6),
-        marginRight: theme.spacing(6),
+        marginLeft: theme.spacing(8),
+        marginRight: theme.spacing(8),
     },
     iconSizing: {
         width: 80,
@@ -59,6 +61,9 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         fontWeight: '600',
+    },
+    header: {
+      marginBottom: theme.spacing(5)
     }
   }));
 const Features = () => {
@@ -71,18 +76,19 @@ const Features = () => {
       {
         title: "Visualize",
         icon: PieChartIcon,
-        text: "With our modern and simple dashboard, it's easy to visualize the relationship between your web usage and your mood.",
+        text: "With our intuitive dashboard, it's easy to visualize the relationship between your web usage and your mood.",
       },
       {
         title: "Analyze",
         icon: EmojiObjectsIcon,
-        text: "Using statistical and machine-learning techniques, our platform helps you understand the effect web usage has on your mood.",
+        text: "Statistical and machine-learning techniques help you understand and improve your web activity patterns.",
       },
     ];
 
     const classes = useStyles();
     return (
       <ThemeProvider theme={theme}>
+      <CssBaseline />
         
         <section className={classes.root} id="services8">
             <div className="container">
@@ -92,6 +98,9 @@ const Features = () => {
                         Our platform will help you gain a better understanding of how the internet affects your mental health.
                     </Typography>
                 </Grid> */}
+                <Typography variant='h2' color='primary' className={classes.header}>
+                  How It Works
+                </Typography>
                 <Grid item className={classes.grid2}>
                     {serviceList.map((item, ind) => (
                         <Grid key={ind} item sm={4} xs={12} className={classes.center}>

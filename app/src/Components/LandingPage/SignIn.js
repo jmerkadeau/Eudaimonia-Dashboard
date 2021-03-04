@@ -2,6 +2,10 @@ import React from 'react';
 import { auth, database, provider } from '../../Data/Firebase.js';
 import { useHistory } from "react-router-dom";
 import GSI from '../../GSI.png';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import GoogleButton from 'react-google-button';
 
 function SignIn() {
   let history = useHistory();
@@ -26,13 +30,11 @@ function SignIn() {
         console.log(errorCode);
         console.log(errorMessage);
       });
-    history.push('/dashboard');
+    history.push('/');
   }
 
   return(
-    <div>
-        <img src={GSI} onClick={sendToLand} id="googleButton" alt="Sign in with Google" />
-    </div>
+        <GoogleButton type='light' onClick={sendToLand}/>
   );
 }
 
