@@ -1,24 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.bfccab3c.chunk.css",
-    "main.js": "/static/js/main.4a01248b.chunk.js",
-    "main.js.map": "/static/js/main.4a01248b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.bd48b284.js",
-    "runtime-main.js.map": "/static/js/runtime-main.bd48b284.js.map",
-    "static/js/2.7c6b3af0.chunk.js": "/static/js/2.7c6b3af0.chunk.js",
-    "static/js/2.7c6b3af0.chunk.js.map": "/static/js/2.7c6b3af0.chunk.js.map",
-    "static/js/3.4109ce93.chunk.js": "/static/js/3.4109ce93.chunk.js",
-    "static/js/3.4109ce93.chunk.js.map": "/static/js/3.4109ce93.chunk.js.map",
+    "main.css": "/static/css/main.465c00a9.chunk.css",
+    "main.js": "/static/js/main.74e85b05.chunk.js",
+    "main.js.map": "/static/js/main.74e85b05.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.4d59bc0d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.4d59bc0d.js.map",
+    "static/js/2.a7d5ffcd.chunk.js": "/static/js/2.a7d5ffcd.chunk.js",
+    "static/js/2.a7d5ffcd.chunk.js.map": "/static/js/2.a7d5ffcd.chunk.js.map",
+    "static/js/3.973c690f.chunk.js": "/static/js/3.973c690f.chunk.js",
+    "static/js/3.973c690f.chunk.js.map": "/static/js/3.973c690f.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.bfccab3c.chunk.css.map": "/static/css/main.bfccab3c.chunk.css.map",
-    "static/js/2.7c6b3af0.chunk.js.LICENSE.txt": "/static/js/2.7c6b3af0.chunk.js.LICENSE.txt",
+    "static/css/main.465c00a9.chunk.css.map": "/static/css/main.465c00a9.chunk.css.map",
+    "static/js/2.a7d5ffcd.chunk.js.LICENSE.txt": "/static/js/2.a7d5ffcd.chunk.js.LICENSE.txt",
+    "static/media/ProductSans-Black.99679fcb.ttf": "/static/media/ProductSans-Black.99679fcb.ttf",
+    "static/media/josephpic.9578bbd6.png": "/static/media/josephpic.9578bbd6.png",
+    "static/media/moodByWeb.3183b8e8.png": "/static/media/moodByWeb.3183b8e8.png",
     "static/media/outlinedLogo.8535e3dc.png": "/static/media/outlinedLogo.8535e3dc.png",
+    "static/media/stanleypic.ec3c5b47.png": "/static/media/stanleypic.ec3c5b47.png",
     "static/media/stockTyping.7c355eca.jpg": "/static/media/stockTyping.7c355eca.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bd48b284.js",
-    "static/js/2.7c6b3af0.chunk.js",
-    "static/css/main.bfccab3c.chunk.css",
-    "static/js/main.4a01248b.chunk.js"
+    "static/js/runtime-main.4d59bc0d.js",
+    "static/js/2.a7d5ffcd.chunk.js",
+    "static/css/main.465c00a9.chunk.css",
+    "static/js/main.74e85b05.chunk.js"
   ]
 }

@@ -30,12 +30,14 @@ import Dashboard from './Dashboard.js';
 import Web from './Web.js';
 import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
-import { BrowserRouter as Router, Route, Switch, useHistory, Redirect} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 
 
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
+import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from './../../Data/AllTimeData.js';
+
 
 
 const drawerWidth = 240;
@@ -137,16 +139,25 @@ const styles = theme => ({
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { moodLog: [], webLog: [], isLoading: true };
+    this.state = { moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
   }
 
   async componentDidMount() {
     const moodLog = await getMoodLog();
     const webLog = await getWebLog();
-    // console.log(moodLog);
+    const allTimeWebByMood = await getAllTimeWebByMood();
+    const allTimeMoodByWeb = await getAllTimeMoodByWeb();
+    const allTimeMood = await getAllTimeMood();
+    const allTimeWeb = await getAllTimeWeb();
+    // console.log(allTimeWeb);
+    // console.log(allTimeMood);
     this.setState({
       moodLog: moodLog,
       webLog: webLog,
+      allTimeWebByMood: allTimeWebByMood,
+      allTimeMoodByWeb: allTimeMoodByWeb,
+      allTimeMood: allTimeMood,
+      allTimeWeb: allTimeWeb,
       isLoading: false
     });
   }
@@ -168,18 +179,18 @@ class Main extends React.Component {
               <CssBaseline />
               {/* <Router history={history}> */}
               <Router>
-                  <SideDrawer />
-                  <Switch>
-                      <Route path='/' exact component={() => <Dashboard />} />
-                      <Route path='/dashboard' exact component={() => <Dashboard />} />
-                      <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog}/>} />
-                      <Route path='/dashboard/web' exact component={() => <Web />} />
-                      <Route path='/privacy' exact component={() => <Policy />} />
-                      <Route path='/dashboard/privacy' exact component={() => <Policy />} />
-                  </Switch>
+                <SideDrawer />
+                <Switch>
+                  <Route path='/' exact component={() => <Dashboard />} />
+                  <Route path='/dashboard' exact component={() => <Dashboard />} />
+                  <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
+                  <Route path='/dashboard/web' exact component={() => <Web />} />
+                  <Route path='/privacy' exact component={() => <Policy />} />
+                  <Route path='/dashboard/privacy' exact component={() => <Policy />} />
+                </Switch>
               </Router>
 
-              </div>
+            </div>
           </ThemeProvider>
         </div>
     )
