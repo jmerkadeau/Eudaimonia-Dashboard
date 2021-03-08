@@ -2,7 +2,11 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import { Typography, Container, Link, List, ListItem, ListItemText } from '@material-ui/core';
+import { Typography, Container, Link, List, ListItem, ListItemText, Grid } from '@material-ui/core';
+import projectLogo from './../../projectLogo.png';
+import theme from './Sections/Theme.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 function Copyright() {
     return (
@@ -17,18 +21,12 @@ function Copyright() {
     );
 }
 
-const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
-    }
-});
-
 const useStyles = makeStyles((theme) => ({
+    root: {
+        marginBottom: theme.spacing(5)
+    },
     container: {
-        paddingTop: theme.spacing(10),
+        paddingTop: theme.spacing(5),
         paddingBottom: theme.spacing(4),
         paddingLeft: theme.spacing(10),
         paddingRight: theme.spacing(10),
@@ -40,7 +38,25 @@ const useStyles = makeStyles((theme) => ({
     indent: {
         textIndent: theme.spacing(2),
         fontSize: 16,
-    }
+    },
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(1),
+        // marginLeft: theme.spacing(60)
+    },
+    projectEudaimonia: {
+        marginLeft: theme.spacing(1),
+        color: theme.palette.grey.A400,
+        fontWeight: theme.typography.fontWeightBold
+    },
+    logo: {
+        width: 25,
+        height: 25,
+    },
     
 }));
 
@@ -48,8 +64,21 @@ export default function Policy2() {
     const classes = useStyles();
     return(
         <ThemeProvider theme={theme}>
-            <div>
+        <CssBaseline />
+            <div className={classes.root}>
+                <Grid item className={classes.header} xs={12}>
+                    <img src={projectLogo} alt='Eudaimonia Logo' className={classes.logo} />
+
+                    <Typography variant='h5' className={classes.projectEudaimonia}>
+                        Project
+                    </Typography>
+                    <Typography variant='h5' className={classes.projectEudaimonia}>
+                        Eudaimonia
+                    </Typography>
+
+                </Grid>
                 <Container className={classes.container}>
+
                     <Typography variant='h5'>
                         Privacy Policy
                     </Typography>
@@ -96,7 +125,7 @@ export default function Policy2() {
                         </List> 
                     </Typography>
                 </Container>
-                <Copyright/>
+                <Copyright />
             </div>
         </ThemeProvider>
     )

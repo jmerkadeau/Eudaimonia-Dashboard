@@ -137,8 +137,7 @@ export default function SignInSide() {
       <AboutUs />
       {/* <DataPrivacy /> */}
       <Copyright />
-      <br/><br/>
-
+      <br/>
     </div>
     </ThemeProvider>
 
