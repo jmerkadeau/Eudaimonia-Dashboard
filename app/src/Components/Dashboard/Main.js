@@ -27,7 +27,7 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import Mood from './Mood.js';
 import Dashboard from './Dashboard.js';
-import Web from './Web.js';
+import WebPage from './WebPage.js';
 import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
@@ -181,10 +181,12 @@ class Main extends React.Component {
               <Router>
                 <SideDrawer />
                 <Switch>
-                  <Route path='/' exact component={() => <Dashboard />} />
-                  <Route path='/dashboard' exact component={() => <Dashboard />} />
+                  {/* <Route path='/' exact component={() => <Dashboard />} />
+                  <Route path='/dashboard' exact component={() => <Dashboard />} /> */}
+                  <Route path='/' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
+                  <Route path='/dashboard' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
-                  <Route path='/dashboard/web' exact component={() => <Web />} />
+                  <Route path='/dashboard/web' exact component={() => <WebPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
                   <Route path='/privacy' exact component={() => <Policy />} />
                   <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                 </Switch>

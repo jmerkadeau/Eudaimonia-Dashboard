@@ -2,16 +2,19 @@ import React from 'react';
 import WebByMoodGraph from './../Mood/WebByMoodGraph.js';
 import MoodsList from './../Mood/MoodsList.js';
 import TopMoodsPie from './../Mood/TopMoodsPie.js';
+import PositivityScore from './../Mood/PositivityScore.js';
+
 import {
   getWebByMoodToday,
   getGraphableWebByMoodData,
   getMoodFrequencyToday,
   getOrderedMoods,
-  getMoodCount
+  getMoodCount,
+  getMoodScore
 } from '../../Data/WebsiteByMood';
 import {
   Typography, Link, createMuiTheme, ThemeProvider, Container,
-  Grid, Paper, Box, Button, Card
+  Grid, Paper, Box, Button, Card, Divider
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
@@ -86,6 +89,25 @@ const styles = theme => ({
     alignItems: 'center',
     width: '100%'
   },
+  paperDiv: {
+    textAlign: 'center',
+    overflow: 'auto',
+    alignItems: 'center',
+    width: '100%'
+  },
+  infoDiv: {
+    textAlign: 'left',
+    overflow: 'auto',
+    alignItems: 'left',
+    width: '100%',
+    marginLeft: theme.spacing(8)
+  },
+  infoText: {
+
+  },
+  centerPieCharts: {
+
+  },
   fixedHeight: {
     height: 240,
   },
@@ -120,6 +142,9 @@ const styles = theme => ({
   card: {
     display: 'flex',
     width: '100%'
+  },
+  divider: {
+    background: "primary"
   }
 });
 
@@ -143,7 +168,17 @@ class MoodPage extends React.Component {
     var webByMoodAllTimeGraphable = getGraphableWebByMoodData(props.allTimeWebByMood, 10);
     // console.log(webByMoodTodayGraphable);
     var moodCountToday = getMoodCount(moodToday);
+    var moodCountAllTime = getMoodCount(moodAllTime);
+
     // console.log(getMoodCount(moodAllTime));
+
+    var moodScoreToday = getMoodScore(moodToday);
+    var moodScoreAllTime = getMoodScore(moodAllTime);
+
+    // console.log(props.moodLog);
+    // console.log(orderedMoodsToday[0]);
+    // console.log(moodCountToday);
+
     this.state = {
       currentMood: orderedMoodsToday[0],
       allTime: false,
@@ -166,12 +201,43 @@ class MoodPage extends React.Component {
       // Mood Count:
       moodCount: moodCountToday,
       todayMoodCount: moodCountToday,
-      allTimeMoodCount: getMoodCount(moodAllTime)
+      allTimeMoodCount: moodCountAllTime,
+      // Mood Score
+      moodScore: moodScoreToday,
+      moodScoreToday: moodScoreToday,
+      moodScoreAllTime: moodScoreAllTime
     };
     // Bind functions to this object so can use this object's state
     this.onCurrentMoodChange = this.onCurrentMoodChange.bind(this);
     this.switchTime = this.switchTime.bind(this);
 
+  }
+  comparePositivity() {
+    if (this.state.allTime) {
+      const allTimeScore = this.state.moodScoreAllTime;
+      if (allTimeScore < 20) {
+        return "Check out our page for mental health resources";
+      } else if (allTimeScore < 40) {
+        return "Overall, feeling alright";
+      } else if (allTimeScore < 60) {
+        return "Overall, feeling good!";
+      } else if (allTimeScore < 80) {
+        return "Overall, feeling great!";
+      } else if (allTimeScore < 101) {
+        return "You're on top of the world!";
+      }
+
+      // return `Top mood ${this.state.headerText.toLowerCase()}: ${this.state.orderedMoods[0]}`
+    } else {
+      if (this.state.moodScoreToday < this.state.moodScoreAllTime) {
+        // if lower than average
+        return `${this.state.moodScoreAllTime - this.state.moodScoreToday}% lower than average`
+      } else {
+        // if higher than average
+        return `${this.state.moodScoreToday - this.state.moodScoreAllTime}% higher than average`
+
+      }
+    }
   }
 
   // Switch Between All-time Data vs Today Data
@@ -187,7 +253,9 @@ class MoodPage extends React.Component {
         allTime: true,
         buttonText: "View Today",
         headerText: "All-Time",
-        moodCount: this.state.allTimeMoodCount
+        moodCount: this.state.allTimeMoodCount,
+        moodScore: this.state.moodScoreAllTime
+
       });
     } else {
       // set to Today
@@ -199,7 +267,9 @@ class MoodPage extends React.Component {
         allTime: false,
         buttonText: "View All Time",
         headerText: "Today",
-        moodCount: this.state.todayMoodCount
+        moodCount: this.state.todayMoodCount,
+        moodScore: this.state.moodScoreToday
+
 
       });
     }
@@ -238,22 +308,46 @@ class MoodPage extends React.Component {
                     {this.state.moodCount}
                   </Typography>
                 </Paper> */}
-                <Card className={classes.altpaper}>
-                  <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
-                    Moods Logged {this.state.headerText}
-                  </Typography>
-                  <Typography color={'primary'} variant='h1' className={classes.pieTitle}>
-                    {this.state.moodCount}
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} className={classes.card}>
                 <Paper className={classes.altpaper}>
                   <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
-                    Moods Distribution
-                        </Typography>
-                  <TopMoodsPie orderedMoods={this.state.orderedMoods} moodFrequency={this.state.moodData}></TopMoodsPie>
+                    Positivity Score {this.state.headerText}
+                  </Typography>
+                  {/* <Typography color={'primary'} variant='h1' className={classes.pieTitle}>
+                    {this.state.moodCount}
+                  </Typography> */}
+                  <PositivityScore classNames={classes.centerIt} moodScore={this.state.moodScore}></PositivityScore>
+                  <div className={classes.paperDiv}>
+                    <Divider className={classes.divider} />
+                    <div className={classes.infoDiv}>
+                      <Typography color={'inherit'} variant='h6' >
+                        {this.comparePositivity()}
+                      </Typography>
+                      {/* <Typography color={'inherit'} variant='h6' >
+                        Top Mood {this.state.headerText}: {this.state.orderedMoods[0]}
+                      </Typography> */}
+
+                    </div>
+                  </div>
                 </Paper>
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.card}>
+                <div>
+                  <Paper className={classes.altpaper}>
+                    <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                      Moods Distribution
+                        </Typography>
+                    <TopMoodsPie orderedMoods={this.state.orderedMoods} moodFrequency={this.state.moodData}></TopMoodsPie>
+                    <div className={classes.paperDiv}>
+                      <Divider className={classes.divider} />
+                      <div className={classes.infoDiv}>
+                        <Typography color={'inherit'} variant='h6' >
+                          {this.state.moodCount} moods logged {this.state.headerText.toLowerCase()}
+                        </Typography>
+
+                      </div>
+                    </div>
+                  </Paper>
+                </div>
               </Grid>
             </Grid>
             <Grid container>

@@ -30,7 +30,7 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import Mood from './Mood.js';
 import Dashboard from './Dashboard.js';
-import Web from './Web.js';
+import Web from './WebPage.js';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 import ComputerIcon from '@material-ui/icons/Computer';
@@ -155,17 +155,17 @@ export default function Main() {
   console.log(check);
 
   const changeTitle = () => {
-    switch(window.location.pathname){
+    switch (window.location.pathname) {
       case '/dashboard/mood':
         return 'Mood';
       case '/dashboard/web':
         return 'Web';
       case '/dashboard/privacy':
         return 'Privacy';
-        case '/privacy':
-          return 'Privacy';
+      case '/privacy':
+        return 'Privacy';
       default:
-        return 'Summary';
+        return 'Mood';
     }
   }
 
@@ -178,13 +178,13 @@ export default function Main() {
     setOpen(false);
   };
   const setSummary = () => {
-      setTitle('Summary');
+    setTitle('Summary');
   }
-    const setMood = () => {
-      setTitle('Mood');
+  const setMood = () => {
+    setTitle('Mood');
   }
   const setWeb = () => {
-      setTitle('Web');
+    setTitle('Web');
   }
   const setPolicy = () => {
     setTitle('Privacy');
@@ -197,85 +197,85 @@ export default function Main() {
 
   return (
     <ThemeProvider theme={theme}>
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-                <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        {title}
-                    </Typography>
-                    {/* <ReactLink to="/"> */}
-                      <SignOut></SignOut>
-                      {/* <Button variant='contained' color='primary' onClick={SignOut}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              {title}
+            </Typography>
+            {/* <ReactLink to="/"> */}
+            <SignOut></SignOut>
+            {/* <Button variant='contained' color='primary' onClick={SignOut}>
                           Sign Out
                       </Button> */}
-                    {/* </ReactLink> */}
-                    <IconButton color="black">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                    <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <MenuList>
-                    <MenuItem component={ReactLink} to="/dashboard" icon={TodayIcon} id='Summary' onClick={setSummary}>
-                        <ListItemIcon>
-                            <TodayIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Summary' />  
-                    </MenuItem>
-                    <MenuItem component={ReactLink} to="/dashboard/mood" icon={MoodIcon} id='Mood' onClick={setMood}>
-                        <ListItemIcon>
-                            <MoodIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Mood' />  
-                    </MenuItem>
-                    <MenuItem component={ReactLink} to="/dashboard/web" icon={ComputerIcon} id='Web' onClick={setWeb}>
+            {/* </ReactLink> */}
+            <IconButton color="black">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <MenuList>
+            {/* <MenuItem component={ReactLink} to="/dashboard" icon={TodayIcon} id='Summary' onClick={setSummary}>
+              <ListItemIcon>
+                <TodayIcon />
+              </ListItemIcon>
+              <ListItemText primary='Summary' />
+            </MenuItem> */}
+            <MenuItem component={ReactLink} to="/dashboard/mood" icon={MoodIcon} id='Mood' onClick={setMood}>
+              <ListItemIcon>
+                <MoodIcon />
+              </ListItemIcon>
+              <ListItemText primary='Mood' />
+            </MenuItem>
+            <MenuItem component={ReactLink} to="/dashboard/web" icon={ComputerIcon} id='Web' onClick={setWeb}>
+              <ListItemIcon>
+                <ComputerIcon />
+              </ListItemIcon>
+              <ListItemText primary='Web' />
+            </MenuItem>
+            <MenuItem component={ReactLink} to="/dashboard/privacy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
+              <ListItemIcon>
+                <PolicyIcon />
+              </ListItemIcon>
+              <ListItemText primary='Privacy' />
+            </MenuItem>
+            {/* <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
                         <ListItemIcon>
                             <ComputerIcon />
                         </ListItemIcon>
-                        <ListItemText primary='Web' />  
-                    </MenuItem>
-                    <MenuItem component={ReactLink} to="/dashboard/privacy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
-                        <ListItemIcon>
-                            <PolicyIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Privacy' />  
-                    </MenuItem>
-                    {/* <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
-                        <ListItemIcon>
-                            <ComputerIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Testing' />  
+                        <ListItemText primary='Testing' />
                     </MenuItem> */}
-                </MenuList>
-                {/* <List>{mainListItems}</List> */}
-                {/* <Divider /> */}
-                {/* <List>{secondaryListItems}</List> */}
-            </Drawer>
-        </div>
+          </MenuList>
+          {/* <List>{mainListItems}</List> */}
+          {/* <Divider /> */}
+          {/* <List>{secondaryListItems}</List> */}
+        </Drawer>
+      </div>
     </ThemeProvider>
 
   );

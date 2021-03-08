@@ -223,6 +223,22 @@ var getMoodCount = (moodData) => {
   }
   return count;
 };
+const positiveMoods = ["Happy", "Energized", "Calm", "Focused"];
+
+var getMoodScore = (moodData) => {
+  var positive = 0;
+  var total = 0;
+  for (var mood in moodData) {
+    // console.log(mood, moodData[mood]);
+    if (positiveMoods.includes(mood)) {
+      // console.log("HERE");
+      positive += moodData[mood];
+    }
+    total += moodData[mood];
+  }
+  return (Math.round(positive * 100 / total));
+  // return positive;
+};
 
 export {
   getDataForMood, // Legacy Function
@@ -231,5 +247,6 @@ export {
   getGraphableWebByMoodData,
   getMoodFrequencyToday,
   getOrderedMoods,
-  getMoodCount
+  getMoodCount,
+  getMoodScore
 };
