@@ -6,8 +6,6 @@ import { Card, CardActions, CardContent } from '@material-ui/core';
 import projectLogo from './../../../projectLogo.png';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import shadows from '@material-ui/core/styles/shadows';
-import outlinedLogo from './outlinedLogo.png';
-import GSI from './../../../GSI.png'
 import theme from './Theme.js'
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -46,79 +44,74 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 const useStyles = makeStyles((theme) => ({
     root: {
     },
+
+    // Header Style
+    header: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        // justifyContent: 'center',
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(1),
+        marginLeft: theme.spacing(18)
+    },
+    projectEudaimonia: {
+        marginLeft: theme.spacing(1),
+        color: theme.palette.grey.A500,
+        fontWeight: theme.typography.fontWeightBold
+    },
+    logo: {
+        width: 25,
+        height: 25,
+    },
+
+    
+
+    // Banner Style
     banner: {
         marginTop: theme.spacing(1),
         backgroundColor: '#58A1C1',
         flexGrow: 1,
         justifyContent: 'center',
-        // textAlign: 'center',
     },
-    header: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: theme.spacing(1)
-    },
-    headerText: {
-        // marginLeft: theme.spacing(.5),
-        // marginRight: theme.spacing(.5),
-        marginLeft: theme.spacing(1.5)
-
+    bannerTitle: {
+        textAlign: 'center',
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(5),
     },
     title: {
-        textAlign: 'center',
-        marginTop: theme.spacing(2),
-        marginBottom: theme.spacing(2)
+        color: theme.palette.common.white,
     },
-    logo: {
-        // marginLeft: 'auto',
-        // marginRight: 'auto',
-        // elevation: 2,
-        width: 50,
-        height: 50
-    },
-    google: {
-        width: 400,
-        // marginLeft: 'auto',
-        // marginRight: 'auto',
 
-    },
-    left: {
-        padding: theme.spacing(5),
-        marginTop: theme.spacing(1),
-        paddingTop: theme.spacing(6),
-        alignItems: 'center',
-        textAlign: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        backgroundColor: '#58A1C1',
-        width: '100%',
-        justifyContent: 'center'
-    },
-    white: {
-        color: 'white'
-    },
-    subtitle: {
-        // padding: theme.spacing(3),
-        marginLeft: theme.spacing(20),
-        marginRight: theme.spacing(20),
-        marginBottom: theme.spacing(5),
-        color: 'white',
-    },
-    subtitle1: {
-        marginTop: theme.spacing(6),
-        color: 'white',
-        marginRight: theme.spacing(35)
 
+
+    // Card Style
+    pos: {
+        marginBottom: 12,
+        color: theme.palette.grey.A500
     },
+    cardRoot: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: theme.spacing(5)
+    },
+    definition: {
+        color: theme.palette.grey.A700
+    },
+
+
+
+
+    // Buttons Style
     buttons: {
         display: 'flex',
+
         marginBottom: theme.spacing(3)       
     },
     button: {
         textAlign: 'center',
         display: 'grid',
         justifyContent: 'center'
-
     },
     extensionButton: {
         backgroundColor: 'white',
@@ -127,32 +120,24 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: 'white',
         },
         fontSize: 14,
+        color: theme.palette.grey.A600,
+        borderRadius: 1,
+        height: '125%',
+        marginTop: theme.spacing(-1.2),
+        paddingLeft: theme.spacing(5),
+        paddingRight: theme.spacing(5)
 
-
-    },
-    googleButton: {
-        marginLeft: theme.spacing(10)
-
-    },
-    userSection: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginLeft: theme.spacing(5)
     },
     whiteText: {
         color: '#FFFFFF'
     },
-    pos: {
-        marginBottom: 12,
-      },
-    cardRoot: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginBottom: theme.spacing(5)
-
-    },
-    definitionCard: {
+    googleButton: {
+        // marginTop: theme.spacing(1)
+        
     }
+
+    
+
   }));
 
 const Intro = () => {
@@ -168,23 +153,23 @@ const Intro = () => {
         <Grid item className={classes.header} xs={12}>
             <img src={projectLogo} alt='Eudaimonia Logo' className={classes.logo} />
 
-            <Typography variant='h3' color='primary' className={classes.headerText}>
+            <Typography variant='h5' className={classes.projectEudaimonia}>
                 Project
             </Typography>
-            <Typography variant='h3' color='primary' className={classes.headerText}>
+            <Typography variant='h5' className={classes.projectEudaimonia}>
                 Eudaimonia
             </Typography>
+
         </Grid>
 
 
         {/* Banner */}
-        {/* <Grid className={classes.root2} width='100%' xs={12}>
-            <Grid item xs={false} sm={4} md={7} className={classes.left}> */}
+
         <Grid container className={classes.banner}>
 
-            <Grid container spacing={3} className={classes.title}>
+            <Grid container spacing={3} className={classes.bannerTitle}>
                 <Grid item xs={12}>
-                    <Typography variant='h4' className={classes.white}>
+                    <Typography variant='h5' className={classes.title}>
                         Data-Driven Solution For Healthy Web Habits
                     </Typography>
                 </Grid>
@@ -193,18 +178,18 @@ const Intro = () => {
 
             {/* Dictionary Card */}
             <Grid container spacing={3}>
-                <Grid item xs>
-                </Grid>
+                <Grid item xs></Grid>
+
                 <Grid item xs={4} className={classes.cardRoot}>
                     <Card raised='true' className={classes.definitionCard}>
                         <CardContent>
                             <Typography variant="h5" component="h2" color='primary'>
                                 eu{bull}dai{bull}mo{bull}ni{bull}a
                             </Typography>
-                            <Typography className={classes.pos} color='primary.light' >
+                            <Typography className={classes.pos} >
                                 noun
                             </Typography>
-                            <Typography variant="body2" component="p">
+                            <Typography variant="body2" component="p" className={classes.definition}>
                                 human flourishing;
                                 <br />
                                 a contented state of being happy, healthy, and prosperous
@@ -212,9 +197,8 @@ const Intro = () => {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs>
-                </Grid>
 
+                <Grid item xs></Grid>
             </Grid>
 
                 
@@ -245,7 +229,9 @@ const Intro = () => {
                             Returning User
                     </Typography>
 
-                    <SignIn />
+                    <div className={classes.googleButton}>
+                        <SignIn/>
+                    </div>
                 </Grid>
                 <Grid item xs></Grid>
 

@@ -15,21 +15,34 @@ import theme from './Theme.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(10),
-        marginBottom: theme.spacing(15)
+        marginTop: theme.spacing(5),
+        // marginBottom: theme.spacing(10),
+        // backgroundColor: theme.palette.grey.A100
     },
     rightText: {
         marginRight: theme.spacing(20),
+        marginBottom: theme.spacing(1),
+        color: theme.palette.grey.A700
+    },
+    rightSubHeader: {
+      marginBottom: theme.spacing(1),
+      color: theme.palette.primary.dark
     },
     photo: {
-      marginTop: theme.spacing(12),
+      marginTop: theme.spacing(18),
       marginLeft: theme.spacing(15),
       width: '80%'
     },
     title: {
       textAlign: 'center',
-      marginRight: theme.spacing(25)
-    }
+      marginRight: theme.spacing(25),
+      color: theme.palette.primary.main
+    },
+    breakLine: {
+      marginRight: theme.spacing(20),
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1)
+    },
 }))
 
 const Services = () => {
@@ -52,28 +65,34 @@ const Services = () => {
               />
             </Grid>
             <Grid item sm={6} xs={12}>
-                <Typography variant='h2' color='primary' className={classes.title}>
+                <Typography variant='h2' className={classes.title}>
                     Our Mission
                 </Typography><br/>
-                <Typography variant='h5' color='primary'>
+                <Typography variant='h5' className={classes.rightSubHeader}>
                   The Problem
                 </Typography>
                 <Typography className={classes.rightText}>
-                
-
                 Studies have consistently shown that excessive web consumption leads 
-                to increased feelings of anxiety, isolation, and depression. <br/><br/> However, 
-                there is a lack of substantial research on how specific sites influence 
-                your mental health.<br/><hr/>
+                to increased feelings of anxiety, isolation, and depression.
                 </Typography>
-                <Typography variant='h5' color='primary'>
+                <Typography className={classes.rightText}>
+                However, there is a lack of substantial 
+                research on how specific sites influence your mental health.
+                </Typography>
+                <div className={classes.breakLine}>
+                  <br/>
+
+                </div>
+                <Typography variant='h5' className={classes.rightSubHeader}>
                   Our Solution
                 </Typography>
                 <Typography className={classes.rightText}>
                 With data privacy in mind, we’ve developed a secure cloud platform enabling you to better understand how 
-                web usage patterns affect your own mood throughout the day. <br/><br/> By sharing our technology and 
-                our vision, we empower you to improve your own mental health through key 
-                insights and the adoption of healthier online habits.
+                web usage patterns affect your own mood throughout the day.
+                </Typography>
+                <Typography className={classes.rightText}>
+                By sharing our technology and our vision, we empower you to improve 
+                your own mental health through key insights and the adoption of healthier online habits.
                 </Typography>
 
 

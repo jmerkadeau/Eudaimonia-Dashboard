@@ -9,6 +9,7 @@ import Main from './Components/Dashboard/Main.js'
 import SignInSide from './Components/LandingPage/NewLanding.js';
 import Land from './Components/LandingPage/Land.js';
 import { BrowserRouter, Route, Switch, Redirect, useHistory } from "react-router-dom";
+import './App.css';
 
 
 function App() {

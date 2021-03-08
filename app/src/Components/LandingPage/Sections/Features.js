@@ -19,18 +19,11 @@ import theme from './Theme.js';
 //   }
 // });
 
-const useStyles = makeStyles(({ palette, ...theme }) => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        marginTop: theme.spacing(8),
-    },
-    header: {
-        fontWeight: '600',
-        width: '60%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginBottom: theme.spacing(6)
-
+        paddingTop: theme.spacing(5),
+        // backgroundColor: theme.palette.grey.A200
     },
     grid2: {
         display: 'flex',
@@ -40,31 +33,22 @@ const useStyles = makeStyles(({ palette, ...theme }) => ({
     },
     center: {
         textAlign: 'center',
-        marginLeft: theme.spacing(8),
-        marginRight: theme.spacing(8),
+        marginLeft: theme.spacing(6),
+        marginRight: theme.spacing(6),
     },
-    iconSizing: {
-        width: 80,
-    },
-    grid1: {
-        display: 'flex',
-        textAlign: 'center',
-    },
-    grid0: {
-        alignItems: 'center',
-        textAlign: 'center',
-        display: 'flex',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
-    miniTitle: {
+    subTitle: {
         marginTop: theme.spacing(2),
         marginBottom: theme.spacing(2),
         fontWeight: '600',
+        color: theme.palette.grey.A600
     },
     header: {
-      marginBottom: theme.spacing(5)
-    }
+      marginBottom: theme.spacing(5),
+      color: theme.palette.primary.main
+    },
+    text: {
+      color: theme.palette.grey.A700
+    },
   }));
 const Features = () => {
     const serviceList = [
@@ -98,16 +82,16 @@ const Features = () => {
                         Our platform will help you gain a better understanding of how the internet affects your mental health.
                     </Typography>
                 </Grid> */}
-                <Typography variant='h2' color='primary' className={classes.header}>
+                <Typography variant='h2' className={classes.header}>
                   How It Works
                 </Typography>
                 <Grid item className={classes.grid2}>
                     {serviceList.map((item, ind) => (
                         <Grid key={ind} item sm={4} xs={12} className={classes.center}>
                         <div className="text-center max-w-252 mx-auto">
-                        <item.icon color="primary" style={{ fontSize: 50 }} />
-                        <Typography variant='h5' color='primary' className={classes.miniTitle}>{item.title}</Typography>
-                        <Typography> 
+                        <item.icon color='primary' style={{ fontSize: 50 }} />
+                        <Typography variant='h5' className={classes.subTitle}>{item.title}</Typography>
+                        <Typography className={classes.text}> 
                             {item.text}
                         </Typography>
                         </div>

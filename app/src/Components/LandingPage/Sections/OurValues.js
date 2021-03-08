@@ -26,17 +26,18 @@ import theme from './Theme.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: theme.spacing(10),
-        marginBottom: theme.spacing(15)
+        marginTop: theme.spacing(5),
+        marginBottom: theme.spacing(8),
+        backgroundColor: theme.palette.grey.A100
     },
     leftText: {
         marginLeft: theme.spacing(20),
         paddingRight: theme.spacing(5),
-        color: '#616161'
+        color: theme.palette.grey.A700
     },
     leftSubHeaders: {
         marginLeft: theme.spacing(20),
-        color: '#999999'
+        color: theme.palette.primary.dark
     },
     photo: {
       marginTop: theme.spacing(15),
@@ -55,14 +56,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         marginLeft: theme.spacing(10),
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(3),
     },
     privacyFab: {
-      backgroundColor: '#999999',
+      backgroundColor: theme.palette.primary.main,
       color: 'white',
       '&:hover': {
-        backgroundColor: '#616161',
-    }
+        backgroundColor: theme.palette.primary.dark,
+      }
     },
 }))
 
@@ -81,7 +82,7 @@ const OurValues = () => {
                 <Typography variant='h2' color='primary' className={classes.title}>
                     Our Values
                 </Typography><br/>
-                <Typography variant='h5' color='primary' className={classes.leftSubHeaders}>
+                <Typography variant='h5' className={classes.leftSubHeaders}>
                   Ease of use
                 </Typography>
                 <Typography className={classes.leftText}>
@@ -89,14 +90,14 @@ const OurValues = () => {
                     curated feature set, we strive to make it as easy as possible 
                     to use our tools.
                 </Typography><br/>
-                <Typography variant='h5' color='primary' className={classes.leftSubHeaders}>
+                <Typography variant='h5' className={classes.leftSubHeaders}>
                   Empowerment
                 </Typography>
                 <Typography className={classes.leftText}>
                 Our goal isn’t to force change, but rather to empower you to find your 
                 own path to wellness and happiness.
                 </Typography><br/>
-                <Typography variant='h5' color='primary' className={classes.leftSubHeaders}>
+                <Typography variant='h5' className={classes.leftSubHeaders}>
                   Integrity
                 </Typography>
                 <Typography className={classes.leftText}>
