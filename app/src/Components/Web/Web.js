@@ -3,6 +3,10 @@ import './Web.css';
 import TopMoodsPieByWeb from './TopMoodsPieByWeb';
 import TopWebGraph from './TopWebGraph.js';
 import { getWebData, getTimeByDomainToday, getTimeByDomainAllTime } from '../../Data/MoodByWebsite';
+import { ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js';
+import { Box } from '@material-ui/core';
 
 
 // Main page for the data section but all the work is done in other files
@@ -63,19 +67,25 @@ class Web extends React.Component {
   }
   render() {
     return (
-      <div className='web' >
-        <h1>{this.state.headerText}</h1>
-        <div>
-          <div><button onClick={this.switchTime} style={{ height: '30px', width: '100px' }}>{this.state.buttonText}</button></div>
-          <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className='web' >
+          <h1>{this.state.headerText}</h1>
+          <div>
+            <div><button onClick={this.switchTime} style={{ height: '30px', width: '100px' }}>{this.state.buttonText}</button></div>
+            <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
+          </div>
+          <div>
+            <Box>
+              <h3>
+                {this.state.currentSite}
+              </h3>
+            </Box>
+
+            <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
+          </div>
         </div>
-        <div>
-          <h3>
-            {this.state.currentSite}
-          </h3>
-          <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
-        </div>
-      </div>
+      </ThemeProvider>
     )
   }
 }

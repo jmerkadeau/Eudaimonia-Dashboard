@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Tooltip, Cell, Sector, Label } from 'recharts';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
 function PositivityScore(props) {
@@ -32,17 +34,11 @@ function PositivityScore(props) {
 
   // const colors = ['#2961BC', '#2E6DD3', '#347AEB', '#4887ED', '#5C94EF', '#70A1F1',
   // '#85AFF3'];
-  const colors = ['#4887ED', '#db6e8b'];
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
-    }
-  });
+  const colors = [theme.palette.primary.main, theme.palette.secondary.main];
+
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>
         <PieChart width={400} height={300}>
           <Pie

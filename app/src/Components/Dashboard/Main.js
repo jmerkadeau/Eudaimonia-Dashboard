@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -32,6 +31,8 @@ import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 
 import getMoodLog from '../../Data/MoodData.js';
@@ -42,15 +43,6 @@ import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb
 
 const drawerWidth = 240;
 
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb"
-    }
-  }
-});
 
 const styles = theme => ({
   root: {

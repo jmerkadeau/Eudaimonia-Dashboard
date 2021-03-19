@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import { PieChart, Pie, Tooltip, Cell, Sector, Label } from 'recharts';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
 function TopMoodsPie(props) {
@@ -40,10 +43,27 @@ function TopMoodsPie(props) {
 
 
 
-  // const colors = ['#2961BC', '#2E6DD3', '#347AEB', '#4887ED', '#5C94EF', '#70A1F1', 
-  // '#85AFF3'];
-  const colors = ['#2455A4', '#2E6DD3', '#4887ED',
-  '#70A1F1', '#99BCF5', '#C2D7F9', '#EAF1FD'];
+  // const colors = ['#2455A4', '#2E6DD3', '#4887ED',
+  // '#70A1F1', '#99BCF5', '#C2D7F9', '#EAF1FD'];
+  let colors = []
+  const fullColors = ['#265366', '#2d6279', '#34718b', '#3b809e', '#428fb1', '#58a1c1', '#61a6c4', '#74b0cb', '#86bbd2', '#99c5d9'];
+  if (pieData.length <= 2){
+    colors = [fullColors[5], fullColors[7]];
+  }
+  else if (pieData.length > 2 && pieData.length <= 4){
+    colors = [fullColors[3], fullColors[4], fullColors[5], fullColors[7]]
+  }
+  else if (pieData.length > 4 && pieData.length <= 6){
+    colors = [fullColors[2], fullColors[3], fullColors[4], fullColors[5], fullColors[7], fullColors[8]]
+  }
+  else if (pieData.length > 6 && pieData.length <= 8){
+    colors = [fullColors[1], fullColors[2], fullColors[3], fullColors[4], fullColors[5], fullColors[6], fullColors[7], fullColors[8]]
+  }
+  else{
+    colors = fullColors;
+  }
+
+
   let renderLabel = function(entry) {
     return entry.name;
   }
@@ -60,23 +80,26 @@ function TopMoodsPie(props) {
 
 
   return (
-    <PieChart width={400} height={300}>
-      <Pie
-        dataKey="value"
-        isAnimationActive={true}
-        data={pieData}
-        cx={200}
-        cy={150}
-        outerRadius={100}
-        fill="#347aeb"
-        label={renderLabel}>
-          {pieData.map((entry, index) => (
-            <Cell fill={colors[index]} />
-          ))}
-      </Pie>
-    {/* <Tooltip content={<CustomTooltip />}/> */}
-      <Tooltip/>
-  </PieChart>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <PieChart width={400} height={300}>
+        <Pie
+          dataKey="value"
+          isAnimationActive={true}
+          data={pieData}
+          cx={200}
+          cy={150}
+          outerRadius={100}
+          fill="#347aeb"
+          label={renderLabel}>
+            {pieData.map((entry, index) => (
+              <Cell fill={colors[index]} />
+            ))}
+        </Pie>
+      {/* <Tooltip content={<CustomTooltip />}/> */}
+        <Tooltip/>
+    </PieChart>
+   </ThemeProvider>
   //
     // <PieChart width={400} height={400}>
     //   {/* <Pie

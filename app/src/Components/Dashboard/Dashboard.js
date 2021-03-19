@@ -25,6 +25,8 @@ import ListRouter from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import theme from './../LandingPage/Sections/Theme.js'
+
 
 function Copyright() {
   return (
@@ -41,14 +43,6 @@ function Copyright() {
 
 const drawerWidth = 240;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb"
-    }
-  }
-});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,6 +141,7 @@ export default function Dashboard() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className={classes.root}>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />

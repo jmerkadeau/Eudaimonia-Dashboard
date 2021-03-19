@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import { ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
 function TopWebGraph(props) {
@@ -38,18 +41,21 @@ function TopWebGraph(props) {
 
 
   return (
-    <div>
-      <BarChart width={1000} height={500} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="seconds" fill="#8884d8" />
-      </BarChart>
-      <br />
-      <div id="webButtonSet"></div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div>
+        <BarChart width={1000} height={500} data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="seconds" fill={theme.palette.primary.main} />
+        </BarChart>
+        <br />
+        <div id="webButtonSet"></div>
+      </div>
+    </ThemeProvider>
 
   )
 }

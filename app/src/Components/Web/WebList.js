@@ -8,18 +8,13 @@ import { Button, Grid, ButtonGroup, Paper, Popper, MenuItem, MenuList, Grow, Con
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js';
 
 
 
 // I only imported the elements of recharts that I needed, there are a lot more you can use
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb",
-    }
-  }
-});
+
 const useStyles = makeStyles((theme) => ({
   mar: {
     // margin: theme.spacing(0.5)
@@ -121,6 +116,7 @@ export default function WebList(props) {
   // const classes = styles;
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className={classes.bg}>
         <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
           {allMoods.map((option, index) => (

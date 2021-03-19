@@ -8,6 +8,8 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 
 function Copyright() {
@@ -22,24 +24,6 @@ function Copyright() {
     </Typography>
   );
 }
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb",
-    }
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
-    },
-  }
-});
 
 const styles = theme => ({
   root: {
@@ -203,6 +187,7 @@ class WebPage extends React.Component {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={classes.root}>
           <Container className={classes.container}>
             {/* <Typography color={'primary'} variant='h2'>
@@ -228,7 +213,7 @@ class WebPage extends React.Component {
                     <Typography color={'primary'} variant='h4'>
                       {this.state.currentSite}
                     </Typography>
-                    <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
+                    <TopMoodsPieByWeb topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
                   </div>}
                 </Paper>
               </Grid>

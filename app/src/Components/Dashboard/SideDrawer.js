@@ -2,8 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { auth } from './../../Data/Firebase.js'
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -12,6 +12,7 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container';
@@ -20,7 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import { Link as ReactLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
-import { MenuList, MenuItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { MenuList, MenuItem, ListItemIcon, ListItemText, Popover } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
@@ -37,7 +38,9 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import MoodIcon from '@material-ui/icons/Mood';
 import TodayIcon from '@material-ui/icons/Today';
 import PolicyIcon from '@material-ui/icons/Policy';
-import SignOut from './../LandingPage/SignOut.js'
+import SignOut from './../LandingPage/SignOut.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 function Copyright() {
   return (
@@ -54,14 +57,6 @@ function Copyright() {
 
 const drawerWidth = 240;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb"
-    }
-  }
-});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +78,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -145,6 +141,36 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  popoverClass: {
+    textAlign: 'center',
+    marginTop: theme.spacing(0)
+
+  },
+  popoverBox: {
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(4)
+  },
+  popoverPhoto: {
+    display: 'flex',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+
+    // padding: theme.spacing(2),
+
+  },
+  popoverName: {
+    color: theme.palette.grey.A700,
+    marginTop: theme.spacing(2)
+
+
+
+  },
+  popoverEmail: {
+    color: theme.palette.grey.A500,
+    marginBottom: theme.spacing(2)
+  }
 }));
 
 export default function Main() {
@@ -152,7 +178,26 @@ export default function Main() {
   let urlElements = window.location.href.split('/');
   let currentPage = urlElements[4];
   let check = window.location.pathname;
-  console.log(check);
+  // console.log(check);
+  const userInfo = auth.currentUser;
+  const name = userInfo.displayName;
+  const email = userInfo.email;
+  // const uid = userInfo.uid;
+  const photo = userInfo.photoURL;
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const popoverOpen = Boolean(anchorEl);
+  const popoverId = popoverOpen ? 'simple-popover' : undefined;
+
 
   const changeTitle = () => {
     switch (window.location.pathname) {
@@ -197,9 +242,10 @@ export default function Main() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <AppBar elevation={1} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
             <IconButton
               edge="start"
@@ -214,16 +260,41 @@ export default function Main() {
               {title}
             </Typography>
             {/* <ReactLink to="/"> */}
-            <SignOut></SignOut>
             {/* <Button variant='contained' color='primary' onClick={SignOut}>
                           Sign Out
                       </Button> */}
             {/* </ReactLink> */}
-            <IconButton color="black">
+            {/* <IconButton color="black">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
+            </IconButton> */}
+            <IconButton aria-describedby={popoverId} onClick={handleClick}>
+              <Avatar alt='profile' src={photo} />
+              {/* <img src={photo} id='profilePic' alt='Profile' /> */}
             </IconButton>
+            <Popover
+              id={popoverId}
+              className={classes.popoverClass}
+              open={popoverOpen}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+            >
+              <Box className={classes.popoverBox}>
+                <Avatar alt='profile' src={photo} className={classes.popoverPhoto}/>
+                <Typography className={classes.popoverName}>{name}</Typography>
+                <Typography className={classes.popoverEmail}>{email}</Typography>
+                <SignOut />
+              </Box>
+            </Popover>
           </Toolbar>
         </AppBar>
         <Drawer
