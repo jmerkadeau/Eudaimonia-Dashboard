@@ -3,9 +3,21 @@ import {
   PieChart, Pie, Tooltip, Cell
 } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, ButtonGroup, Grid, Box } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
+
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    overflow: 'auto'
+  },
+  rightAlign: {
+    textAlign: 'right'
+  }
+}))
 
 function TopMoodsPieByWeb(props) {
   const [pieData, setPieData] = useState([]);
@@ -13,6 +25,10 @@ function TopMoodsPieByWeb(props) {
 
 
   useEffect(() => {
+    const setCurrentSite = (e, site) => {
+      // const site = e.target.id;
+      props.setSite(site);
+    };
     // This function is where WebsiteByMood.js is called to collect the data
     // we need for the graphs.
 
@@ -31,24 +47,21 @@ function TopMoodsPieByWeb(props) {
       return comparison;
     }
 
-    const setCurrentSite = (e) => {
-      const site = e.target.className;
-      props.setSite(site);
-    };
+
 
     function createButtons() {
       const topSites = props.topSites;
       console.log(topSites);
-      let buttonSet1 = document.getElementById('webButtonSet2');
-      buttonSet1.innerHTML = "";
-      console.log(buttonSet1);
-      for (var i = 0; i < topSites.length; i++) {
-        let newButton = document.createElement('button');
-        newButton.innerHTML = topSites[i].name + ": " + topSites[i].seconds;
-        newButton.className = topSites[i].name;
-        buttonSet1.appendChild(newButton);
-        newButton.addEventListener('click', setCurrentSite);
-      }
+      // let buttonSet1 = document.getElementById('webButtonSet2');
+      // buttonSet1.innerHTML = "";
+      // console.log(buttonSet1);
+      // for (var i = 0; i < topSites.length; i++) {
+      //   let newButton = document.createElement('button');
+      //   newButton.innerHTML = topSites[i].name + ": " + topSites[i].seconds;
+      //   newButton.className = topSites[i].name;
+      //   buttonSet1.appendChild(newButton);
+      //   newButton.addEventListener('click', setCurrentSite);
+      // }
     }
 
     function createPieChartData() {
@@ -103,16 +116,38 @@ function TopMoodsPieByWeb(props) {
     return entry.name;
   }
 
+  // const setWebData = (e, web) => {
+  //   props.setSite(web)
+  // }
+  const setCurrentSite = (e, site) => {
+    // const site = e.target.id;
+    props.setSite(site);
+  };
+
+  const classes = useStyles();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div id="webButtonSet2"></div>
+      <div id="webButtonSet2">
+        <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
+          {data.map((x, i) => (
+            <Button onClick={(event) => { setCurrentSite(event, x.name) }} variant='outlined' color='primary' id={x.name} className={classes.rightAlign}>
+              {x.name}
+            </Button>
+          ))}
+        </ButtonGroup>
 
+      </div>
+      <div className={classes.content}>
       <PieChart width={400} height={400}>
         <Pie 
           dataKey="value" 
           isAnimationActive={true} 
           data={pieData}
+          // cx={200}
+          // cy={150}
+          outerRadius={125}
           label={renderLabel}>
           {pieData.map((entry, index) => (
             <Cell fill={colors[index]} />
@@ -121,6 +156,7 @@ function TopMoodsPieByWeb(props) {
         </Pie>
         <Tooltip />
       </PieChart>
+      </div>
     </ThemeProvider>
   )
 }

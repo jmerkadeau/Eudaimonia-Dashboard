@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
+import WebList from '../Web/WebList.js';
 
 
 function Copyright() {
@@ -36,7 +37,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   paper: {
-    // width: 850,
+    width: '90%',
     margin: theme.spacing(2),
     padding: theme.spacing(4),
     display: 'flex',
@@ -119,6 +120,25 @@ const styles = theme => ({
   },
   divider: {
     background: "primary"
+  },
+  pieChartTitle: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  pieChart: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+
+  },
+  pieChartTypography: {
+    marginBottom: theme.spacing(4),
+    
+    
+  },
+  graphTitle: {
+    display: 'flex',
+    justifyContent: 'center'
+
   }
 });
 
@@ -145,7 +165,8 @@ class WebPage extends React.Component {
       graphData: todayMoodByWeb,
       // Texts
       buttonText: "View All Time",
-      headerText: "Web Today"
+      headerText: "Today",
+      graphTitle: "Web Usage - Today"
     };
     // Bind functions to this object so can use this object's state
     this.setCurrentSite = this.setCurrentSite.bind(this);
@@ -168,7 +189,9 @@ class WebPage extends React.Component {
         topSites: this.state.allTimeTopSites,
         allTime: true,
         buttonText: "View Today",
-        headerText: "Web All-Time"
+        headerText: "All-Time",
+        graphTitle: "Web Usage - All-Time"
+
       });
     } else {
       // set to Today
@@ -177,7 +200,9 @@ class WebPage extends React.Component {
         topSites: this.state.todayTopSites,
         allTime: false,
         buttonText: "View All Time",
-        headerText: "Web Today"
+        headerText: "Today",
+        graphTitle: "Web Usage - Today"
+
       });
     }
   }
@@ -199,22 +224,33 @@ class WebPage extends React.Component {
                 <Button onClick={this.switchTime}>{this.state.buttonText}</Button>
               </Paper>
             </Grid>
-            <Grid container>
+
+            <Grid container className={classes.webGrid}>
               <Grid item xs={12}>
                 <Paper className={classes.paper} display='inline'>
+                <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
+                    {this.state.graphTitle}
+                  </Typography>
                   {<div className={classes.flex}>
                     <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
                   </div>}
                 </Paper>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className={classes.card}>
                 <Paper className={classes.paper} display='inline'>
-                  {<div className={classes.flex}>
-                    <Typography color={'primary'} variant='h4'>
-                      {this.state.currentSite}
-                    </Typography>
+                  <div >
+                    <Box item xs={3} className={classes.pieChartTitle}>
+                      {/* <WebList setSite={this.setCurrentSite} topSites={this.state.topSites}
+                      webFrequency={this.state.graphData}></WebList> */}
+                    
+                      <Typography color={'primary'} variant='h5' className={classes.pieChartTypography} >
+                        {this.state.currentSite}
+                      </Typography>
+                    </Box>
+                    <Box item xs={3} className={classes.pieChart}>
                     <TopMoodsPieByWeb topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
-                  </div>}
+                    </Box>
+                  </div>
                 </Paper>
               </Grid>
             </Grid >

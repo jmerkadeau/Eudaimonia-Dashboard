@@ -97,11 +97,11 @@ const styles = theme => ({
     width: '100%'
   },
   infoDiv: {
-    textAlign: 'left',
+    // textAlign: 'left',
     overflow: 'auto',
     alignItems: 'left',
     width: '100%',
-    marginLeft: theme.spacing(8)
+    // marginLeft: theme.spacing(8)
   },
   infoText: {
 
@@ -148,7 +148,9 @@ const styles = theme => ({
     background: "primary"
   },
   positivityText: {
-    color: theme.palette.grey.A500
+    color: theme.palette.grey.A500,
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -303,6 +305,7 @@ class MoodPage extends React.Component {
                 <Button onClick={this.switchTime}>{this.state.buttonText}</Button>
               </Paper>
             </Grid>
+            
             <Grid container className={classes.moodGrid}>
               <Grid item xs={12} sm={6} className={classes.card}>
                 {/* <Paper className={classes.altpaper}>

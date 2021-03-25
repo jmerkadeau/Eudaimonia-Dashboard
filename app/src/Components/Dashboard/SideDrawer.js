@@ -41,6 +41,7 @@ import PolicyIcon from '@material-ui/icons/Policy';
 import SignOut from './../LandingPage/SignOut.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 function Copyright() {
   return (
@@ -234,6 +235,9 @@ export default function Main() {
   const setPolicy = () => {
     setTitle('Privacy');
   }
+  // this.state = {
+  //   headerText: props.headerText,
+  // }
   // const Testing = () => {
   //   let urlElements = window.location.href.split('/')
   //   console.log(urlElements[3])
@@ -257,7 +261,9 @@ export default function Main() {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              {title}
+              {title} 
+              {/* {headerText} */}
+
             </Typography>
             {/* <ReactLink to="/"> */}
             {/* <Button variant='contained' color='primary' onClick={SignOut}>

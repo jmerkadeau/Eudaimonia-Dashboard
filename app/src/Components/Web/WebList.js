@@ -37,13 +37,13 @@ export default function WebList(props) {
   const [selected, setSelected] = useState('outlined');
 
   //
-  const [allMoods, setAllMoods] = useState([]);
+  const [allWebs, setAllWebs] = useState([]);
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
   //
   const handleClick = () => {
-    console.info(`You clicked ${allMoods[selectedIndex]}`);
+    console.info(`You clicked ${allWebs[selectedIndex]}`);
   };
 
   const handleMenuItemClick = (event, index) => {
@@ -71,29 +71,31 @@ export default function WebList(props) {
     // Function to create buttons for each mood.
     // It works but it might be better to just have it hard coded
     // since it never changes
-    const setMoodData = (e) => {
-      const mood = e.target.className;
-      props.setCurrentMood(mood);
+    const setWebsite = (e) => {
+      const web = e.target.className;
+      props.setSite(web);
     };
 
     function createButtons() {
       // console.log("createButtons run");
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
-      const orderedMoods = props.orderedMoods;
+      const topSites = props.topSites;
+      console.log(topSites);
       // const moodFrequency = props.moodFrequency;
 
       // console.log(typeof []);
 
-      var allMoods = [
-        'Anxious', 'Sad', 'Happy', 'Tired',
-        'Energized', 'Frustrated', 'Calm',
-        'Distracted', 'Focused', 'Lonely'
-      ];
-      allMoods = allMoods.filter((el) => !orderedMoods.includes(el));
-      allMoods = orderedMoods.concat(allMoods);
+      // let allWebs = [];
+      // allWebs = allWebs.filter((el) => !topSites.includes(el));
+      // allWebs = topSites.concat(allWebs);
 
       // allMoods is sorted by here
-      setAllMoods(allMoods);
+      setAllWebs(topSites);
+      console.log(allWebs);
+      // {allWebs.map((option, index) => (
+      //   console.log(option);
+      //   console.log(index);
+      // ))}
 
     }
     createButtons();
@@ -101,39 +103,39 @@ export default function WebList(props) {
 
   }, [props]);
 
-  const setMoodData = (e, mood) => {
+  const setWebsite = (e, web) => {
     // console.log(mood)
-    props.setCurrentMood(mood);
+    props.setSite(web);
+    console.log(e);
+    console.log(web);
   };
-  const moodFrequency = props.moodFrequency;
-  for (var i = 0; i < allMoods.length; i++) {
-    if (moodFrequency[allMoods[i]] == undefined) {
-      moodFrequency[allMoods[i]] = 0;
-    }
-  }
 
+  // const webFrequency = props.webFrequency;
+  // for (var i = 0; i < allWebs.length; i++) {
+  //   if (webFrequency[allWebs[i]] == undefined) {
+  //     webFrequency[allWebs[i]] = 0;
+  //   }
+  // }
+
+
+  const topSites = props.topSites;
 
   // const classes = styles;
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.bg}>
-        <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
-          {allMoods.map((option, index) => (
-            <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='outlined' color='primary' className={classes.mar} id={index}>
+        {/* {topSites.map((option, index) => (
+          <div>{option}</div>
+        ))} */}
+        {/* <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
+          {allWebs.map((option, index) => (
+            <Button onClick={(event) => { setWebsite(event, option); selectThis(); }} variant='outlined' color='primary' className={classes.mar} id={index}>
               {option}
             </Button>
           ))}
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
-
-      {/* <Container className={classes.root}>
-        {allMoods.map((option, index) => (
-          <Button onClick={(event) => setMoodData(event, option)} variant='contained' color='primary' className={classes.mar}>
-            {option + ": " + moodFrequency[option]}
-          </Button>
-        ))}
-      </Container> */}
     </ThemeProvider>
   )
 
