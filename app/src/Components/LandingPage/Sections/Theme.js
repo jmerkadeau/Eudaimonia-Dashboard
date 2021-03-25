@@ -22,6 +22,11 @@ const theme = createMuiTheme({
             light: "#8bd2f4",
             dark: "#1e7291",
         },
+        secondary: {
+            main: '#dd7c85',
+            light: '#ffadb5',
+            dark: '#a94e58'
+        },
         grey: {
             A100: '#EEEEEE',
             A200: '#D9D9D9',
@@ -37,6 +42,15 @@ const theme = createMuiTheme({
         button: {
             textTransform: 'none'
         }
+    },
+    breakpoints: {
+        values: {
+          xs: 0,
+          sm: 600,
+          md: 960,
+          lg: 1280,
+          xl: 1920,
+        },
     },
     // typography: {
     //     fontFamily: ['"Open Sans"', 'ProductSans', 'Roboto'].join(','),

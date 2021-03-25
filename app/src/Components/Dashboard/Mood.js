@@ -12,6 +12,8 @@ import { getDataForMood, getTopMoodsToday } from '../../Data/WebsiteByMood';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 
 function Copyright() {
@@ -27,14 +29,6 @@ function Copyright() {
   );
 }
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb",
-    }
-  }
-});
 
 const styles = theme => ({
   root: {
@@ -77,6 +71,7 @@ class Mood extends React.Component {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={classes.root}>
           <Container className={classes.main}>
             <Typography variant='h2'>

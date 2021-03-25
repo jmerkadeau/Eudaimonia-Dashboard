@@ -2,6 +2,9 @@ import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+import theme from './../LandingPage/Sections/Theme.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -21,7 +24,7 @@ const data = [
 ];
 
 export default function Chart() {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   return (
     <React.Fragment>

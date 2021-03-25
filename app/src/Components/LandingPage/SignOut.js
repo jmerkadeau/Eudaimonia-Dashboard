@@ -2,6 +2,9 @@ import React from 'react';
 import { auth } from '../../Data/Firebase.js';
 import { Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
+import { ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 
 
@@ -53,9 +56,12 @@ function SignOut() {
   }
 
   return(
-    <Button variant='contained' color='primary' onClick={sendHome}>
-      Sign Out
-    </Button>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Button variant='contained' color='primary' onClick={sendHome}  style={{ "color": theme.palette.common.white }}>
+        Sign Out
+      </Button>
+    </ThemeProvider>
   );
 }
 

@@ -4,6 +4,8 @@ import {
 } from 'recharts';
 import { ResponsiveContainer } from 'recharts';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 
 function WebByMoodGraph(props) {
@@ -24,21 +26,13 @@ function WebByMoodGraph(props) {
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
-    }
-  });
-
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div>
         {/* <Title>Mood: {title1}</Title> */}
         <ResponsiveContainer width='100%' height={400}>
-          <BarChart data={data} margin={{ top: 16, right: 16, left: 24, bottom: 0 }}>
+          <BarChart data={data} margin={{ top: 16, right: 0, left: 0, bottom: 0 }}>
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
             <XAxis dataKey="name" />
             <YAxis />

@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { Typography, Container, Link, List, ListItem, ListItemText } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 function Copyright() {
     return (
@@ -17,14 +19,6 @@ function Copyright() {
     );
 }
 
-const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#347aeb",
-        light: "#3d7feb"
-      }
-    }
-});
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -48,6 +42,7 @@ export default function Policy() {
     const classes = useStyles();
     return(
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <div>
                 <Container className={classes.container}>
                     <Typography variant='h5'>

@@ -9,7 +9,6 @@ import { useObject } from 'react-firebase-hooks/database';
 
 
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
@@ -38,6 +37,8 @@ import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 import AlertDialog from './AlertDialog.js';
 import getMoodLog from '../../Data/MoodData.js';
@@ -48,15 +49,6 @@ import SignOut from '../LandingPage/SignOut.js';
 
 const drawerWidth = 240;
 
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb"
-    }
-  }
-});
 
 const styles = theme => ({
   root: {

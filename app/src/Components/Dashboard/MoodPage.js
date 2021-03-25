@@ -18,7 +18,8 @@ import {
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
-
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from './../LandingPage/Sections/Theme.js'
 
 function Copyright() {
   return (
@@ -33,23 +34,23 @@ function Copyright() {
   );
 }
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#347aeb",
-      light: "#3d7feb",
-    }
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
-    },
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       main: "#347aeb",
+//       light: "#3d7feb",
+//     }
+//   },
+//   breakpoints: {
+//     values: {
+//       xs: 0,
+//       sm: 600,
+//       md: 960,
+//       lg: 1280,
+//       xl: 1920,
+//     },
+//   }
+// });
 
 const styles = theme => ({
   root: {
@@ -96,11 +97,11 @@ const styles = theme => ({
     width: '100%'
   },
   infoDiv: {
-    textAlign: 'left',
+    // textAlign: 'left',
     overflow: 'auto',
     alignItems: 'left',
     width: '100%',
-    marginLeft: theme.spacing(8)
+    // marginLeft: theme.spacing(8)
   },
   infoText: {
 
@@ -145,6 +146,11 @@ const styles = theme => ({
   },
   divider: {
     background: "primary"
+  },
+  positivityText: {
+    color: theme.palette.grey.A500,
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -288,6 +294,7 @@ class MoodPage extends React.Component {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={classes.root}>
           <Container className={classes.container}>
             {/* <Typography color={'primary'} variant='h2'>
@@ -298,6 +305,7 @@ class MoodPage extends React.Component {
                 <Button onClick={this.switchTime}>{this.state.buttonText}</Button>
               </Paper>
             </Grid>
+            
             <Grid container className={classes.moodGrid}>
               <Grid item xs={12} sm={6} className={classes.card}>
                 {/* <Paper className={classes.altpaper}>
@@ -319,7 +327,7 @@ class MoodPage extends React.Component {
                   <div className={classes.paperDiv}>
                     <Divider className={classes.divider} />
                     <div className={classes.infoDiv}>
-                      <Typography color={'inherit'} variant='h6' >
+                      <Typography variant='h6' className={classes.positivityText}>
                         {this.comparePositivity()}
                       </Typography>
                       {/* <Typography color={'inherit'} variant='h6' >
@@ -340,7 +348,7 @@ class MoodPage extends React.Component {
                     <div className={classes.paperDiv}>
                       <Divider className={classes.divider} />
                       <div className={classes.infoDiv}>
-                        <Typography color={'inherit'} variant='h6' >
+                        <Typography variant='h6' className={classes.positivityText}>
                           {this.state.moodCount} moods logged {this.state.headerText.toLowerCase()}
                         </Typography>
 
