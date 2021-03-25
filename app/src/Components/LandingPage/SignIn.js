@@ -12,29 +12,29 @@ function SignIn() {
 
   function sendToLand() {
     auth.signInWithPopup(provider).then((result) => {
-        var credential = result.credential;
-        var token = credential.accessToken;
-        var user = result.user;
-  
-        console.log(token);
-        console.log(user);
-  
-        database.ref('users/' + user.uid).set({
-          uid: user.uid,
-          name: user.displayName,
-          email: user.email
-        })
-      }).catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-      });
+      var credential = result.credential;
+      var token = credential.accessToken;
+      var user = result.user;
+
+      console.log(token);
+      console.log(user);
+
+      // database.ref('users/' + user.uid).set({
+      //   uid: user.uid,
+      //   name: user.displayName,
+      //   email: user.email
+      // })
+    }).catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode);
+      console.log(errorMessage);
+    });
     history.push('/');
   }
 
-  return(
-        <GoogleButton type='light' onClick={sendToLand}/>
+  return (
+    <GoogleButton type='light' onClick={sendToLand} />
   );
 }
 

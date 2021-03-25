@@ -2,6 +2,12 @@ import React from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+// import { database } from './Data/Firebase.js';
+import { database } from '../../Data/Firebase.js';
+
+import { useObject } from 'react-firebase-hooks/database';
+
+
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -33,11 +39,11 @@ import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 
-
+import AlertDialog from './AlertDialog.js';
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
 import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from './../../Data/AllTimeData.js';
-
+import SignOut from '../LandingPage/SignOut.js';
 
 
 const drawerWidth = 240;
@@ -139,10 +145,37 @@ const styles = theme => ({
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
+    this.state = { user: props.user, extensionAdded: false, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
   }
 
   async componentDidMount() {
+    console.log(this.state.user);
+
+    var uid = "";
+    if (this.state.user) {
+      uid = this.state.user.uid;
+    }
+    // console.log(uid);
+    try {
+      // const [snapshots, loading, error] = useObject(database.ref(`users/${uid}`));
+      const ref = database.ref(`users/${uid}`);
+      ref.on('value', (snapshots) => {
+        const val = snapshots.val();
+        // print(val);
+        if ("extension" in val && val.extension) {
+          console.log("With extension");
+          this.state.extensionAdded = true;
+        } else {
+          console.log("no extension");
+          this.state.extensionAdded = false;
+        }
+      });
+    } catch (err) {
+      // console.log(err);
+      this.state.extensionAdded = false;
+    }
+
+
     const moodLog = await getMoodLog();
     const webLog = await getWebLog();
     const allTimeWebByMood = await getAllTimeWebByMood();
@@ -169,6 +202,13 @@ class Main extends React.Component {
   render() {
 
     const { classes } = this.props;
+    const extensionAdded = this.state.extensionAdded;
+    let alert;
+    if (extensionAdded === false) {
+      return (<div>
+        <AlertDialog></AlertDialog>
+      </div>);
+    }
     return (
       this.state.isLoading ?
         <div></div>
@@ -179,6 +219,7 @@ class Main extends React.Component {
               <CssBaseline />
               {/* <Router history={history}> */}
               <Router>
+                {alert}
                 <SideDrawer />
                 <Switch>
                   {/* <Route path='/' exact component={() => <Dashboard />} />
