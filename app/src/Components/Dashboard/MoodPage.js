@@ -361,18 +361,20 @@ class MoodPage extends React.Component {
             <Grid container>
               <Grid item xs={12}>
                 <Paper className={classes.paper} display='inline'>
-                  <div className={classes.flex}>
-                    <Grid item xs={3}>
-                      <MoodsList setCurrentMood={this.onCurrentMoodChange} orderedMoods={this.state.orderedMoods}
-                        moodFrequency={this.state.moodData}></MoodsList>
-                    </Grid>
-                    <Grid item xs={9}>
+                  <div>
+
+                    <Grid item xs={10}>
                       <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
                         Mood: {this.state.currentMood}
                       </Typography>
                       <WebByMoodGraph currentMood={this.state.currentMood} graphData={this.state.graphData} />
                     </Grid>
+                    <Grid item xs={3} >
+                      <MoodsList setCurrentMood={this.onCurrentMoodChange} orderedMoods={this.state.orderedMoods}
+                        moodFrequency={this.state.moodData}></MoodsList>
+                    </Grid>
                   </div>
+
                 </Paper>
               </Grid>
             </Grid >

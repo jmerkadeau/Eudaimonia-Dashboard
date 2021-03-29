@@ -33,8 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
   photo: {
     marginTop: theme.spacing(5),
-    marginLeft: theme.spacing(15),
-    width: '80%'
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    // padding: theme.spacing()
+    width: '80%',
+    // paddingBottom: '50%'
+    // height: '80vh'
+    
+
     // height: '100%'
   },
   title: {
@@ -47,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
   },
+  leftImg: {
+    display: 'grid',
+    justifyContent: 'center',
+    resize: "horizontal",
+    overflow: 'auto'
+  }
 }))
 
 const Services = () => {
@@ -60,7 +72,7 @@ const Services = () => {
       <section className={classes.root}>
         <div className="container">
           <Grid container spacing={isMobile ? 4 : 10} justify="space-between">
-            <Grid item sm={6} xs={12} >
+            <Grid item md={6} sm={12} xs={12} className={classes.leftImg}>
               <img
                 src={Dashboard}
                 alt="graduate"
@@ -68,7 +80,7 @@ const Services = () => {
               // className="max-h-500 max-w-full border-radius-12"
               />
             </Grid>
-            <Grid item sm={6} xs={12}>
+            <Grid item md={6} sm={12} xs={12}>
               <Typography variant='h2' className={classes.title}>
                 Our Mission
                 </Typography><br />

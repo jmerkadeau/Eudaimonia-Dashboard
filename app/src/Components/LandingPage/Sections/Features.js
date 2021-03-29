@@ -87,14 +87,14 @@ const Features = () => {
                 </Typography>
                 <Grid item className={classes.grid2}>
                     {serviceList.map((item, ind) => (
-                        <Grid key={ind} item sm={4} xs={12} className={classes.center}>
-                        <div className="text-center max-w-252 mx-auto">
-                        <item.icon color='primary' style={{ fontSize: 50 }} />
-                        <Typography variant='h5' className={classes.subTitle}>{item.title}</Typography>
-                        <Typography className={classes.text}> 
-                            {item.text}
-                        </Typography>
-                        </div>
+                        <Grid key={ind} item md={4} sm={6} xs={12} className={classes.center}>
+                          <div className="text-center max-w-252 mx-auto">
+                          <item.icon color='primary' style={{ fontSize: 50 }} />
+                          <Typography variant='h5' className={classes.subTitle}>{item.title}</Typography>
+                          <Typography className={classes.text}> 
+                              {item.text}
+                          </Typography>
+                          </div>
                         </Grid>
                     ))}
                 </Grid>
