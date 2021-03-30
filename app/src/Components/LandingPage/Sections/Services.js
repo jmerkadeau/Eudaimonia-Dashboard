@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Icon, Button, useMediaQuery } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
-import stockTyping from './../../../stockTyping.jpg';
+import stockTyping from './../../../img/stockTyping.jpg';
 
 const Services = () => {
   const theme = useTheme();
@@ -23,11 +23,11 @@ const Services = () => {
               Our Services
             </h1>
             <p className="my-8 max-w-400">
-            Project Eudaimonia is our solution. With data privacy in mind, 
-            we’ve developed a secure cloud platform to help users better 
-            understand how the internet affects their mental health. We combine 
-            the functionality of productivity trackers like RescueTime with a 
-            simple and clean user interface for mood logging. 
+              Project Eudaimonia is our solution. With data privacy in mind,
+              we’ve developed a secure cloud platform to help users better
+              understand how the internet affects their mental health. We combine
+              the functionality of productivity trackers like RescueTime with a
+              simple and clean user interface for mood logging.
 
             </p>
             {[1, 2, 3].map((item) => (

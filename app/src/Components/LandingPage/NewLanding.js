@@ -1,36 +1,16 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { Card, CardContent, CardActions, AppBar, Toolbar, useScrollTrigger, Slide } from '@material-ui/core';
-import cx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import GSI from '../../GSI.png';
 import { auth, database, provider } from '../../Data/Firebase.js';
-import projectLogo from './../../projectLogo.png';
-import TopBar from './TopBar.js';
-import HideAppBar from './TopBar2.js';
-import { Link as RouterLink } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SignIn from './SignIn.js'
+
 import Intro from './Sections/Intro.js';
 import Services from './Sections/OurServices.js';
-import DataPrivacy from './Sections/DataPrivacy.js';
 import Features from './Sections/Features.js';
 import AboutUs from './Sections/AboutUs.js';
-import OurValues from './Sections/OurValues.js'
+import OurValues from './Sections/OurValues.js';
 import theme from './Sections/Theme.js';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
 
 
 
@@ -64,11 +44,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
   },
   card: {
-      minWidth: 275,
-      textAlign: 'center',
-      margin: theme.spacing(2),
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(5),
+    minWidth: 275,
+    textAlign: 'center',
+    margin: theme.spacing(2),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(5),
   },
   content: {
     alignItems: 'center',
@@ -87,13 +67,13 @@ const useStyles = makeStyles((theme) => ({
     padding: 12,
   },
   left: {
-      padding: theme.spacing(5),
-      alignItems: 'center',
-      textAlign: 'center',
+    padding: theme.spacing(5),
+    alignItems: 'center',
+    textAlign: 'center',
   },
   logo: {
-      marginLeft: 'auto',
-      marginRight: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
 
   },
   bottomGrid: {
@@ -103,42 +83,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const googleSignIn = () => {
-    auth.signInWithPopup(provider).then((result) => {
-      var credential = result.credential;
-      var token = credential.accessToken;
-      var user = result.user;
+  auth.signInWithPopup(provider).then((result) => {
+    var credential = result.credential;
+    var token = credential.accessToken;
+    var user = result.user;
 
-      console.log(token);
-      console.log(user);
+    console.log(token);
+    console.log(user);
 
-      database.ref('users/' + user.uid).set({
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email
-      })
-    }).catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
-    });
+    database.ref('users/' + user.uid).set({
+      uid: user.uid,
+      name: user.displayName,
+      email: user.email
+    })
+  }).catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+  });
 }
 
 
 export default function SignInSide() {
   const classes = useStyles();
-  return(
+  return (
     <ThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <Intro />
-      <Services />
-      <OurValues />
-      <Features />
-      <AboutUs />
-      {/* <DataPrivacy /> */}
-      <Copyright />
-      <br/>
-    </div>
+      <div className={classes.root}>
+        <Intro />
+        <Services />
+        <OurValues />
+        <Features />
+        <AboutUs />
+        {/* <DataPrivacy /> */}
+        <Copyright />
+        <br />
+      </div>
     </ThemeProvider>
 
   )

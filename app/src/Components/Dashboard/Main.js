@@ -26,6 +26,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ListRouter from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
@@ -38,13 +39,17 @@ import MoodPage from './MoodPage.js';
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from './../LandingPage/Sections/Theme.js'
+import theme from './../LandingPage/Sections/Theme.js';
 
 import AlertDialog from './AlertDialog.js';
+import FacebookSpinner from './FacebookSpinner.js';
+
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
 import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from './../../Data/AllTimeData.js';
 import SignOut from '../LandingPage/SignOut.js';
+import logo from "./logo192.png";
+
 
 
 const drawerWidth = 240;
@@ -132,17 +137,25 @@ const styles = theme => ({
   fixedHeight: {
     height: 240,
   },
+  loadingIcon: {
+    width: '6rem',
+  },
+
+  loadingSpinner: {
+    color: theme.palette.grey.A200,
+    thickness: 2
+  }
 });
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user: props.user, extensionAdded: false, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
+    this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
   }
 
   async componentDidMount() {
-    console.log(this.state.user);
-
+    // console.log(this.state.user);
+    console.log("start loading");
     var uid = "";
     if (this.state.user) {
       uid = this.state.user.uid;
@@ -155,10 +168,10 @@ class Main extends React.Component {
         const val = snapshots.val();
         // print(val);
         if ("extension" in val && val.extension) {
-          console.log("With extension");
+          // console.log("With extension");
           this.state.extensionAdded = true;
         } else {
-          console.log("no extension");
+          // console.log("no extension");
           this.state.extensionAdded = false;
         }
       });
@@ -185,6 +198,8 @@ class Main extends React.Component {
       allTimeWeb: allTimeWeb,
       isLoading: false
     });
+    console.log("end loading");
+
   }
 
   // createHistory = () => {
@@ -203,7 +218,44 @@ class Main extends React.Component {
     }
     return (
       this.state.isLoading ?
-        <div></div>
+        <div>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+          >
+
+            <Grid item xs={3}>
+              {/* <CircularProgress color="primary" size='10rem'></CircularProgress> */}
+              <Box position="relative" display="inline-flex">
+                {/* <CircularProgress thickness='2' size='15rem' class={classes.loadingSpinner}> </CircularProgress> */}
+                <FacebookSpinner></FacebookSpinner>
+                <Box
+                  top={0}
+                  left={0}
+                  bottom={0}
+                  right={0}
+                  position="absolute"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  {/* <Typography
+                    variant="caption"
+                    component="div"
+                    color="textSecondary"
+                  >{`10%`}</Typography> */}
+                  {/* <Logo></Logo> */}
+                  <img alt='logo' src={logo} class={classes.loadingIcon}></img>
+                </Box>
+              </Box>
+            </Grid>
+
+          </Grid>
+        </div>
         :
         <div className='home'>
           <ThemeProvider theme={theme}>

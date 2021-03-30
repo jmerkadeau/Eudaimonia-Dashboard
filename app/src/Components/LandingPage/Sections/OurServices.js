@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Icon, Button, useMediaQuery, Container, Typography, ThemeProvider, createMuiTheme, makeStyles } from "@material-ui/core";
-import stockTyping from './../../../stockTyping.jpg';
+import stockTyping from './../../../img/stockTyping.jpg';
 import webByMood from "./../../../img/moodByWeb.png";
 import Dashboard from "./../../../img/dashboard.png";
 

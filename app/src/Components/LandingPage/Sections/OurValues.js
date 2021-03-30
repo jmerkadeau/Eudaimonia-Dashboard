@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Icon, Button, useMediaQuery, Container, Typography, ThemeProvider, createMuiTheme, makeStyles, Fab } from "@material-ui/core";
-import stockTyping from './../../../stockTyping.jpg';
+import stockTyping from './../../../img/stockTyping.jpg';
 import moodLogger from "./../../../img/moodLogger.png";
 
 import { Link as RouterLink } from 'react-router-dom';
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   photo: {
     marginTop: theme.spacing(10),
     marginRight: theme.spacing(10),
-    width: '70%'
+    width: '60%'
   },
   title: {
     textAlign: 'center',

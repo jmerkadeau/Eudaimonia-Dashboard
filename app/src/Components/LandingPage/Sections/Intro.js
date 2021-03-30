@@ -3,161 +3,131 @@ import SignIn from './../SignIn.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
 import { Card, CardActions, CardContent } from '@material-ui/core';
-import projectLogo from './../../../projectLogo.png';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
-import shadows from '@material-ui/core/styles/shadows';
-import theme from './Theme.js'
+import projectLogo from './../../../img/projectLogo.png';
+import { Link as RouterLink } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core';
+import theme from './Theme.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-
-// Old theme here:
-// const theme = createMuiTheme({
-//     palette: {
-//       primary: {
-//         main: "#347aeb",
-//         light: "#3d7feb",
-//       }
-//     }
-// });
-
-// new color scheme
-// const theme = createMuiTheme({
-//     palette: {
-//         primary: {
-//             main: "#58A1C1",
-//             light: "#7BB5CE",
-//         },
-//       secondary: {
-//           main: '#FFFFFF'
-//       }
-//     },
-//     // overrides: {
-//     //     MuiCssBaseline: {
-//     //         '@global': {
-//     //             '@font-face': []
-//     //         }
-//     //     }
-//     // }
-// });
-
 const useStyles = makeStyles((theme) => ({
-    root: {
-    },
+  root: {
+  },
 
-    // Header Style
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        // justifyContent: 'center',
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-        marginLeft: theme.spacing(18)
-    },
-    projectEudaimonia: {
-        marginLeft: theme.spacing(1),
-        color: theme.palette.grey.A500,
-        fontWeight: theme.typography.fontWeightBold
-    },
-    logo: {
-        width: 25,
-        height: 25,
-    },
-
-    
-
-    // Banner Style
-    banner: {
-        marginTop: theme.spacing(1),
-        backgroundColor: '#58A1C1',
-        flexGrow: 1,
-        justifyContent: 'center',
-    },
-    bannerTitle: {
-        textAlign: 'center',
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(5),
-    },
-    title: {
-        color: theme.palette.common.white,
-    },
+  // Header Style
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    // justifyContent: 'center',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(18)
+  },
+  projectEudaimonia: {
+    marginLeft: theme.spacing(1),
+    color: theme.palette.grey.A500,
+    fontWeight: theme.typography.fontWeightBold
+  },
+  logo: {
+    width: 25,
+    height: 25,
+  },
 
 
 
-    // Card Style
-    pos: {
-        marginBottom: 12,
-        color: theme.palette.grey.A500
+  // Banner Style
+  banner: {
+    marginTop: theme.spacing(1),
+    backgroundColor: '#58A1C1',
+    flexGrow: 1,
+    justifyContent: 'center',
+  },
+  bannerTitle: {
+    textAlign: 'center',
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5),
+  },
+  title: {
+    color: theme.palette.common.white,
+  },
+
+
+
+  // Card Style
+  pos: {
+    marginBottom: 12,
+    color: theme.palette.grey.A500
+  },
+  cardRoot: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: theme.spacing(5)
+  },
+  definition: {
+    color: theme.palette.grey.A700
+  },
+
+
+
+
+  // Buttons Style
+  buttons: {
+    display: 'flex',
+
+    marginBottom: theme.spacing(3)
+  },
+  button: {
+    textAlign: 'center',
+    display: 'grid',
+    justifyContent: 'center'
+  },
+  extensionButton: {
+    backgroundColor: 'white',
+    color: '#616161',
+    '&:hover': {
+      backgroundColor: 'white',
     },
-    cardRoot: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginBottom: theme.spacing(5)
-    },
-    definition: {
-        color: theme.palette.grey.A700
-    },
+    fontSize: 14,
+    color: theme.palette.grey.A600,
+    borderRadius: 1,
+    height: '125%',
+    marginTop: theme.spacing(-1.2),
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5)
+
+  },
+  whiteText: {
+    color: '#FFFFFF'
+  },
+  googleButton: {
+    // marginTop: theme.spacing(1)
+
+  }
 
 
 
-
-    // Buttons Style
-    buttons: {
-        display: 'flex',
-
-        marginBottom: theme.spacing(3)       
-    },
-    button: {
-        textAlign: 'center',
-        display: 'grid',
-        justifyContent: 'center'
-    },
-    extensionButton: {
-        backgroundColor: 'white',
-        color: '#616161',
-        '&:hover': {
-            backgroundColor: 'white',
-        },
-        fontSize: 14,
-        color: theme.palette.grey.A600,
-        borderRadius: 1,
-        height: '125%',
-        marginTop: theme.spacing(-1.2),
-        paddingLeft: theme.spacing(5),
-        paddingRight: theme.spacing(5)
-
-    },
-    whiteText: {
-        color: '#FFFFFF'
-    },
-    googleButton: {
-        // marginTop: theme.spacing(1)
-        
-    }
-
-    
-
-  }));
+}));
 
 const Intro = () => {
-    const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
 
-    return(
-        <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className={classes.root}>
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={classes.root}>
 
         {/* Header */}
         <Grid item className={classes.header} xs={12}>
-            <img src={projectLogo} alt='Eudaimonia Logo' className={classes.logo} />
 
-            <Typography variant='h5' className={classes.projectEudaimonia}>
-                Project
+          <img src={projectLogo} alt='Eudaimonia Logo' className={classes.logo} />
+
+          <Typography variant='h5' className={classes.projectEudaimonia}>
+            Project
             </Typography>
-            <Typography variant='h5' className={classes.projectEudaimonia}>
-                Eudaimonia
+          <Typography variant='h5' className={classes.projectEudaimonia}>
+            Eudaimonia
             </Typography>
 
         </Grid>
@@ -167,80 +137,86 @@ const Intro = () => {
 
         <Grid container className={classes.banner}>
 
-            <Grid container spacing={3} className={classes.bannerTitle}>
-                <Grid item xs={12}>
-                    <Typography variant='h5' className={classes.title}>
-                        Data-Driven Solution For Healthy Web Habits
+          <Grid container spacing={3} className={classes.bannerTitle}>
+            <Grid item xs={12}>
+              <Typography variant='h5' className={classes.title}>
+                Data-Driven Solution For Healthy Web Habits
                     </Typography>
-                </Grid>
             </Grid>
+          </Grid>
 
 
-            {/* Dictionary Card */}
-            <Grid container spacing={3}>
-                <Grid item xs></Grid>
+          {/* Dictionary Card */}
+          <Grid container spacing={3}>
+            <Grid item xs></Grid>
 
-                <Grid item xs={4} className={classes.cardRoot}>
-                    <Card raised='true' className={classes.definitionCard}>
-                        <CardContent>
-                            <Typography variant="h5" component="h2" color='primary'>
-                                eu{bull}dai{bull}mo{bull}ni{bull}a
+            <Grid item xs={4} className={classes.cardRoot}>
+              <Card raised='true' className={classes.definitionCard}>
+                <CardContent>
+                  <Typography variant="h5" component="h2" color='primary'>
+                    eu{bull}dai{bull}mo{bull}ni{bull}a
                             </Typography>
-                            <Typography className={classes.pos} >
-                                noun
+                  <Typography className={classes.pos} >
+                    noun
                             </Typography>
-                            <Typography variant="body2" component="p" className={classes.definition}>
-                                human flourishing;
+                  <Typography variant="body2" component="p" className={classes.definition}>
+                    human flourishing;
                                 <br />
                                 a contented state of being happy, healthy, and prosperous
                             </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-                <Grid item xs></Grid>
+                </CardContent>
+              </Card>
             </Grid>
 
-                
+            <Grid item xs></Grid>
+          </Grid>
 
 
-            {/* Buttons */}
-            <Grid container spacing={3} className={classes.buttons}>
-                <Grid item xs></Grid>
 
-                <Grid item xs={3} className={classes.button}>
-                    <Typography className={classes.whiteText}>
-                            New User
+
+          {/* Buttons */}
+          <Grid container spacing={3} className={classes.buttons}>
+            <Grid item xs></Grid>
+
+            <Grid item xs={3} className={classes.button}>
+              <Typography className={classes.whiteText}>
+                New User
                     </Typography>
 
 
 
-                    <a style={{ textDecoration: 'none',}} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
-                    <Button variant='contained' size='large' className={classes.extensionButton} style={{textTransform: 'none'}}>
-                        Install Chrome Extension
+              {/* <a style={{ textDecoration: 'none', }} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
+                <Button variant='contained' size='large' className={classes.extensionButton} style={{ textTransform: 'none' }}>
+                  Install Chrome Extension
                     </Button>
-                    </a>
-                </Grid>
-
-
-
-                <Grid item xs={3} className={classes.button}>
-                    <Typography className={classes.whiteText}>
-                            Returning User
-                    </Typography>
-
-                    <div className={classes.googleButton}>
-                        <SignIn/>
-                    </div>
-                </Grid>
-                <Grid item xs></Grid>
-
+              </a> */}
+              <RouterLink style={{ textDecoration: 'none' }} to="/tutorial">
+                <Button variant='contained' size='large' className={classes.extensionButton} style={{ textTransform: 'none' }}>
+                  Get Started
+                    </Button>
+              </RouterLink>
 
             </Grid>
-        </Grid>
-        </div>
-        </ThemeProvider>
 
-    )
+
+
+            <Grid item xs={3} className={classes.button}>
+              <Typography className={classes.whiteText}>
+                Returning User
+                    </Typography>
+
+              <div className={classes.googleButton}>
+                <SignIn />
+              </div>
+            </Grid>
+            <Grid item xs></Grid>
+
+
+          </Grid>
+        </Grid>
+      </div>
+    </ThemeProvider>
+
+  )
 }
 export default Intro;
