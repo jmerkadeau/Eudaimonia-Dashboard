@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   rightText: {
     paddingRight: theme.spacing(10),
   }
-}))
+}));
 
 const Definition = () => {
   const classes = useStyles();
