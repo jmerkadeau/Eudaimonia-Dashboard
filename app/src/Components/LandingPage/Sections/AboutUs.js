@@ -89,7 +89,8 @@ const useStyles = makeStyles((theme) => ({
     // marginRight: theme.spacing(4)
   },
   names: {
-    color: theme.palette.grey.A100
+    color: theme.palette.grey.A100,
+    marginBottom: theme.spacing(3)
   }
 
 }));
@@ -105,7 +106,7 @@ const AboutUs = () => {
             <Typography variant='h2' className={classes.title}>Our Story</Typography>
           </Grid>
 
-          <Grid container spacing={3}>
+          {/* <Grid container spacing={3}>
             <Grid item xs></Grid>
             <Grid item xs={4} className={classes.frame}>
               <img
@@ -126,20 +127,33 @@ const AboutUs = () => {
             <Grid item xs></Grid>
 
 
-          </Grid>
+          </Grid> */}
 
           <Grid container spacing={3} className={classes.description}>
             <Grid item xs></Grid>
-            <Grid item xs={4}>
+            <Grid item md={4} sm={5} xs={12}>
+              <img
+                src={stanley}
+                alt="profile1"
+                className={classes.pic}
+              />
+              <Typography className={classes.names}>Stanley Jia</Typography>
+
               <Typography className={classes.bodyText}>
                 "With the pandemic and stay-at-home orders, I found myself online more than ever.
                 I began feeling increasingly anxious and isolated. Sharing this experience
                 with Joseph, we realized that our online activities significantly impacted our thoughts
                 and emotions. More often than not, we felt worse afterwards."
-                    </Typography>
+              </Typography>
 
             </Grid>
-            <Grid item xs={4}>
+            <Grid item md={4} sm={5} xs={12}>
+              <img
+                src={joseph}
+                alt="profile2"
+                className={classes.pic}
+              />
+              <Typography className={classes.names}>Joseph Merkadeau</Typography>
               <Typography className={classes.bodyText}>
                 "To help ourselves tackle this problem, Stanley and I started developing Project
                 Eudaimonia. After months of work, our solution is getting to the point where we can

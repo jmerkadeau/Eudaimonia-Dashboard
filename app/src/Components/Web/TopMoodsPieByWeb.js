@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto'
   },
   rightAlign: {
-    textAlign: 'right'
+    justifyContent: 'flex-start'
   }
 }))
 
@@ -133,7 +133,7 @@ function TopMoodsPieByWeb(props) {
         <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
           {data.map((x, i) => (
             <Button onClick={(event) => { setCurrentSite(event, x.name) }} variant='outlined' color='primary' id={x.name} className={classes.rightAlign}>
-              {x.name}
+              {x.name} - {(x.seconds/60).toFixed(2)} min
             </Button>
           ))}
         </ButtonGroup>

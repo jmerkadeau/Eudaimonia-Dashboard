@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
     height: 25,
   },
 
-
-
   // Banner Style
   banner: {
     marginTop: theme.spacing(1),
@@ -47,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+    paddingRight: theme.spacing(5)
   },
   title: {
     color: theme.palette.common.white,
@@ -80,7 +80,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     textAlign: 'center',
     display: 'grid',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // backgroundColor: 'red'
   },
   extensionButton: {
     backgroundColor: 'white',
@@ -89,19 +90,25 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'white',
     },
     fontSize: 14,
-    color: theme.palette.grey.A600,
+    // color: theme.palette.grey.A600,
     borderRadius: 1,
-    height: '125%',
-    marginTop: theme.spacing(-1.2),
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(5)
+    height: '100%',
+    width: '100%'
+    // marginTop: theme.spacing(-1.2),
+    // paddingLeft: theme.spacing(5),
+    // paddingRight: theme.spacing(5)
 
   },
   whiteText: {
     color: '#FFFFFF'
   },
+  whiteText2: {
+    color: '#FFFFFF',
+    marginBottom: theme.spacing(1.2)
+
+  },
   googleButton: {
-    // marginTop: theme.spacing(1)
+    // paddingTop: theme.spacing(1)
 
   }
 
@@ -149,8 +156,7 @@ const Intro = () => {
           {/* Dictionary Card */}
           <Grid container spacing={3}>
             <Grid item xs></Grid>
-
-            <Grid item xs={4} className={classes.cardRoot}>
+            <Grid item lg={4} md={4} sm={6} xs={8} className={classes.cardRoot}>
               <Card raised='true' className={classes.definitionCard}>
                 <CardContent>
                   <Typography variant="h5" component="h2" color='primary'>
@@ -171,17 +177,15 @@ const Intro = () => {
             <Grid item xs></Grid>
           </Grid>
 
-
-
-
           {/* Buttons */}
           <Grid container spacing={3} className={classes.buttons}>
             <Grid item xs></Grid>
 
-            <Grid item xs={3} className={classes.button}>
+
+            <Grid item lg={3} md={4} sm={12} xs={12} className={classes.button}>
               <Typography className={classes.whiteText}>
                 New User
-                    </Typography>
+              </Typography>
 
 
 
@@ -199,9 +203,8 @@ const Intro = () => {
             </Grid>
 
 
-
-            <Grid item xs={3} className={classes.button}>
-              <Typography className={classes.whiteText}>
+            <Grid item lg={3} md={4} sm={12} xs={12} className={classes.button}>
+              <Typography className={classes.whiteText2}>
                 Returning User
                     </Typography>
 
