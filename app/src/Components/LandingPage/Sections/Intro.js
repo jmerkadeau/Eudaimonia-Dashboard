@@ -3,7 +3,7 @@ import SignIn from './../SignIn.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Container, Typography, Avatar, Grid, Button } from '@material-ui/core';
 import { Card, CardActions, CardContent } from '@material-ui/core';
-import projectLogo from './../../../img/projectLogo.png';
+import projectLogo from './../../../img/logos/logo.png';
 import { Link as RouterLink } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
 import theme from './Theme.js';

@@ -12,35 +12,38 @@ import theme from './../LandingPage/Sections/Theme.js';
 const useStyles = makeStyles((theme) => ({
   legend: {
   }
-}))
+}));
 
 function TopWebGraph(props) {
 
   const [data, setData] = useState([]);
+  const [dataKey, setDataKey] = useState('minutes');
 
   useEffect(() => {
-    // This function is where WebsiteByMood.js is called to collect the data
-    // we need for the graphs.
+    var currentWebData = [];
+    if (props.allTime) {
 
-    const setCurrentSite = (e) => {
-      const site = e.target.className;
-      props.setSite(site);
-    };
+      props.topSites.forEach(function (item, index) {
+        currentWebData.push({
+          name: item.name,
+          hours: (item.seconds / 3600).toFixed(1)
+        });
+      });
+      setData(currentWebData);
 
-    // function createButtons() {
-    //   const topSites = props.topSites;
-    //   let buttonSet1 = document.getElementById('webButtonSet');
-    //   buttonSet1.innerHTML = "";
-    //   for (var i = 0; i < topSites.length; i++) {
-    //     let newButton = document.createElement('button');
-    //     newButton.innerHTML = topSites[i].name + ": " + topSites[i].seconds;
-    //     newButton.className = topSites[i].name;
-    //     buttonSet1.appendChild(newButton);
-    //     newButton.addEventListener('click', setCurrentSite);
-    //   }
-    // }
+      setDataKey('hours');
+    } else {
+      props.topSites.forEach(function (item, index) {
+        currentWebData.push({
+          name: item.name,
+          minutes: Math.round(item.seconds / 60)
+        });
+      });
+      setData(currentWebData);
+      setDataKey('minutes');
 
-    setData(props.topSites);
+    }
+    setData(currentWebData);
     // createButtons();
   }, [props]);
   // The empty array at the end of UseEffect makes it only run once
@@ -52,22 +55,13 @@ function TopWebGraph(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
-      {/* <ResponsiveContainer width='100%' height={500}> */}
-
         <BarChart width={800} height={500} data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-
-        {/* <BarChart data={data} margin={{ top: 5, right: 0, left: 0, bottom: 50}}> */}
-          {/* <CartesianGrid strokeDasharray="2 2 2" /> */}
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend verticalAlign='bottom' wrapperStyle={{ position: 'relative' }} align='center' />
-          <Bar dataKey="seconds" fill={theme.palette.primary.main} />
+          <Bar dataKey={dataKey} fill={theme.palette.primary.main} />
         </BarChart>
-      {/* </ResponsiveContainer> */}
-
-        {/* <br /> */}
-        {/* <div id="webButtonSet"></div> */}
       </div>
     </ThemeProvider>
 

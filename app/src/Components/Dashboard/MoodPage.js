@@ -305,7 +305,7 @@ class MoodPage extends React.Component {
                 <Button onClick={this.switchTime}>{this.state.buttonText}</Button>
               </Paper>
             </Grid>
-            
+
             <Grid container className={classes.moodGrid}>
               <Grid item xs={12} sm={6} className={classes.card}>
                 {/* <Paper className={classes.altpaper}>
@@ -367,7 +367,7 @@ class MoodPage extends React.Component {
                       <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
                         Mood: {this.state.currentMood}
                       </Typography>
-                      <WebByMoodGraph currentMood={this.state.currentMood} graphData={this.state.graphData} />
+                      <WebByMoodGraph currentMood={this.state.currentMood} graphData={this.state.graphData} allTime={this.state.allTime} />
                     </Grid>
                     <Grid item xs={3} >
                       <MoodsList setCurrentMood={this.onCurrentMoodChange} orderedMoods={this.state.orderedMoods}

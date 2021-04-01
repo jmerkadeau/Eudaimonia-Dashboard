@@ -1,7 +1,5 @@
 import React from "react";
 import { Grid, Icon, Button, useMediaQuery, Container, Typography, ThemeProvider, createMuiTheme, makeStyles } from "@material-ui/core";
-import stockTyping from './../../../img/stockTyping.jpg';
-import webByMood from "./../../../img/moodByWeb.png";
 import Dashboard from "./../../../img/dashboard.png";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -39,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
     // paddingBottom: '50%'
     // height: '80vh'
-    
+
 
     // height: '100%'
   },
@@ -110,46 +108,11 @@ const Services = () => {
                 By sharing our technology and our vision, we empower you to improve
                 your own mental health through key insights and the adoption of healthier online habits.
                 </Typography>
-
-
-              {/* <h1 className="mt-0 text-48 font-normal mb-8 inline-block">
-                Our Services
-              </h1>
-              <p className="my-8 max-w-400">
-              Project Eudaimonia is our solution. With data privacy in mind,
-              we’ve developed a secure cloud platform to help users better
-              understand how the internet affects their mental health. We combine
-              the functionality of productivity trackers like RescueTime with a
-              simple and clean user interface for mood logging.
-
-              </p> */}
             </Grid>
           </Grid>
         </div>
       </section>
     </ThemeProvider>
-
-    // <section className='section'>
-    //     <div className='container'>
-    //     <Grid container>
-    //     <Grid>
-    //         <img src={stockTyping} alt="Typing"/>
-    //     </Grid>
-    //     <Grid>
-    // <Typography variant='h2' color='primary'>
-    //     Our Services
-    // </Typography>
-    // <Typography>
-    //     Project Eudaimonia is our solution. With data privacy in mind,
-    //     we’ve developed a secure cloud platform to help users better
-    //     understand how the internet affects their mental health. We combine
-    //     the functionality of productivity trackers like RescueTime with a
-    //     simple and clean user interface for mood logging.
-    // </Typography>
-    //     </Grid>
-    //     </Grid>
-    //     </div>
-    // </section>
   )
 }
 

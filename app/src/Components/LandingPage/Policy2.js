@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { Typography, Container, Link, List, ListItem, ListItemText, Grid } from '@material-ui/core';
-import projectLogo from "./../../img/projectLogo.png";
+import projectLogo from "./../../img/logos/logo.png";
 import theme from './Sections/Theme.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 

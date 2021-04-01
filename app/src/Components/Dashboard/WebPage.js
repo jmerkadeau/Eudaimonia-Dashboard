@@ -132,8 +132,8 @@ const styles = theme => ({
   },
   pieChartTypography: {
     marginBottom: theme.spacing(4),
-    
-    
+
+
   },
   graphTitle: {
     display: 'flex',
@@ -228,11 +228,11 @@ class WebPage extends React.Component {
             <Grid container className={classes.webGrid}>
               <Grid item xs={12}>
                 <Paper className={classes.paper} display='inline'>
-                <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
+                  <Typography color={'primary'} variant='h5' className={classes.graphTitle}>
                     {this.state.graphTitle}
                   </Typography>
                   {<div className={classes.flex}>
-                    <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
+                    <TopWebGraph allTime={this.state.allTime} topSites={this.state.topSites} setSite={this.setCurrentSite} />
                   </div>}
                 </Paper>
               </Grid>
@@ -242,13 +242,13 @@ class WebPage extends React.Component {
                     <Box item xs={3} className={classes.pieChartTitle}>
                       {/* <WebList setSite={this.setCurrentSite} topSites={this.state.topSites}
                       webFrequency={this.state.graphData}></WebList> */}
-                    
+
                       <Typography color={'primary'} variant='h5' className={classes.pieChartTypography} >
                         {this.state.currentSite}
                       </Typography>
                     </Box>
                     <Box item xs={3} className={classes.pieChart}>
-                    <TopMoodsPieByWeb topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
+                      <TopMoodsPieByWeb topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
                     </Box>
                   </div>
                 </Paper>

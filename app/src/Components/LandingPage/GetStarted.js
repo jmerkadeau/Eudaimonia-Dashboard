@@ -3,7 +3,7 @@ import { Grid, useMediaQuery, Typography, ThemeProvider, Divider, Button } from 
 import { makeStyles } from "@material-ui/core/styles";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import projectLogo from './../../img/projectLogo.png';
+import projectLogo from './../../img/logos/logo.png';
 import theme from './Sections/Theme.js';
 import webStore from './img/webstore.png';
 import pinToTop from './img/PinToTop.png';
