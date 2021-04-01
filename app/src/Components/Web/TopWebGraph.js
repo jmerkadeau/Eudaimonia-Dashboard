@@ -55,11 +55,16 @@ function TopWebGraph(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div>
-        <BarChart width={800} height={500} data={data} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
-          <XAxis dataKey="name" />
+        {/* <ResponsiveContainer width='100%' height={500}> */}
+
+        <BarChart width={900} height={600} data={data} margin={{ top: 5, right: 80, left: 80, bottom: -20 }}>
+
+          {/* <BarChart data={data} margin={{ top: 5, right: 0, left: 0, bottom: 50}}> */}
+          {/* <CartesianGrid strokeDasharray="2 2 2" /> */}
+          <XAxis dataKey="name" angle={-30} textAnchor='end' interval={0} height={220} allowDataOverflow />
           <YAxis />
           <Tooltip />
-          <Legend verticalAlign='bottom' wrapperStyle={{ position: 'relative' }} align='center' />
+          <Legend verticalAlign='top' align='right' />
           <Bar dataKey={dataKey} fill={theme.palette.primary.main} />
         </BarChart>
       </div>

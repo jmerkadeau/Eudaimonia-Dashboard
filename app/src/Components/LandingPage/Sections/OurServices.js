@@ -23,14 +23,23 @@ const useStyles = makeStyles((theme) => ({
   rightText: {
     marginRight: theme.spacing(20),
     marginBottom: theme.spacing(1),
-    color: theme.palette.grey.A700
+    color: theme.palette.grey.A700,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: theme.spacing(5)
+    }
   },
   rightSubHeader: {
     marginBottom: theme.spacing(1),
-    color: theme.palette.primary.dark
+    color: theme.palette.primary.dark,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: theme.spacing(5)
+    }
   },
   photo: {
     marginTop: theme.spacing(5),
+    [theme.breakpoints.only('md')]: {
+      marginTop: theme.spacing(25),
+    },
     marginLeft: 'auto',
     marginRight: 'auto',
     // padding: theme.spacing()

@@ -61,10 +61,10 @@ function WebByMoodGraph(props) {
       <CssBaseline />
       <div>
         {/* <Title>Mood: {title1}</Title> */}
-        <ResponsiveContainer width='100%' height={400}>
-          <BarChart data={data} margin={{ top: 16, right: 0, left: 0, bottom: 0 }}>
+        <ResponsiveContainer width='100%' height={600}>
+          <BarChart data={data} margin={{ top: 16, right: 40, left: 0, bottom: 0 }}>
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
-            <XAxis dataKey="name" />
+            <XAxis dataKey="name" angle={60} interval={0} textAnchor='start' height={200} allowDataOverflow />
             <YAxis allowDecimals={false} />
             <Tooltip />
             <Legend />
