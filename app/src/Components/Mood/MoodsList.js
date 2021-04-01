@@ -17,10 +17,14 @@ import theme from './../LandingPage/Sections/Theme.js'
 
 const useStyles = makeStyles((theme) => ({
   mar: {
-    width: '100%',
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-    fontSize: 12
+    width: '120px',
+    // paddingLeft: theme.spacing(2),
+    // paddingRight: theme.spacing(2),
+    fontSize: 14,
+    color: theme.palette.common.white,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     // padding: theme.spacing(0.5)
     // display: 'flex',
     // justifyContent: 'center'
@@ -36,6 +40,15 @@ const useStyles = makeStyles((theme) => ({
     // alignContent: 'center'
     // display: 'grid',
     // justifyContent: 'center'
+  },
+  flex: {
+    display: 'flex',
+    marginLeft: theme.spacing(5)
+  },
+  buttonContainer: {
+    // paddingRight: theme.spacing(5),
+    // paddingLeft: theme.spacing(5),
+    width: '100%'
   }
 }));
 
@@ -51,6 +64,7 @@ export default function MoodsList(props) {
   const [allMoods, setAllMoods] = useState([]);
   const [allMoods1, setAllMoods1] = useState([]);
   const [allMoods2, setAllMoods2] = useState([]);
+  const [pieData, setPieData] = useState([]);
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
@@ -93,7 +107,7 @@ export default function MoodsList(props) {
       // console.log("createButtons run");
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
       const orderedMoods = props.orderedMoods;
-      // const moodFrequency = props.moodFrequency;
+      const moodFrequency = props.moodFrequency;
 
       // console.log(typeof []);
 
@@ -107,8 +121,31 @@ export default function MoodsList(props) {
 
       setAllMoods(allMoods);
 
-      let firstHalf = allMoods.splice(0, 5)
-      let secondHalf = allMoods.splice(-5) 
+      let pieChartData = [];
+      allMoods.forEach(function (mood) {
+        if (moodFrequency[mood] === 0){
+          pieChartData.push({
+            name: mood,
+            value: 0
+          }); 
+        }
+        else {
+          pieChartData.push({
+            name: mood,
+            value: moodFrequency[mood]
+          }); 
+        }
+      });
+
+
+  
+
+      setPieData(pieChartData);
+
+      // let firstHalf = allMoods.splice(0, 5)
+      // let secondHalf = allMoods.splice(-5) 
+      let firstHalf = pieData.splice(0, 5)
+      let secondHalf = pieData.splice(-5) 
 
       // allMoods is sorted by here
       setAllMoods1(firstHalf);
@@ -123,7 +160,9 @@ export default function MoodsList(props) {
 
   const setMoodData = (e, mood) => {
     // console.log(mood)
-    props.setCurrentMood(mood);
+    props.setCurrentMood(mood.name);
+    // props.setCurrentMood(mood);
+
   };
   const moodFrequency = props.moodFrequency;
   for (var i = 0; i < allMoods.length; i++) {
@@ -147,20 +186,27 @@ export default function MoodsList(props) {
         </ButtonGroup> */}
 
 
-        <ButtonGroup orientation='horizontal' color='primary' variant='outlined'>
+        <div className={classes.flex}>
           {allMoods1.map((option, index) => (
-            <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} fullWidth={true} variant='outlined' color='primary' size='small' className={classes.mar} id={index}>
-              {option}
-            </Button>
+            <div className={classes.buttonContainer}>
+              <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='contained' color='primary' className={classes.mar} id={index}>
+                {option.name} - {option.value}
+              </Button>
+            </div>
           ))}
-        </ButtonGroup>
-        <ButtonGroup orientation='horizontal' color='primary' variant='outlined'>
+        </div>
+        {/* <ButtonGroup orientation='horizontal' color='primary' variant='outlined'> */}
+        <div className={classes.flex}>
           {allMoods2.map((option, index) => (
-            <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} fullWidth={true} variant='outlined' color='primary' size='small' className={classes.mar} id={index}>
-              {option}
-            </Button>
+            <div className={classes.buttonContainer}>
+              <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='contained' color='primary' className={classes.mar} id={index}>
+                {option.name} - {option.value}
+                {/* {option} */}
+              </Button>
+            </div>
           ))}
-        </ButtonGroup>
+        </div>
+        {/* </ButtonGroup> */}
       </div>
 
       {/* <Container className={classes.root}>

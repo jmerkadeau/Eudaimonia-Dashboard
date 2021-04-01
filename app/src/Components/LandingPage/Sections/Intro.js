@@ -93,10 +93,16 @@ const useStyles = makeStyles((theme) => ({
     // color: theme.palette.grey.A600,
     borderRadius: 1,
     height: '100%',
-    width: '100%'
+    width: '100%',
     // marginTop: theme.spacing(-1.2),
-    // paddingLeft: theme.spacing(5),
-    // paddingRight: theme.spacing(5)
+    paddingLeft: theme.spacing(10),
+    paddingRight: theme.spacing(10),
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      marginTop: theme.spacing(1)
+    },
+
 
   },
   whiteText: {

@@ -11,6 +11,8 @@ import AboutUs from './Sections/AboutUs.js';
 import OurValues from './Sections/OurValues.js';
 import theme from './Sections/Theme.js';
 import { ThemeProvider } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 
 
@@ -30,6 +32,8 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    maxWidth: '100%',
+    overflowX: 'hidden'
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -109,6 +113,8 @@ export default function SignInSide() {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
+
       <div className={classes.root}>
         <Intro />
         <Services />

@@ -15,7 +15,16 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto'
   },
   rightAlign: {
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    color: theme.palette.common.white,
+    border: 'none',
+    backgroundColor: '#74b0cb'
+  },
+  group: {
+    color: theme.palette.secondary.main
+  },
+  color: {
+    color: '#74b0cb'
   }
 }))
 
@@ -130,17 +139,17 @@ function TopMoodsPieByWeb(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div id="webButtonSet2">
-        <ButtonGroup orientation='vertical' color='primary' variant='outlined'>
+        <ButtonGroup orientation='vertical' variant='contained' color='primary' >
           {data.map((x, i) => (
-            <Button onClick={(event) => { setCurrentSite(event, x.name) }} variant='outlined' color='primary' id={x.name} className={classes.rightAlign}>
-              {x.name} - {(x.seconds/60).toFixed(2)} min
+            <Button onClick={(event) => { setCurrentSite(event, x.name) }} id={x.name} className={classes.rightAlign}>
+              {x.name} - {Math.ceil(x.seconds/60)} min
             </Button>
           ))}
         </ButtonGroup>
 
       </div>
       <div className={classes.content}>
-      <PieChart width={400} height={400}>
+      <PieChart width={400} height={400} margin={{ top: 0, right: 0, left: 50, bottom: 0 }}>
         <Pie 
           dataKey="value" 
           isAnimationActive={true} 
