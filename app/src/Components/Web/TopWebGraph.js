@@ -80,3 +80,4 @@ function TopWebGraph(props) {
 
   )
 }
+export default TopWebGraph;
