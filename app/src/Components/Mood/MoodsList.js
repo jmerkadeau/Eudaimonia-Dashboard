@@ -17,7 +17,7 @@ import theme from './../LandingPage/Sections/Theme.js'
 
 const useStyles = makeStyles((theme) => ({
   mar: {
-    width: '120px',
+    width: '150px',
     // paddingLeft: theme.spacing(2),
     // paddingRight: theme.spacing(2),
     fontSize: 14,

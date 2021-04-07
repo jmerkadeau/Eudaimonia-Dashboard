@@ -67,7 +67,7 @@ function WebByMoodGraph(props) {
             <XAxis dataKey="name" angle={60} interval={0} textAnchor='start' height={200} allowDataOverflow />
             <YAxis allowDecimals={false} />
             <Tooltip />
-            <Legend />
+            <Legend verticalAlign='top' align='right'/>
             <Bar dataKey={dataKey} fill={theme.palette.primary.main} />
           </BarChart>
         </ResponsiveContainer>
