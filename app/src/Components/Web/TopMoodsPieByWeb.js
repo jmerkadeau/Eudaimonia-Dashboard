@@ -26,11 +26,24 @@ const useStyles = makeStyles((theme) => ({
   color: {
     color: '#74b0cb'
   }
-}))
+}));
+
+function processURL(name) {
+  if (name.includes('www.')) {
+    name = name.replace('www.', '');
+  }
+  if (name.length > 22) {
+    name = name.slice(0, 20);
+    name = name.concat("..");
+  }
+  return name;
+}
 
 function TopMoodsPieByWeb(props) {
   const [pieData, setPieData] = useState([]);
   const [data, setData] = useState([]);
+  const [dataKey, setDataKey] = useState("minutes");
+
 
 
   useEffect(() => {
@@ -58,20 +71,7 @@ function TopMoodsPieByWeb(props) {
 
 
 
-    function createButtons() {
-      const topSites = props.topSites;
-      console.log(topSites);
-      // let buttonSet1 = document.getElementById('webButtonSet2');
-      // buttonSet1.innerHTML = "";
-      // console.log(buttonSet1);
-      // for (var i = 0; i < topSites.length; i++) {
-      //   let newButton = document.createElement('button');
-      //   newButton.innerHTML = topSites[i].name + ": " + topSites[i].seconds;
-      //   newButton.className = topSites[i].name;
-      //   buttonSet1.appendChild(newButton);
-      //   newButton.addEventListener('click', setCurrentSite);
-      // }
-    }
+
 
     function createPieChartData() {
       // console.log("[topMoodsPieByWeb] createPieChartData run");
@@ -82,7 +82,7 @@ function TopMoodsPieByWeb(props) {
         var pieChartData = [];
         for (var key in temp) {
           pieChartData.push({
-            name: key,
+            name: processURL(key),
             value: temp[key]
           });
         }
@@ -95,33 +95,56 @@ function TopMoodsPieByWeb(props) {
 
     }
 
-    setData(props.topSites);
+    // console.log(props);
+    var topSitesShortened = [];
+    if (!props.allTime) {
+      props.topSites.forEach(function (item, index) {
+        topSitesShortened.push({
+          name: item.name,
+          value: Math.round(item.seconds / 60)
+        });
+      });
+      setDataKey('min');
+
+    } else {
+      props.topSites.forEach(function (item, index) {
+        topSitesShortened.push({
+          name: item.name,
+          value: (item.seconds / 3600).toFixed(1)
+        });
+      });
+      setDataKey('hrs');
+    }
+
+    // console.log(topSitesShortened);
+    setData(topSitesShortened);
+
+    // setData(props.topSites);
     createPieChartData();
-    createButtons();
-  }, [props.moodByWebData, props.currentSite]);
+  }, [props]);
   // }, [props.moodByWebData, props.currentSite]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 
   let colors = []
   const fullColors = ['#265366', '#2d6279', '#34718b', '#3b809e', '#428fb1', '#58a1c1', '#61a6c4', '#74b0cb', '#86bbd2', '#99c5d9'];
-  if (pieData.length <= 2){
+  if (pieData.length <= 2) {
     colors = [fullColors[5], fullColors[7]];
   }
-  else if (pieData.length > 2 && pieData.length <= 4){
+  else if (pieData.length > 2 && pieData.length <= 4) {
     colors = [fullColors[3], fullColors[4], fullColors[5], fullColors[7]]
   }
-  else if (pieData.length > 4 && pieData.length <= 6){
+  else if (pieData.length > 4 && pieData.length <= 6) {
     colors = [fullColors[2], fullColors[3], fullColors[4], fullColors[5], fullColors[7], fullColors[8]]
   }
-  else if (pieData.length > 6 && pieData.length <= 8){
+  else if (pieData.length > 6 && pieData.length <= 8) {
     colors = [fullColors[1], fullColors[2], fullColors[3], fullColors[4], fullColors[5], fullColors[6], fullColors[7], fullColors[8]]
   }
-  else{
+  else {
     colors = fullColors;
   }
 
-  let renderLabel = function(entry) {
+  let renderLabel = function (entry) {
     return entry.name;
   }
 
@@ -142,29 +165,29 @@ function TopMoodsPieByWeb(props) {
         <ButtonGroup orientation='vertical' variant='contained' color='primary' >
           {data.map((x, i) => (
             <Button onClick={(event) => { setCurrentSite(event, x.name) }} id={x.name} className={classes.rightAlign}>
-              {x.name} - {Math.ceil(x.seconds/60)} min
+              {processURL(x.name)} - {x.value} {dataKey}
             </Button>
           ))}
         </ButtonGroup>
 
       </div>
       <div className={classes.content}>
-      <PieChart width={400} height={400} margin={{ top: 0, right: 0, left: 50, bottom: 0 }}>
-        <Pie 
-          dataKey="value" 
-          isAnimationActive={true} 
-          data={pieData}
-          // cx={200}
-          // cy={150}
-          outerRadius={125}
-          label={renderLabel}>
-          {pieData.map((entry, index) => (
-            <Cell fill={colors[index]} />
-          ))}
-          
-        </Pie>
-        <Tooltip />
-      </PieChart>
+        <PieChart width={400} height={400} margin={{ top: 0, right: 0, left: 50, bottom: 0 }}>
+          <Pie
+            dataKey="value"
+            isAnimationActive={true}
+            data={pieData}
+            // cx={200}
+            // cy={150}
+            outerRadius={125}
+            label={renderLabel}>
+            {pieData.map((entry, index) => (
+              <Cell fill={colors[index]} />
+            ))}
+
+          </Pie>
+          <Tooltip />
+        </PieChart>
       </div>
     </ThemeProvider>
   )

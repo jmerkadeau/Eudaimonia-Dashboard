@@ -7,7 +7,16 @@ import { ThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
 
-
+function processURL(name) {
+  if (name.includes('www.')) {
+    name = name.replace('www.', '');
+  }
+  if (name.length > 22) {
+    name = name.slice(0, 20);
+    name = name.concat("..");
+  }
+  return name;
+}
 function WebByMoodGraph(props) {
   const [data, setData] = useState([]);
   const [dataKey, setDataKey] = useState('minutes');
@@ -25,8 +34,10 @@ function WebByMoodGraph(props) {
         setData([{ name: `You have not logged ${currentMood} yet`, hours: 0 }]);
       } else {
         props.graphData.forEach(function (item, index) {
+          var name = processURL(item.name);
+
           currentMoodData.push({
-            name: item.name,
+            name: name,
             hours: (item.seconds / 3600).toFixed(1)
           });
         });
@@ -42,8 +53,9 @@ function WebByMoodGraph(props) {
         setData([{ name: `You have not logged ${currentMood} yet`, minutes: 0 }]);
       } else {
         props.graphData.forEach(function (item, index) {
+          var name = processURL(item.name);
           currentMoodData.push({
-            name: item.name,
+            name: name,
             minutes: Math.round(item.seconds / 60)
           });
         });
@@ -64,10 +76,10 @@ function WebByMoodGraph(props) {
         <ResponsiveContainer width='100%' height={600}>
           <BarChart data={data} margin={{ top: 16, right: 40, left: 0, bottom: 0 }}>
             {/* <CartesianGrid strokeDasharray="3 3" /> */}
-            <XAxis dataKey="name" angle={60} interval={0} textAnchor='start' height={200} allowDataOverflow />
+            <XAxis dataKey="name" angle={30} interval={0} textAnchor='start' height={200} allowDataOverflow />
             <YAxis allowDecimals={false} />
             <Tooltip />
-            <Legend />
+            <Legend verticalAlign='top' align='right' />
             <Bar dataKey={dataKey} fill={theme.palette.primary.main} />
           </BarChart>
         </ResponsiveContainer>

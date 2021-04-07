@@ -14,6 +14,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+function processURL(name) {
+  if (name.includes('www.')) {
+    name = name.replace('www.', '');
+  }
+  if (name.length > 22) {
+    name = name.slice(0, 20);
+    name = name.concat("..");
+  }
+  return name;
+}
+
 function TopWebGraph(props) {
 
   const [data, setData] = useState([]);
@@ -22,30 +33,27 @@ function TopWebGraph(props) {
   useEffect(() => {
     var currentWebData = [];
     if (props.allTime) {
-
       props.topSites.forEach(function (item, index) {
         currentWebData.push({
-          name: item.name,
-          hours: (item.seconds / 3600).toFixed(1)
+          name: processURL(item.name),
+          hours: item.seconds / 3600
         });
       });
       setData(currentWebData);
-
       setDataKey('hours');
     } else {
       props.topSites.forEach(function (item, index) {
         currentWebData.push({
-          name: item.name,
-          minutes: Math.round(item.seconds / 60)
+          name: processURL(item.name),
+          minutes: item.seconds / 60
         });
       });
       setData(currentWebData);
       setDataKey('minutes');
-
     }
-    setData(currentWebData);
+    // setData(currentWebData);
     // createButtons();
-  }, [props]);
+  }, [props.allTime, props.topSites]);
   // The empty array at the end of UseEffect makes it only run once
   // per render and only rerenders on state change.
 
@@ -61,9 +69,9 @@ function TopWebGraph(props) {
 
           {/* <BarChart data={data} margin={{ top: 5, right: 0, left: 0, bottom: 50}}> */}
           {/* <CartesianGrid strokeDasharray="2 2 2" /> */}
-          <XAxis dataKey="name" angle={-30} textAnchor='end' interval={0} height={220} allowDataOverflow />
+          <XAxis dataKey="name" angle={30} textAnchor='start' interval={0} height={220} allowDataOverflow tickFormatter={processURL} />
           <YAxis />
-          <Tooltip />
+          <Tooltip formatter={(value) => value.toFixed(1)} />
           <Legend verticalAlign='top' align='right' />
           <Bar dataKey={dataKey} fill={theme.palette.primary.main} />
         </BarChart>
@@ -72,4 +80,3 @@ function TopWebGraph(props) {
 
   )
 }
-export default TopWebGraph;

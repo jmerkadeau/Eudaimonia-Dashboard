@@ -11,7 +11,16 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
 
-
+function processURL(name) {
+  if (name.includes('www.')) {
+    name = name.replace('www.', '');
+  }
+  if (name.length > 22) {
+    name = name.slice(0, 20);
+    name = name.concat("..");
+  }
+  return name;
+}
 
 // I only imported the elements of recharts that I needed, there are a lot more you can use
 
@@ -77,7 +86,7 @@ export default function WebList(props) {
     };
 
     function createButtons() {
-      // console.log("createButtons run");
+      console.log("createButtons run");
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
       const topSites = props.topSites;
       console.log(topSites);

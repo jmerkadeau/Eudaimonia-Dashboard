@@ -248,7 +248,7 @@ class WebPage extends React.Component {
                       </Typography>
                     </Box>
                     <Box item xs={3} className={classes.pieChart}>
-                      <TopMoodsPieByWeb topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
+                      <TopMoodsPieByWeb allTime={this.state.allTime} topSites={this.state.topSites} setSite={this.setCurrentSite} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
                     </Box>
                   </div>
                 </Paper>

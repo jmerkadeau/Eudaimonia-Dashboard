@@ -4,12 +4,15 @@ import {
   PieChart, Pie, Tooltip
 } from 'recharts';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import { Button, Grid, ButtonGroup, Paper, Popper, MenuItem, MenuList, Grow, Container } from '@material-ui/core';
+import {
+  Button, Grid, ButtonGroup, Paper, Popper, Box,
+  MenuItem, MenuList, Grow, Container
+} from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from './../LandingPage/Sections/Theme.js'
+import theme from './../LandingPage/Sections/Theme.js';
 
 
 
@@ -17,7 +20,7 @@ import theme from './../LandingPage/Sections/Theme.js'
 
 const useStyles = makeStyles((theme) => ({
   mar: {
-    width: '120px',
+    width: '150px',
     // paddingLeft: theme.spacing(2),
     // paddingRight: theme.spacing(2),
     fontSize: 14,
@@ -43,12 +46,16 @@ const useStyles = makeStyles((theme) => ({
   },
   flex: {
     display: 'flex',
-    marginLeft: theme.spacing(5)
+    marginLeft: theme.spacing(5),
   },
   buttonContainer: {
     // paddingRight: theme.spacing(5),
     // paddingLeft: theme.spacing(5),
     width: '100%'
+  },
+  break: {
+    flexBasis: '100%',
+    height: 0
   }
 }));
 
@@ -64,7 +71,7 @@ export default function MoodsList(props) {
   const [allMoods, setAllMoods] = useState([]);
   const [allMoods1, setAllMoods1] = useState([]);
   const [allMoods2, setAllMoods2] = useState([]);
-  const [pieData, setPieData] = useState([]);
+
   const [open, setOpen] = useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
@@ -104,7 +111,7 @@ export default function MoodsList(props) {
     };
 
     function createButtons() {
-      // console.log("createButtons run");
+      console.log("createButtons run");
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
       const orderedMoods = props.orderedMoods;
       const moodFrequency = props.moodFrequency;
@@ -119,38 +126,36 @@ export default function MoodsList(props) {
       allMoods = allMoods.filter((el) => !orderedMoods.includes(el));
       allMoods = orderedMoods.concat(allMoods);
 
+      for (var i = 0; i < allMoods.length; i++) {
+        if (moodFrequency[allMoods[i]] == undefined) {
+          moodFrequency[allMoods[i]] = 0;
+        }
+      }
+
       setAllMoods(allMoods);
 
       let pieChartData = [];
       allMoods.forEach(function (mood) {
-        if (moodFrequency[mood] === 0){
+        if (moodFrequency[mood] === 0) {
           pieChartData.push({
             name: mood,
             value: 0
-          }); 
+          });
         }
         else {
           pieChartData.push({
             name: mood,
             value: moodFrequency[mood]
-          }); 
+          });
         }
       });
-
-
-  
-
-      setPieData(pieChartData);
-
-      // let firstHalf = allMoods.splice(0, 5)
-      // let secondHalf = allMoods.splice(-5) 
-      let firstHalf = pieData.splice(0, 5)
-      let secondHalf = pieData.splice(-5) 
+      let firstHalf = pieChartData.splice(0, 5);
+      let secondHalf = pieChartData.splice(-5);
 
       // allMoods is sorted by here
       setAllMoods1(firstHalf);
       setAllMoods2(secondHalf);
-      
+
 
     }
     createButtons();
@@ -159,17 +164,21 @@ export default function MoodsList(props) {
   }, [props]);
 
   const setMoodData = (e, mood) => {
-    // console.log(mood)
+    console.log(mood)
     props.setCurrentMood(mood.name);
     // props.setCurrentMood(mood);
 
   };
-  const moodFrequency = props.moodFrequency;
-  for (var i = 0; i < allMoods.length; i++) {
-    if (moodFrequency[allMoods[i]] == undefined) {
-      moodFrequency[allMoods[i]] = 0;
-    }
-  }
+
+  // let buttonGroup = [];
+  // for (i = 0; i < allMoods1.length; i++) {
+  //   var option = allMoods1[i];
+  //   var index = i;
+  //   buttonGroup.push(<div className={classes.buttonContainer}>
+  //     <Button onClick={(event) => { setMoodData(event, option); selectThis(); }}
+  //       variant='contained' color='primary'
+  //       className={classes.mar} id={index}>{option.name} - {option.value}</Button>
+  //   </div>);
 
 
   // const classes = styles;
@@ -195,18 +204,26 @@ export default function MoodsList(props) {
             </div>
           ))}
         </div>
-        {/* <ButtonGroup orientation='horizontal' color='primary' variant='outlined'> */}
+
         <div className={classes.flex}>
           {allMoods2.map((option, index) => (
             <div className={classes.buttonContainer}>
               <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='contained' color='primary' className={classes.mar} id={index}>
                 {option.name} - {option.value}
-                {/* {option} */}
               </Button>
             </div>
           ))}
         </div>
-        {/* </ButtonGroup> */}
+        {/* <Box flex-wrap="wrap" className={classes.flex}>
+        {allMoods1.map((option, index) => (
+            <div className={classes.buttonContainer}>
+              <Button onClick={(event) => { setMoodData(event, option); selectThis(); }} variant='contained' color='primary' className={classes.mar} id={index}>
+                {option.name} - {option.value}
+              </Button>
+            </div>
+          ))}
+        {buttonGroup}
+      </Box> */}
       </div>
 
       {/* <Container className={classes.root}>
@@ -216,7 +233,7 @@ export default function MoodsList(props) {
           </Button>
         ))}
       </Container> */}
-    </ThemeProvider>
+    </ThemeProvider >
   )
 
 }

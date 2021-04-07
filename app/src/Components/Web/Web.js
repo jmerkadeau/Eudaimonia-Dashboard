@@ -73,7 +73,7 @@ class Web extends React.Component {
           <h1>{this.state.headerText}</h1>
           <div>
             <div><button onClick={this.switchTime} style={{ height: '30px', width: '100px' }}>{this.state.buttonText}</button></div>
-            <TopWebGraph topSites={this.state.topSites} setSite={this.setCurrentSite} />
+            <TopWebGraph allTime={this.state.allTime} topSites={this.state.topSites} setSite={this.setCurrentSite} />
           </div>
           <div>
             <Box>
@@ -82,7 +82,7 @@ class Web extends React.Component {
               </h3>
             </Box>
 
-            <TopMoodsPieByWeb currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
+            <TopMoodsPieByWeb allTime={this.state.allTime} currentSite={this.state.currentSite} moodByWebData={this.state.graphData}></TopMoodsPieByWeb>
           </div>
         </div>
       </ThemeProvider>
