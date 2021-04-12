@@ -156,7 +156,7 @@ class Main extends React.Component {
 
   async componentDidMount() {
     // console.log(this.state.user);
-    console.log("start loading");
+    // console.log("start loading");
     var uid = "";
     if (this.state.user) {
       uid = this.state.user.uid;
