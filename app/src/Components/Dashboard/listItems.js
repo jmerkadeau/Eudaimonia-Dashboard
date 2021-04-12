@@ -21,7 +21,7 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Typography from '@material-ui/core/Typography';
 import { Route, MemoryRouter } from 'react-router';
 import { Link as RouterLink } from 'react-router-dom';
- 
+
 
 function ListItemLink(props) {
   const { icon, primary, to } = props;
@@ -72,6 +72,7 @@ export default function ListRouter() {
             <ListItem component={RouterLink} to="/" primary="Summary" icon={<TodayIcon />} />
             <ListItem component={RouterLink} to="/mood" primary="Mood" icon={<MoodIcon />} />
             <ListItem component={RouterLink} to="/web" primary="Web" icon={<ComputerIcon />} />
+            <ListItem component={RouterLink} to="/friends" primary="Friends" icon={<ComputerIcon />} />
           </List>
           <Divider />
           {/* secondary list items here */}
@@ -89,7 +90,7 @@ export default function ListRouter() {
 export const mainListItems = (
   <div>
     {/* component={renderLink} */}
-    <ListItem button> 
+    <ListItem button>
       <ListItemIcon>
         <TodayIcon />
       </ListItemIcon>

@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function processURL(name) {
+  console.log(name);
   if (name.includes('www.')) {
     name = name.replace('www.', '');
   }
@@ -31,6 +32,7 @@ function TopWebGraph(props) {
   const [dataKey, setDataKey] = useState('minutes');
 
   useEffect(() => {
+    // console.log(props.topSites);
     var currentWebData = [];
     if (props.allTime) {
       props.topSites.forEach(function (item, index) {
@@ -69,7 +71,7 @@ function TopWebGraph(props) {
 
           {/* <BarChart data={data} margin={{ top: 5, right: 0, left: 0, bottom: 50}}> */}
           {/* <CartesianGrid strokeDasharray="2 2 2" /> */}
-          <XAxis dataKey="name" angle={30} textAnchor='start' interval={0} height={220} allowDataOverflow tickFormatter={processURL} />
+          <XAxis dataKey="name" angle={30} textAnchor='start' interval={0} height={220} allowDataOverflow />
           <YAxis />
           <Tooltip formatter={(value) => value.toFixed(1)} />
           <Legend verticalAlign='top' align='right' />
