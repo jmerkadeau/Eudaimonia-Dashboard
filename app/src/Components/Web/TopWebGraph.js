@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function processURL(name) {
+
+  if (name === 0) {
+    return name;
+  }
   if (name.includes('www.')) {
     name = name.replace('www.', '');
   }
@@ -32,8 +36,11 @@ function TopWebGraph(props) {
 
   useEffect(() => {
     var currentWebData = [];
+
     if (props.allTime) {
+
       props.topSites.forEach(function (item, index) {
+
         currentWebData.push({
           name: processURL(item.name),
           hours: item.seconds / 3600

@@ -53,7 +53,7 @@ function PositivityScore(props) {
             {pieData.map((entry, index) => (
               <Cell fill={colors[index]} />
             ))}
-            <Label style={{ "font-size": 40 }} width={30} value={props.moodScore} position="center" />
+            <Label style={{ "font-size": 40, "fill": '#8C8C8C' }} width={30} value={props.moodScore} position="center" />
           </Pie>
           {/* <Tooltip content={<CustomTooltip />}/> */}
           {/* <Tooltip /> */}

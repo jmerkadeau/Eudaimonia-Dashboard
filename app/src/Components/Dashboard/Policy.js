@@ -30,11 +30,26 @@ const useStyles = makeStyles((theme) => ({
     bold: {
         fontSize: 16,
         fontWeight: 600,
+        color: theme.palette.grey.A600
     },
     indent: {
         textIndent: theme.spacing(2),
         fontSize: 16,
-    }
+    },
+    grey: {
+        // color: '#EEEEEE'
+        color: theme.palette.grey.A600
+    },
+    link: {
+        color: theme.palette.primary.main,
+        "&:hover": {
+            color: theme.palette.primary.dark,
+            transition: '200ms'
+        },
+        // "&:visited": {
+        //     color: theme.palette.secondary.main
+        // },
+    },
     
 }));
 
@@ -45,23 +60,23 @@ export default function Policy() {
             <CssBaseline />
             <div>
                 <Container className={classes.container}>
-                    <Typography variant='h5'>
+                    <Typography variant='h4' color='primary'>
                         Privacy Policy
                     </Typography>
                     <br/>
-                    <Typography paragraph>
+                    <Typography paragraph className={classes.grey}>
                         The use of information received from Project Eudaimonia 
-                        will adhere to the <a href='https://developer.chrome.com/docs/webstore/program_policies/'>Chrome Web Store User Data Policy</a>, 
-                        including the <a href='https://developer.chrome.com/docs/webstore/program_policies/#limited_use'>Limited Use</a> requirements.
+                        will adhere to the <a className={classes.link} href='https://developer.chrome.com/docs/webstore/program_policies/'>Chrome Web Store User Data Policy</a>, 
+                        including the <a className={classes.link} href='https://developer.chrome.com/docs/webstore/program_policies/#limited_use'>Limited Use</a> requirements.
                     </Typography>
-                    <Typography paragraph>
+                    <Typography paragraph className={classes.grey}>
                         Project Eudaimonia collects web browsing activity to use 
                         for statistical analysis when correlating with mood logging data.  
                         Our use of user data is limited to the project’s sole purpose of 
                         helping users better understand the role of web usage in their 
                         moods and mental-health.
                     </Typography>
-                    <Typography paragraph>
+                    <Typography paragraph className={classes.grey}>
                         Complying with the Chrome Web Store User Data Policy, 
                         Project Eudaimonia will only transfer user data to third parties 
                         if necessary to providing our single purpose; to comply with applicable laws; 
@@ -75,18 +90,18 @@ export default function Policy() {
                         will not be able to read user data unless:
                         <List>
                             <ListItem>
-                                <ListItemText primary='1. The user’s explicit consent to read specific data 
-                                (for example, helping an user reset parts of their data for analysis) is obtained.'/>
+                            <ListItemText primary={<React.Fragment><Typography className={classes.grey}>1. The user’s explicit consent to read specific data 
+                                (for example, helping an user reset parts of their data for analysis) is obtained.</Typography></React.Fragment>} />
                             </ListItem>
                             <ListItem>
-                                <ListItemText primary='2. The data is aggregated and anonymized and used for internal 
-                                operations in accordance with applicable privacy and other jurisdictional legal requirements.'/>
+                                <ListItemText primary={<React.Fragment><Typography className={classes.grey}>2. The data is aggregated and anonymized and used for internal 
+                                operations in accordance with applicable privacy and other jurisdictional legal requirements.</Typography></React.Fragment>} />
                             </ListItem>
                             <ListItem>
-                                <ListItemText primary='3. It’s necessary for security purposes (for example, investigating abuse).'/>
+                                <ListItemText primary={<React.Fragment><Typography className={classes.grey}>3. It’s necessary for security purposes (for example, investigating abuse).</Typography></React.Fragment>} />
                             </ListItem>
                             <ListItem>
-                                <ListItemText primary='4. Or to comply with applicable laws.'/>
+                                <ListItemText primary={<React.Fragment><Typography className={classes.grey}>4. Or to comply with applicable laws.</Typography></React.Fragment>} />
                             </ListItem>
                         </List>
                         
@@ -95,6 +110,7 @@ export default function Policy() {
                     
                 </Container>
                 <Copyright/>
+                <br />
             </div>
         </ThemeProvider>
     )

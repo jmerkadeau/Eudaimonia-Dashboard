@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  PieChart, Pie, Tooltip, Cell
+  PieChart, Pie, Tooltip, Cell, Label
 } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,10 +25,31 @@ const useStyles = makeStyles((theme) => ({
   },
   color: {
     color: '#74b0cb'
+  },
+  flex: {
+    display: 'grid'
+  },
+  buttonContainer: {
+    // width: '100%'
+
+  },
+  eachButton: {
+    justifyContent: 'flex-start',
+    color: theme.palette.common.white,
+    border: 'none',
+    backgroundColor: '#74b0cb',
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
+    fontSize: 14,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+  },
+
   }
 }));
 
 function processURL(name) {
+  let oldName = name
   if (name.includes('www.')) {
     name = name.replace('www.', '');
   }
@@ -36,6 +57,7 @@ function processURL(name) {
     name = name.slice(0, 20);
     name = name.concat("..");
   }
+  console.log(oldName, name)
   return name;
 }
 
@@ -90,7 +112,10 @@ function TopMoodsPieByWeb(props) {
         setPieData(pieChartData);
       } else {
         console.log("No moods associated with site from today");
-        setPieData([]);
+        setPieData([{
+          name: 'none',
+          value: 1
+        }]);
       }
 
     }
@@ -144,9 +169,39 @@ function TopMoodsPieByWeb(props) {
     colors = fullColors;
   }
 
-  let renderLabel = function (entry) {
-    return entry.name;
-  }
+
+  // let renderLabel = function (entry) {
+  //   return(entry.name)
+  // }
+  const RADIAN = Math.PI / 180;
+  // const renderCustomizedLabel = (entry, { cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  
+  //   return (entry.name
+  //     // <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+  //     //   {`${(percent * 100).toFixed(0)}%`}
+  //     // </text>
+  //   );
+  // };
+  const renderCustomizedLabel = entry => {
+    const radius = entry.innerRadius + (entry.outerRadius - entry.innerRadius) * 0.5;
+    const dx = entry.cx + radius * Math.cos(-entry.midAngle * RADIAN);
+    const dy = entry.cy + radius * Math.sin(-entry.midAngle * RADIAN);
+    return(
+    <text 
+    fill='white' 
+    x={dx} 
+    y={dy} 
+    position='inside'
+    // textAnchor='end'
+    textAnchor={dx > entry.cx ? 'start' : 'end'}
+    >
+      <tspan>{entry.name}</tspan>
+    </text>
+  )}
+  
 
   // const setWebData = (e, web) => {
   //   props.setSite(web)
@@ -162,17 +217,21 @@ function TopMoodsPieByWeb(props) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div id="webButtonSet2">
-        <ButtonGroup orientation='vertical' variant='contained' color='primary' >
+        {/* <ButtonGroup orientation='vertical' variant='contained' color='primary' > */}
+        <div className={classes.flex}>
           {data.map((x, i) => (
-            <Button onClick={(event) => { setCurrentSite(event, x.name) }} id={x.name} className={classes.rightAlign}>
+            <div className={classes.buttonContainer}>
+            <Button onClick={(event) => { setCurrentSite(event, x.name) }} fullWidth variant='contained' id={x.name} className={classes.eachButton}>
               {processURL(x.name)} - {x.value} {dataKey}
             </Button>
+            </div>
           ))}
-        </ButtonGroup>
+        </div>
+        {/* </ButtonGroup> */}
 
       </div>
       <div className={classes.content}>
-        <PieChart width={400} height={400} margin={{ top: 0, right: 0, left: 50, bottom: 0 }}>
+        <PieChart width={400} height={400} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
@@ -180,10 +239,15 @@ function TopMoodsPieByWeb(props) {
             // cx={200}
             // cy={150}
             outerRadius={125}
-            label={renderLabel}>
+            labelLine={false}
+            label={entry => renderCustomizedLabel(entry)}
+            >
             {pieData.map((entry, index) => (
               <Cell fill={colors[index]} />
             ))}
+            {/* {pieData.map((entry, index) => (
+              <Label value={entry.name} position='inside' fill='white' />
+            ))} */}
 
           </Pie>
           <Tooltip />

@@ -88,7 +88,7 @@ const styles = theme => ({
     flexDirection: 'column',
     elevation: 3,
     alignItems: 'center',
-    width: '100%'
+    width: '113%'
   },
   paperDiv: {
     textAlign: 'center',

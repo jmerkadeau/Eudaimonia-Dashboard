@@ -159,6 +159,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   leftSubHeaders: {
+    color: '#333333',
     paddingLeft: theme.spacing(10),
     marginBottom: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
@@ -169,6 +170,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   leftPadding: {
+    color: '#5F5F5F',
     paddingLeft: theme.spacing(20),
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(15)
