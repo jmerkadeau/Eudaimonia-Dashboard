@@ -36,6 +36,7 @@ import Dashboard from './Dashboard.js';
 import WebPage from './WebPage.js';
 import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
+import Friends from "./../Friends/Friends.js";
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -198,7 +199,7 @@ class Main extends React.Component {
       allTimeWeb: allTimeWeb,
       isLoading: false
     });
-    console.log("end loading");
+    // console.log("end loading");
 
   }
 
@@ -272,6 +273,7 @@ class Main extends React.Component {
                   <Route path='/dashboard' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/web' exact component={() => <WebPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
+                  <Route path='/dashboard/friends' exact component={() => <Friends />} />
                   <Route path='/privacy' exact component={() => <Policy />} />
                   <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                 </Switch>

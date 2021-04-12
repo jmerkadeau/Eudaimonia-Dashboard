@@ -38,6 +38,7 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import MoodIcon from '@material-ui/icons/Mood';
 import TodayIcon from '@material-ui/icons/Today';
 import PolicyIcon from '@material-ui/icons/Policy';
+import PeopleIcon from '@material-ui/icons/People';
 import SignOut from './../LandingPage/SignOut.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
@@ -232,6 +233,9 @@ export default function Main() {
   const setWeb = () => {
     setTitle('Web');
   }
+  const setFriends = () => {
+    setTitle('Friends');
+  }
   const setPolicy = () => {
     setTitle('Privacy');
   }
@@ -261,7 +265,7 @@ export default function Main() {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              {title} 
+              {title}
               {/* {headerText} */}
 
             </Typography>
@@ -295,7 +299,7 @@ export default function Main() {
               }}
             >
               <Box className={classes.popoverBox}>
-                <Avatar alt='profile' src={photo} className={classes.popoverPhoto}/>
+                <Avatar alt='profile' src={photo} className={classes.popoverPhoto} />
                 <Typography className={classes.popoverName}>{name}</Typography>
                 <Typography className={classes.popoverEmail}>{email}</Typography>
                 <SignOut />
@@ -335,18 +339,21 @@ export default function Main() {
               </ListItemIcon>
               <ListItemText primary='Web' />
             </MenuItem>
+            {/* <MenuItem component={ReactLink} to="/dashboard/friends" icon={PeopleIcon} id='Friends' onClick={setFriends}>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary='Friends' />
+            </MenuItem> */}
             <MenuItem component={ReactLink} to="/dashboard/privacy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
               <ListItemIcon>
                 <PolicyIcon />
               </ListItemIcon>
               <ListItemText primary='Privacy' />
             </MenuItem>
-            {/* <MenuItem icon={ComputerIcon} id='test' icon={TodayIcon} onClick={Testing}>
-                        <ListItemIcon>
-                            <ComputerIcon />
-                        </ListItemIcon>
-                        <ListItemText primary='Testing' />
-                    </MenuItem> */}
+
+
+
           </MenuList>
           {/* <List>{mainListItems}</List> */}
           {/* <Divider /> */}
