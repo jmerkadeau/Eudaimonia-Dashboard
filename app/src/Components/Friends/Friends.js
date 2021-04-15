@@ -7,7 +7,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-import getUsers from "./../../Data/UserSearch.js";
+import { getUsers } from "../../Data/UserData.js";
 
 function Copyright() {
   return (
@@ -132,7 +132,7 @@ class Friends extends React.Component {
   };
 
   async handleSubmit() {
-    console.log('handleSubmit');
+    // console.log('handleSubmit');
     // console.log(event);
     console.log(this.state.searchName);
     const users = await getUsers(this.state.searchName);
@@ -166,18 +166,18 @@ class Friends extends React.Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>Photo</TableCell>
+                        <TableCell align="right">Username</TableCell>
                         <TableCell align="right">Name</TableCell>
-                        <TableCell align="right">Email</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {this.state.results.map((row) => (
-                        <TableRow key={row.name}>
+                        <TableRow key={row.username}>
                           <TableCell component="th" scope="row">
                             <Avatar alt={row.name} src={row.photoUrl} />
                           </TableCell>
+                          <TableCell align="right">{row.username}</TableCell>
                           <TableCell align="right">{row.name}</TableCell>
-                          <TableCell align="right">{row.email}</TableCell>
 
                         </TableRow>
                       ))}
