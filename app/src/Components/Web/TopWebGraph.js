@@ -70,7 +70,7 @@ function TopWebGraph(props) {
       <div>
         {/* <ResponsiveContainer width='100%' height={500}> */}
 
-        <BarChart width={900} height={600} data={data} margin={{ top: 5, right: 80, left: 80, bottom: -20 }}>
+        <BarChart width={900} height={500} data={data} margin={{ top: 5, right: 150, left: 75, bottom: -100 }}>
 
           {/* <BarChart data={data} margin={{ top: 5, right: 0, left: 0, bottom: 50}}> */}
           {/* <CartesianGrid strokeDasharray="2 2 2" /> */}

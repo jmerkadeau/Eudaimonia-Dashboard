@@ -4,7 +4,10 @@ import {
 } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, ButtonGroup, Grid, Box } from '@material-ui/core';
+import { Button, ButtonGroup, Grid, Box, Table, TableBody, 
+  TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography
+} from '@material-ui/core';
+import { DoubleArrow } from '@material-ui/icons';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
 // I only imported the elements of recharts that I needed, there are a lot more you can use
@@ -45,11 +48,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
   },
 
+  },
+  setPie: {
+    color: 'white'
+  },
+  rows: {
+  },
+  tableContainer: {
+    marginTop: theme.spacing(-5)
   }
 }));
 
 function processURL(name) {
-  let oldName = name
   if (name.includes('www.')) {
     name = name.replace('www.', '');
   }
@@ -57,7 +67,6 @@ function processURL(name) {
     name = name.slice(0, 20);
     name = name.concat("..");
   }
-  console.log(oldName, name)
   return name;
 }
 
@@ -218,7 +227,7 @@ function TopMoodsPieByWeb(props) {
       <CssBaseline />
       <div id="webButtonSet2">
         {/* <ButtonGroup orientation='vertical' variant='contained' color='primary' > */}
-        <div className={classes.flex}>
+        {/* <div className={classes.flex}>
           {data.map((x, i) => (
             <div className={classes.buttonContainer}>
             <Button onClick={(event) => { setCurrentSite(event, x.name) }} fullWidth variant='contained' id={x.name} className={classes.eachButton}>
@@ -226,8 +235,38 @@ function TopMoodsPieByWeb(props) {
             </Button>
             </div>
           ))}
-        </div>
+        </div> */}
         {/* </ButtonGroup> */}
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table className={classes.table} size='small' aria-label='a dense table'>
+            <TableHead>
+              <TableRow>
+                <TableCell>website</TableCell>
+                <TableCell align='right'>{dataKey}</TableCell>
+                <TableCell align='center'>show</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((x) => (
+                <TableRow key={x.name} className={classes.rows}>
+                  <TableCell component='th' scope='row'>
+                    {x.name}
+                  </TableCell>
+                  <TableCell align='right'>{x.value}</TableCell>
+                  <TableCell align='right'>
+                    <IconButton color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
+                      <DoubleArrow fontSize="small"/>
+                    </IconButton>
+                    {/* <Button variant='contained' color='primary' className={classes.setPie}>show</Button> */}
+                  </TableCell>
+                </TableRow>
+
+
+              ))}
+            </TableBody>
+
+          </Table>
+        </TableContainer>
 
       </div>
       <div className={classes.content}>
