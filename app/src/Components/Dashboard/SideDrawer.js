@@ -339,12 +339,12 @@ export default function Main() {
               </ListItemIcon>
               <ListItemText primary='Web' />
             </MenuItem>
-            {/* <MenuItem component={ReactLink} to="/dashboard/friends" icon={PeopleIcon} id='Friends' onClick={setFriends}>
+            <MenuItem component={ReactLink} to="/dashboard/friends" icon={PeopleIcon} id='Friends' onClick={setFriends}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary='Friends' />
-            </MenuItem> */}
+            </MenuItem>
             <MenuItem component={ReactLink} to="/dashboard/privacy" icon={PolicyIcon} id='Policy' onClick={setPolicy}>
               <ListItemIcon>
                 <PolicyIcon />

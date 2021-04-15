@@ -111,7 +111,7 @@ export default function MoodsList(props) {
     };
 
     function createButtons() {
-      console.log("createButtons run");
+      // console.log("createButtons run");
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
       const orderedMoods = props.orderedMoods;
       const moodFrequency = props.moodFrequency;
@@ -164,7 +164,7 @@ export default function MoodsList(props) {
   }, [props]);
 
   const setMoodData = (e, mood) => {
-    console.log(mood)
+    console.log(mood);
     props.setCurrentMood(mood.name);
     // props.setCurrentMood(mood);
 

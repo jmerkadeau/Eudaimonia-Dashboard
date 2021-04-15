@@ -43,6 +43,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
 
 import AlertDialog from './AlertDialog.js';
+import UsernameDialog from './UsernameDialog.js';
+
 import FacebookSpinner from './FacebookSpinner.js';
 
 import getMoodLog from '../../Data/MoodData.js';
@@ -151,12 +153,13 @@ const styles = theme => ({
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {} };
+    this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {}, usernameAdded: true };
+    this.changeUsernameStatus = this.changeUsernameStatus.bind(this);
   }
 
   async componentDidMount() {
     // console.log(this.state.user);
-    console.log("start loading");
+    // console.log("start loading");
     var uid = "";
     if (this.state.user) {
       uid = this.state.user.uid;
@@ -167,7 +170,8 @@ class Main extends React.Component {
       const ref = database.ref(`users/${uid}`);
       ref.on('value', (snapshots) => {
         const val = snapshots.val();
-        // print(val);
+        console.log(val);
+        // Check for extension
         if ("extension" in val && val.extension) {
           // console.log("With extension");
           this.state.extensionAdded = true;
@@ -175,10 +179,19 @@ class Main extends React.Component {
           // console.log("no extension");
           this.state.extensionAdded = false;
         }
+        // Check for username
+        if ("username" in val && val.username !== "") {
+          console.log("With username");
+          this.state.usernameAdded = true;
+        } else {
+          console.log("no username");
+          this.state.usernameAdded = false;
+        }
       });
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       this.state.extensionAdded = false;
+      this.state.usernameAdded = false;
     }
 
 
@@ -206,6 +219,10 @@ class Main extends React.Component {
   // createHistory = () => {
   //   const { history } = useHistory();
   // }
+  changeUsernameStatus(b) {
+    console.log(b);
+    this.setState({ usernameAdded: b });
+  }
 
   render() {
 
@@ -213,13 +230,23 @@ class Main extends React.Component {
     const extensionAdded = this.state.extensionAdded;
     let alert;
     if (extensionAdded === false) {
+      // no extension
+      // show alert
       return (<div>
         <AlertDialog></AlertDialog>
       </div>);
+    } else {
+      // extension added
+      if (!this.state.usernameAdded) {
+        console.log("Show choose username alert");
+        return (<div>
+          <UsernameDialog changeUsernameStatusFunc={this.changeUsernameStatus}></UsernameDialog>
+        </div>);
+      }
     }
     return (
       this.state.isLoading ?
-        <div>
+        (<div>
           <Grid
             container
             spacing={0}
@@ -256,9 +283,9 @@ class Main extends React.Component {
             </Grid>
 
           </Grid>
-        </div>
+        </div>)
         :
-        <div className='home'>
+        (<div className='home'>
           <ThemeProvider theme={theme}>
             <div className={classes.root}>
               <CssBaseline />
@@ -281,7 +308,7 @@ class Main extends React.Component {
 
             </div>
           </ThemeProvider>
-        </div>
+        </div>)
     )
   }
 }
