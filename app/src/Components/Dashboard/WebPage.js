@@ -131,7 +131,9 @@ const styles = theme => ({
 
   },
   pieChartTypography: {
-    marginBottom: theme.spacing(4),
+    marginRight: theme.spacing(-53),
+    // marginTop: theme.spacing(10)
+    // marginBottom: theme.spacing(4),
 
 
   },

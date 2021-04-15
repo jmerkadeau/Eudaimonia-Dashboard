@@ -43,6 +43,24 @@ const useStyles = makeStyles((theme) => ({
       color: '#58A1C1'
     },
   },
+  bottomLink: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '285px',
+    color: '#8C8C8C',
+    textDecoration: 'none',
+    '&:hover': {
+      color: '#58A1C1'
+    },
+    
+
+  },
+  homeButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: theme.spacing(2)
+    
+  },
   projectEudaimonia: {
     marginLeft: theme.spacing(1),
     // color: theme.palette.grey.A500,
@@ -89,7 +107,10 @@ const useStyles = makeStyles((theme) => ({
   extensionButton: {
     color: theme.palette.common.white,
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
+    width: '250px',
+
+    
     
     
   },
@@ -159,7 +180,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   leftSubHeaders: {
-    color: '#333333',
+    color: '#58A1C1',
     paddingLeft: theme.spacing(10),
     marginBottom: theme.spacing(2),
     [theme.breakpoints.down('md')]: {
@@ -277,11 +298,18 @@ const GetStarted = () => {
                 Click the button below to head to the Google Web Store.
               </Typography>
               {/* Buttons */}
-              <a className={classes.leftPaddingA} style={{ textDecoration: 'none', }} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
+              {/* <a className={classes.leftPaddingA} style={{ textDecoration: 'none', }} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
                 <Button variant='contained' color='primary' size='large' className={classes.extensionButton} style={{ textTransform: 'none' }}>
                   Install Chrome Extension
                 </Button>
-              </a>
+              </a> */}
+              <div className={classes.leftPaddingA}>
+              <Button variant='contained' color='primary' size='large' className={classes.extensionButton} href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}>
+                {/* <Link href={'https://chrome.google.com/webstore/detail/eudaimonia/bppoigjdaealcnkilpogfpaffhfjmchj?hl=en'}> */}
+                Install Chrome Extension
+                {/* </Link> */}
+              </Button>
+              </div>
               <Typography className={classes.leftPadding}>
                 On the page for the Eudaimonia extension, click "Add to Chrome".
               </Typography>
@@ -373,12 +401,28 @@ const GetStarted = () => {
               </Typography><br />
               <img src={dashboard} alt='Dashboard snippet' className={classes.sampleDashboard} />
             </Grid>
+            
+
+
 
 
           </Grid>
+
+        </Grid>
+        <Grid className={classes.homeButton}>
+          <RouterLink className={classes.bottomLink} style={{ textDecoration: 'none' }} to="/">
+            <img src={projectLogo} alt='Eudaimonia Logo' className={classes.logo} />
+            <Typography variant='h5' className={classes.projectEudaimonia}>
+              Project
+            </Typography>
+            <Typography variant='h5' className={classes.projectEudaimonia}>
+              Eudaimonia
+            </Typography>
+            
+          </RouterLink>
         </Grid>
         <Copyright />
-        <br/>
+        <br/><br/>
       </div>
     </ThemeProvider >
   )
