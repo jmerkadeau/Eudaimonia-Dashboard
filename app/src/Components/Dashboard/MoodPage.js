@@ -3,6 +3,7 @@ import WebByMoodGraph from './../Mood/WebByMoodGraph.js';
 import MoodsList from './../Mood/MoodsList.js';
 import TopMoodsPie from './../Mood/TopMoodsPie.js';
 import PositivityScore from './../Mood/PositivityScore.js';
+import MoodByTimeGraph from './../Mood/MoodByTimeGraph.js';
 
 import {
   getWebByMoodToday,
@@ -10,8 +11,10 @@ import {
   getMoodFrequencyToday,
   getOrderedMoods,
   getMoodCount,
-  getMoodScore
+  getMoodScore,
+  getTimeByPeriodToday
 } from '../../Data/WebsiteByMood';
+
 import {
   Typography, Link, createMuiTheme, ThemeProvider, Container,
   Grid, Paper, Box, Button, Card, Divider
@@ -181,6 +184,8 @@ class MoodPage extends React.Component {
     var moodScoreToday = getMoodScore(moodToday);
     var moodScoreAllTime = getMoodScore(moodAllTime);
 
+    var timeByPeriodToday = getTimeByPeriodToday(props.webLog)
+
     // console.log(props.moodLog);
     // console.log(orderedMoodsToday[0]);
     // console.log(moodCountToday);
@@ -211,7 +216,9 @@ class MoodPage extends React.Component {
       // Mood Score
       moodScore: moodScoreToday,
       moodScoreToday: moodScoreToday,
-      moodScoreAllTime: moodScoreAllTime
+      moodScoreAllTime: moodScoreAllTime,
+      // Area Chart
+      areaData: timeByPeriodToday,
     };
     // Bind functions to this object so can use this object's state
     this.onCurrentMoodChange = this.onCurrentMoodChange.bind(this);
@@ -260,7 +267,8 @@ class MoodPage extends React.Component {
         buttonText: "View Today",
         headerText: "All-Time",
         moodCount: this.state.allTimeMoodCount,
-        moodScore: this.state.moodScoreAllTime
+        moodScore: this.state.moodScoreAllTime,
+        // areaData: this.state.timeByPeriodToday
 
       });
     } else {
@@ -274,7 +282,8 @@ class MoodPage extends React.Component {
         buttonText: "View All Time",
         headerText: "Today",
         moodCount: this.state.todayMoodCount,
-        moodScore: this.state.moodScoreToday
+        moodScore: this.state.moodScoreToday,
+        // areaData: this.state.timeByPeriodToday
 
 
       });
@@ -316,27 +325,38 @@ class MoodPage extends React.Component {
                     {this.state.moodCount}
                   </Typography>
                 </Paper> */}
-                <Paper className={classes.altpaper}>
+                {/* <Paper className={classes.altpaper}>
                   <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
                     Positivity Score {this.state.headerText}
-                  </Typography>
+                  </Typography> */}
                   {/* <Typography color={'primary'} variant='h1' className={classes.pieTitle}>
                     {this.state.moodCount}
                   </Typography> */}
-                  <PositivityScore classNames={classes.centerIt} moodScore={this.state.moodScore}></PositivityScore>
+                  {/* <PositivityScore classNames={classes.centerIt} moodScore={this.state.moodScore}></PositivityScore>
                   <div className={classes.paperDiv}>
                     <Divider className={classes.divider} />
                     <div className={classes.infoDiv}>
                       <Typography variant='h6' className={classes.positivityText}>
                         {this.comparePositivity()}
-                      </Typography>
+                      </Typography> */}
                       {/* <Typography color={'inherit'} variant='h6' >
                         Top Mood {this.state.headerText}: {this.state.orderedMoods[0]}
                       </Typography> */}
 
-                    </div>
+                    {/* </div>
                   </div>
+                </Paper> */}
+                
+                <Paper className={classes.altpaper}>
+                  <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                    Mood By Time {this.state.headerText}
+                  </Typography>
+                  <MoodByTimeGraph className={classes.centerIt} areaData={this.state.areaData}></MoodByTimeGraph>
+                  
+
                 </Paper>
+
+
               </Grid>
               <Grid item xs={12} sm={6} className={classes.card}>
                 <div>

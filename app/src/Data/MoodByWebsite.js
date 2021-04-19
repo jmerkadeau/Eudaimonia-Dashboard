@@ -107,69 +107,6 @@ function getTimeByDomainAllTime(allTimeWeb) {
   return (top);
 };
 
-// for each period of the day get the total time spent
-function getTimeByPeriodToday(webLog) {
-  var timeByDomain = [];
-  const webLogWithStartAndTime = [];
-  for (var i = 0; i < webLog.length; i++) {
-    var start = webLog[i].start;
-    var end = webLog[i].end;
-    var timeSpent = end - start;
-    const a = {
-      'domain': webLog[i].domain,
-      'start': start,
-      'timeSpent': timeSpent
-    };
-    webLogWithStartAndTime.push(a);
-  }
-  // console.log(webLogWithTime);
-  // need to separate by time of day
-  const timesOfDay = ['0:00 - 4:00', '4:00 - 8:00', '8:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 24:00'];
-  const timesOfDayNames = ['Early Morning', 'Dawn', 'Morning', 'Afternoon', 'Evening', 'Night' ];
-  let webTimePerPeriod = [0, 0, 0, 0, 0, 0]
-
-  for (var j = 0; j < webLogWithStartAndTime.length; j++){
-    let check = webLogWithStartAndTime[j].start;
-    if (check <= 14400){
-      webTimePerPeriod[0] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 14400 && check <= 28800){
-      webTimePerPeriod[1] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 28800 && check <= 43200){
-      webTimePerPeriod[2] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 43200 && check <= 57600){
-      webTimePerPeriod[3] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 57600 && check <= 72000){
-      webTimePerPeriod[4] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 72000 && check <= 86400){
-      webTimePerPeriod[5] += webLogWithStartAndTime[j].timeSpent; 
-    }
-  }
-
-  let areaData = []
-  for (var k = 0; k < webTimePerPeriod.length; k++){
-    let dataPoint = {
-      'name': timesOfDayNames[k],
-      'period': timesOfDay[k],
-      'time': webTimePerPeriod[k]
-    }
-    areaData.push(dataPoint)
-  }
-
-  // let earlyMorning = 0;
-  // let dawn = 0;
-  // let morning = 0;
-  // let afternoon = 0;
-  // let evening = 0;
-  // let night = 0;
-
-  return (areaData);
-}
-
 // create moodByWeb data for today
 var getWebData = (moodLog, webLog) => {
   // console.log("[MoodByWebsite] getWebData run");
