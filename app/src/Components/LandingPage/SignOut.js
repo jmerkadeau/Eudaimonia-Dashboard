@@ -48,17 +48,17 @@ function SignOut() {
 
   function sendHome() {
     auth.signOut().then(() => {
-      console.log('sign out succesful')
+      console.log('sign out succesful');
     }).catch((error) => {
       console.log(error);
     });
     history.push('/');
   }
 
-  return(
+  return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Button variant='contained' color='primary' onClick={sendHome}  style={{ "color": theme.palette.common.white }}>
+      <Button variant='contained' color='primary' onClick={sendHome} style={{ "color": theme.palette.common.white, "display": 'inline-block' }}>
         Sign Out
       </Button>
     </ThemeProvider>

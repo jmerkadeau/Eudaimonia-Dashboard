@@ -50,7 +50,6 @@ import FacebookSpinner from './FacebookSpinner.js';
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
 import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from './../../Data/AllTimeData.js';
-import SignOut from '../LandingPage/SignOut.js';
 import logo from "./logo192.png";
 
 
@@ -153,7 +152,7 @@ const styles = theme => ({
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {}, usernameAdded: true };
+    this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {}, usernameAdded: true, username: "" };
     this.changeUsernameStatus = this.changeUsernameStatus.bind(this);
   }
 
@@ -181,8 +180,9 @@ class Main extends React.Component {
         }
         // Check for username
         if ("username" in val && val.username !== "") {
-          console.log("With username");
+          console.log(`With username: ${val.username}`);
           this.state.usernameAdded = true;
+          this.state.username = val.username;
         } else {
           console.log("no username");
           this.state.usernameAdded = false;
@@ -292,7 +292,7 @@ class Main extends React.Component {
               {/* <Router history={history}> */}
               <Router>
                 {alert}
-                <SideDrawer />
+                <SideDrawer username={this.state.username} />
                 <Switch>
                   {/* <Route path='/' exact component={() => <Dashboard />} />
                   <Route path='/dashboard' exact component={() => <Dashboard />} /> */}

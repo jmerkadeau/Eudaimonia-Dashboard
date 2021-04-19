@@ -43,6 +43,8 @@ import SignOut from './../LandingPage/SignOut.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
 import { propTypes } from 'react-bootstrap/esm/Image';
+import changeUsername from "./ChangeUsername.js";
+import ChangeUsername from './ChangeUsername.js';
 
 function Copyright() {
   return (
@@ -162,32 +164,42 @@ const useStyles = makeStyles((theme) => ({
     // padding: theme.spacing(2),
 
   },
+  popoverUsername: {
+    color: theme.palette.grey.A500,
+    marginTop: theme.spacing(2),
+    fontWeight: "600",
+    fontSize: 23,
+    marginBottom: theme.spacing(1)
+  },
   popoverName: {
-    color: theme.palette.grey.A700,
-    marginTop: theme.spacing(2)
-
-
-
+    color: theme.palette.grey.A500,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   popoverEmail: {
     color: theme.palette.grey.A500,
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(3)
   }
 }));
 
-export default function Main() {
+export default function Main(props) {
   const classes = useStyles();
   let urlElements = window.location.href.split('/');
   let currentPage = urlElements[4];
   let check = window.location.pathname;
   // console.log(check);
   const userInfo = auth.currentUser;
+  // const username = userInfo.username;
+  // console.log(props.username);
+
   const name = userInfo.displayName;
   const email = userInfo.email;
   // const uid = userInfo.uid;
   const photo = userInfo.photoURL;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [changeUsernameShow, setChangeUsernameShow] = React.useState(false);
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -224,9 +236,6 @@ export default function Main() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const setSummary = () => {
-    setTitle('Summary');
-  }
   const setMood = () => {
     setTitle('Mood');
   }
@@ -248,11 +257,15 @@ export default function Main() {
   // }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const changeUsername = () => {
+    console.log('change username pressed');
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root}>
         <CssBaseline />
+        <ChangeUsername show={changeUsernameShow}></ChangeUsername>
         <AppBar elevation={1} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
             <IconButton
@@ -300,8 +313,14 @@ export default function Main() {
             >
               <Box className={classes.popoverBox}>
                 <Avatar alt='profile' src={photo} className={classes.popoverPhoto} />
-                <Typography className={classes.popoverName}>{name}</Typography>
+                <Typography className={classes.popoverUsername}>{props.username}</Typography>
+                {/* <Typography className={classes.popoverName}>{name}</Typography> */}
                 <Typography className={classes.popoverEmail}>{email}</Typography>
+                <Button variant='contained' color='primary' onClick={changeUsername}
+                  style={{ "color": theme.palette.common.white, "display": "inline-block" }}>
+                  Change Username
+                </Button>
+                <br />
                 <SignOut />
               </Box>
             </Popover>

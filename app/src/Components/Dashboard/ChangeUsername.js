@@ -13,8 +13,8 @@ import { checkUsernameExists, setUsername } from './../../Data/UserData.js';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import CloseIcon from '@material-ui/icons/Close';
 
-export default function UsernameDialog(props) {
-  const [open, setOpen] = React.useState(true);
+export default function ChangeUsername(props) {
+  const [open, setOpen] = React.useState(false);
   const [textField, setTextField] = React.useState("");
   const name = auth.currentUser.displayName;
   const email = auth.currentUser.email;
@@ -34,10 +34,10 @@ export default function UsernameDialog(props) {
     var usernameExists = await checkUsernameExists(textField);
     // console.log(usernameExists);
     if (usernameExists === false) {
-      console.log("set username");
+      // console.log("set username");
       setUsername(textField);
       setOpen(false);
-      props.changeUsernameStatusFunc(true);
+      // props.changeUsernameStatusFunc(true);
     } else {
       setTakenAlertOpen(true);
     }
@@ -49,8 +49,8 @@ export default function UsernameDialog(props) {
         Open form dialog
       </Button> */}
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableBackdropClick={true} disableEscapeKeyDown={true}>
-        <DialogTitle id="form-dialog-title">Choose Username</DialogTitle>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Change Username</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Account: {name} ({email})
@@ -76,7 +76,6 @@ export default function UsernameDialog(props) {
                 aria-label="close"
                 color="inherit"
                 size="small"
-
                 onClick={() => {
                   setTakenAlertOpen(false);
                 }}
@@ -94,7 +93,7 @@ export default function UsernameDialog(props) {
             Cancel
           </Button> */}
           <Button onClick={handleClose} color="primary">
-            Choose Username
+            Change Username
           </Button>
         </DialogActions>
       </Dialog >
