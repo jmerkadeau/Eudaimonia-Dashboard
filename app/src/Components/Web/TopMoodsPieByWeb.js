@@ -5,7 +5,9 @@ import {
 import { ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, ButtonGroup, Grid, Box, Table, TableBody, 
-  TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Typography
+  TableCell, TableContainer, TableHead, TableRow, TablePagination, 
+  TableSortLabel, FormControlLabel, Switch, Paper, IconButton, Typography, 
+  Toolbar, 
 } from '@material-ui/core';
 import { DoubleArrow } from '@material-ui/icons';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -55,7 +57,11 @@ const useStyles = makeStyles((theme) => ({
   rows: {
   },
   tableContainer: {
-    marginTop: theme.spacing(-5)
+    marginTop: theme.spacing(6),
+    minWidth: '450px'
+  },
+  arrowIcon: {
+    color: theme.palette.common.white,
   }
 }));
 
@@ -74,6 +80,17 @@ function TopMoodsPieByWeb(props) {
   const [pieData, setPieData] = useState([]);
   const [data, setData] = useState([]);
   const [dataKey, setDataKey] = useState("minutes");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  }
 
 
 
@@ -179,37 +196,37 @@ function TopMoodsPieByWeb(props) {
   }
 
 
-  // let renderLabel = function (entry) {
-  //   return(entry.name)
-  // }
-  const RADIAN = Math.PI / 180;
-  // const renderCustomizedLabel = (entry, { cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-  //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  let renderLabel = function (entry) {
+    return(entry.name)
+  }
+  // const RADIAN = Math.PI / 180;
+  // // const renderCustomizedLabel = (entry, { cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+  // //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  // //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  // //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
   
-  //   return (entry.name
-  //     // <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-  //     //   {`${(percent * 100).toFixed(0)}%`}
-  //     // </text>
-  //   );
-  // };
-  const renderCustomizedLabel = entry => {
-    const radius = entry.innerRadius + (entry.outerRadius - entry.innerRadius) * 0.5;
-    const dx = entry.cx + radius * Math.cos(-entry.midAngle * RADIAN);
-    const dy = entry.cy + radius * Math.sin(-entry.midAngle * RADIAN);
-    return(
-    <text 
-    fill='white' 
-    x={dx} 
-    y={dy} 
-    position='inside'
-    // textAnchor='end'
-    textAnchor={dx > entry.cx ? 'start' : 'end'}
-    >
-      <tspan>{entry.name}</tspan>
-    </text>
-  )}
+  // //   return (entry.name
+  // //     // <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+  // //     //   {`${(percent * 100).toFixed(0)}%`}
+  // //     // </text>
+  // //   );
+  // // };
+  // const renderCustomizedLabel = entry => {
+  //   const radius = entry.innerRadius + (entry.outerRadius - entry.innerRadius) * 0.5;
+  //   const dx = entry.cx + radius * Math.cos(-entry.midAngle * RADIAN);
+  //   const dy = entry.cy + radius * Math.sin(-entry.midAngle * RADIAN);
+  //   return(
+  //   <text 
+  //   fill='white' 
+  //   x={dx} 
+  //   y={dy} 
+  //   position='inside'
+  //   // textAnchor='end'
+  //   textAnchor={dx > entry.cx ? 'start' : 'end'}
+  //   >
+  //     <tspan>{entry.name}</tspan>
+  //   </text>
+  // )}
   
 
   // const setWebData = (e, web) => {
@@ -241,22 +258,25 @@ function TopMoodsPieByWeb(props) {
           <Table className={classes.table} size='small' aria-label='a dense table'>
             <TableHead>
               <TableRow>
-                <TableCell>website</TableCell>
-                <TableCell align='right'>{dataKey}</TableCell>
+                <TableCell align='left'>website</TableCell>
+                <TableCell align='center'>time</TableCell>
                 <TableCell align='center'>show</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((x) => (
+              {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((x) => (
                 <TableRow key={x.name} className={classes.rows}>
                   <TableCell component='th' scope='row'>
                     {x.name}
                   </TableCell>
-                  <TableCell align='right'>{x.value}</TableCell>
+                  <TableCell align='right'>{x.value} {dataKey}</TableCell>
                   <TableCell align='right'>
-                    <IconButton color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
+                    <Button variant='contained' color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
+                      <DoubleArrow fontSize='small' className={classes.arrowIcon}/>
+                    </Button>
+                    {/* <IconButton color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
                       <DoubleArrow fontSize="small"/>
-                    </IconButton>
+                    </IconButton> */}
                     {/* <Button variant='contained' color='primary' className={classes.setPie}>show</Button> */}
                   </TableCell>
                 </TableRow>
@@ -267,6 +287,8 @@ function TopMoodsPieByWeb(props) {
 
           </Table>
         </TableContainer>
+        <TablePagination rowsPerPageOptions={[5]} component='div' count={data.length} 
+        rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage} />
 
       </div>
       <div className={classes.content}>
@@ -278,8 +300,9 @@ function TopMoodsPieByWeb(props) {
             // cx={200}
             // cy={150}
             outerRadius={125}
-            labelLine={false}
-            label={entry => renderCustomizedLabel(entry)}
+            // labelLine={false}
+            // label={entry => renderCustomizedLabel(entry)}
+            label={renderLabel}
             >
             {pieData.map((entry, index) => (
               <Cell fill={colors[index]} />
