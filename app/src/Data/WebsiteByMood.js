@@ -241,7 +241,7 @@ var getMoodScore = (moodData) => {
 };
 
 // for each period of the day get the total time spent
-function getTimeByPeriodToday(webLog) {
+function getTimeByPeriodToday(webLog, moodLog) {
   var timeByDomain = [];
   const webLogWithStartAndTime = [];
   for (var i = 0; i < webLog.length; i++) {
@@ -259,7 +259,9 @@ function getTimeByPeriodToday(webLog) {
   // console.log(webLogWithTime);
   // need to separate by time of day
   const timesOfDay = ['0:00 - 4:00', '4:00 - 8:00', '8:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 24:00'];
-  const timesOfDayNames = ['Early Morning', 'Dawn', 'Morning', 'Afternoon', 'Evening', 'Night' ];
+  // const timesOfDayNames = ['Early Morning', 'Dawn', 'Morning', 'Afternoon', 'Evening', 'Night' ];
+  // const timesOfDayNames = ['2:00', '6:00', '10:00', '14:00', '18:00', '22:00'];
+  const timesOfDayNames = [7200, 21600, 36000, 50400, 64800, 79200];
   let webTimePerPeriod = [0, 0, 0, 0, 0, 0]
 
   for (var j = 0; j < webLogWithStartAndTime.length; j++){
@@ -291,9 +293,20 @@ function getTimeByPeriodToday(webLog) {
     let dataPoint = {
       'name': timesOfDayNames[k],
       'period': timesOfDay[k],
-      'time': webTimePerPeriod[k]
+      'time': (webTimePerPeriod[k]/60).toFixed(1)
     }
     areaData.push(dataPoint)
+  }
+
+  // let moodsToday = [];
+
+  for (var l = 0; l<moodLog.length; l++){
+    let mood = {
+      'name': moodLog[l].time,
+      'period': moodLog[l].mood,
+      'moodTime': 0
+    }
+    areaData.push(mood);
   }
 
   console.log(areaData)
