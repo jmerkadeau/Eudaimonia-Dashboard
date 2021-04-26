@@ -293,7 +293,7 @@ function getTimeByPeriodToday(webLog, moodLog) {
     let dataPoint = {
       'name': timesOfDayNames[k],
       'period': timesOfDay[k],
-      'time': (webTimePerPeriod[k]/60).toFixed(1)
+      'time': parseFloat((webTimePerPeriod[k]/60).toFixed(1))
     }
     areaData.push(dataPoint)
   }

@@ -44,7 +44,7 @@ function MoodByTimeGraph(props) {
                     <ComposedChart width={400} height={300} data={data}>
                         {/* <XAxis dataKey='name' /> */}
                         <XAxis dataKey='name' type='number' domain={[0, 86400]}/>
-                        <YAxis />
+                        <YAxis domain={[0, 'auto']}/>
                         <Tooltip />
                         <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
                         {/* <Line type='monotone' dataKey='moodTime' stroke='#dd7c85' /> */}
