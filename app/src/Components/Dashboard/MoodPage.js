@@ -12,7 +12,8 @@ import {
   getOrderedMoods,
   getMoodCount,
   getMoodScore,
-  getTimeByPeriodToday
+  getTimeByPeriodToday,
+  
 } from '../../Data/WebsiteByMood';
 
 import {
@@ -184,7 +185,7 @@ class MoodPage extends React.Component {
     var moodScoreToday = getMoodScore(moodToday);
     var moodScoreAllTime = getMoodScore(moodAllTime);
 
-    var timeByPeriodToday = getTimeByPeriodToday(props.webLog)
+    var timeByPeriodToday = getTimeByPeriodToday(props.webLog, props.moodLog)
 
     // console.log(props.moodLog);
     // console.log(orderedMoodsToday[0]);

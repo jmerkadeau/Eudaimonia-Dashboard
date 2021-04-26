@@ -123,7 +123,8 @@ const styles = theme => ({
   },
   pieChartTitle: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    
   },
   pieChart: {
     display: 'flex',
@@ -132,6 +133,8 @@ const styles = theme => ({
   },
   pieChartTypography: {
     marginRight: theme.spacing(-60),
+    color: theme.palette.common.white
+
     // marginTop: theme.spacing(10)
     // marginBottom: theme.spacing(4),
 
@@ -141,6 +144,11 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center'
 
+  },
+  pieTitleStyle: {
+    backgroundColor: theme.palette.primary.main,
+    padding: theme.spacing(2),
+    borderRadius: 5,
   }
 });
 
@@ -245,8 +253,10 @@ class WebPage extends React.Component {
                       {/* <WebList setSite={this.setCurrentSite} topSites={this.state.topSites}
                       webFrequency={this.state.graphData}></WebList> */}
 
-                      <Typography color={'primary'} variant='h5' className={classes.pieChartTypography} >
-                        {this.state.currentSite}
+                      <Typography color={'primary'} variant='h5' className={classes.pieChartTypography}>
+                        <div className={classes.pieTitleStyle}>
+                          {this.state.currentSite}
+                        </div>
                       </Typography>
                     </Box>
                     <Box item xs={3} className={classes.pieChart}>

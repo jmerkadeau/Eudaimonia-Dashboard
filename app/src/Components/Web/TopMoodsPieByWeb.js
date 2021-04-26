@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  PieChart, Pie, Tooltip, Cell, Label
+  PieChart, Pie, Tooltip, Cell, Label, ResponsiveContainer
 } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +17,8 @@ import theme from './../LandingPage/Sections/Theme.js';
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    overflow: 'auto'
+    overflow: 'auto',
+    marginLeft: theme.spacing(3)
   },
   rightAlign: {
     justifyContent: 'flex-start',
@@ -55,9 +56,10 @@ const useStyles = makeStyles((theme) => ({
     color: 'white'
   },
   rows: {
+    padding: theme.spacing(5)
   },
   tableContainer: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(-8),
     minWidth: '450px'
   },
   arrowIcon: {
@@ -255,7 +257,7 @@ function TopMoodsPieByWeb(props) {
         </div> */}
         {/* </ButtonGroup> */}
         <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table className={classes.table} size='small' aria-label='a dense table'>
+          <Table className={classes.table} aria-label='simple table'>
             <TableHead>
               <TableRow>
                 <TableCell align='left'>website</TableCell>
@@ -292,14 +294,15 @@ function TopMoodsPieByWeb(props) {
 
       </div>
       <div className={classes.content}>
-        <PieChart width={400} height={400} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+        <ResponsiveContainer width={400} height={400} >
+        <PieChart width={200} height={200} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
             data={pieData}
             // cx={200}
             // cy={150}
-            outerRadius={125}
+            outerRadius={100}
             // labelLine={false}
             // label={entry => renderCustomizedLabel(entry)}
             label={renderLabel}
@@ -314,6 +317,7 @@ function TopMoodsPieByWeb(props) {
           </Pie>
           <Tooltip />
         </PieChart>
+        </ResponsiveContainer>
       </div>
     </ThemeProvider>
   )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, 
-    Tooltip, ResponsiveContainer } from 'recharts';
+    Tooltip, ResponsiveContainer, Line, Legend, Scatter, ComposedChart } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
@@ -20,6 +20,13 @@ function MoodByTimeGraph(props) {
     }, [props.areaData]);
     console.log(data);
 
+    let moodsToday = [
+        {'name': 30000, 'time': 40, 'period': 'Tired' },
+        {'name': 30400, 'time': 40, 'period': 'Energized' },
+        {'name': 45900, 'time': 40, 'period': 'Distracted' },
+        {'name': 65580, 'time': 40, 'period': 'Focused' },
+    ];
+
 
 
     return(
@@ -27,13 +34,23 @@ function MoodByTimeGraph(props) {
             <CssBaseline />
             <div>
                 {/* <ResponsiveContainer width='100%' height='100%'> */}
-                    <AreaChart width={400} height={300} data={data}>
-                        {/* <CartesianGrid /> */}
+                    {/* <AreaChart width={400} height={300} data={data}>
                         <XAxis dataKey='name' />
                         <YAxis />
                         <Tooltip />
                         <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
-                    </AreaChart>
+                        <Scatter data={moodsToday} dataKey='time' fill='#dd7c85' />
+                    </AreaChart> */}
+                    <ComposedChart width={400} height={300} data={data}>
+                        {/* <XAxis dataKey='name' /> */}
+                        <XAxis dataKey='name' type='number' domain={[0, 86400]}/>
+                        <YAxis />
+                        <Tooltip />
+                        <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
+                        {/* <Line type='monotone' dataKey='moodTime' stroke='#dd7c85' /> */}
+                        <Scatter dataKey='moodTime' fill='#dd7c85' />
+
+                    </ComposedChart>
                 {/* </ResponsiveContainer> */}
             </div>
         </ThemeProvider>
