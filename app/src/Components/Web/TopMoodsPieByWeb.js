@@ -4,10 +4,11 @@ import {
 } from 'recharts';
 import { ThemeProvider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, ButtonGroup, Grid, Box, Table, TableBody, 
-  TableCell, TableContainer, TableHead, TableRow, TablePagination, 
-  TableSortLabel, FormControlLabel, Switch, Paper, IconButton, Typography, 
-  Toolbar, 
+import {
+  Button, ButtonGroup, Grid, Box, Table, TableBody,
+  TableCell, TableContainer, TableHead, TableRow, TablePagination,
+  TableSortLabel, FormControlLabel, Switch, Paper, IconButton, Typography,
+  Toolbar,
 } from '@material-ui/core';
 import { DoubleArrow } from '@material-ui/icons';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     "&:hover": {
       backgroundColor: theme.palette.primary.dark,
-  },
+    },
 
   },
   setPie: {
@@ -197,14 +198,14 @@ function TopMoodsPieByWeb(props) {
 
 
   let renderLabel = function (entry) {
-    return(entry.name)
+    return (entry.name)
   }
   // const RADIAN = Math.PI / 180;
   // // const renderCustomizedLabel = (entry, { cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
   // //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   // //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   // //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
+
   // //   return (entry.name
   // //     // <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
   // //     //   {`${(percent * 100).toFixed(0)}%`}
@@ -216,10 +217,10 @@ function TopMoodsPieByWeb(props) {
   //   const dx = entry.cx + radius * Math.cos(-entry.midAngle * RADIAN);
   //   const dy = entry.cy + radius * Math.sin(-entry.midAngle * RADIAN);
   //   return(
-  //   <text 
-  //   fill='white' 
-  //   x={dx} 
-  //   y={dy} 
+  //   <text
+  //   fill='white'
+  //   x={dx}
+  //   y={dy}
   //   position='inside'
   //   // textAnchor='end'
   //   textAnchor={dx > entry.cx ? 'start' : 'end'}
@@ -227,7 +228,7 @@ function TopMoodsPieByWeb(props) {
   //     <tspan>{entry.name}</tspan>
   //   </text>
   // )}
-  
+
 
   // const setWebData = (e, web) => {
   //   props.setSite(web)
@@ -258,9 +259,9 @@ function TopMoodsPieByWeb(props) {
           <Table className={classes.table} size='small' aria-label='a dense table'>
             <TableHead>
               <TableRow>
-                <TableCell align='left'>website</TableCell>
-                <TableCell align='center'>time</TableCell>
-                <TableCell align='center'>show</TableCell>
+                <TableCell align='left'>Website</TableCell>
+                <TableCell align='center'>Time</TableCell>
+                <TableCell align='center'>Show</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -272,7 +273,7 @@ function TopMoodsPieByWeb(props) {
                   <TableCell align='right'>{x.value} {dataKey}</TableCell>
                   <TableCell align='right'>
                     <Button variant='contained' color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
-                      <DoubleArrow fontSize='small' className={classes.arrowIcon}/>
+                      <DoubleArrow fontSize='small' className={classes.arrowIcon} />
                     </Button>
                     {/* <IconButton color='primary' onClick={(event) => { setCurrentSite(event, x.name) }}>
                       <DoubleArrow fontSize="small"/>
@@ -287,8 +288,8 @@ function TopMoodsPieByWeb(props) {
 
           </Table>
         </TableContainer>
-        <TablePagination rowsPerPageOptions={[5]} component='div' count={data.length} 
-        rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage} />
+        <TablePagination rowsPerPageOptions={[5]} component='div' count={data.length}
+          rowsPerPage={rowsPerPage} page={page} onChangePage={handleChangePage} onChangeRowsPerPage={handleChangeRowsPerPage} />
 
       </div>
       <div className={classes.content}>
@@ -303,7 +304,7 @@ function TopMoodsPieByWeb(props) {
             // labelLine={false}
             // label={entry => renderCustomizedLabel(entry)}
             label={renderLabel}
-            >
+          >
             {pieData.map((entry, index) => (
               <Cell fill={colors[index]} />
             ))}

@@ -43,7 +43,6 @@ import SignOut from './../LandingPage/SignOut.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
 import { propTypes } from 'react-bootstrap/esm/Image';
-import changeUsername from "./ChangeUsername.js";
 import ChangeUsername from './ChangeUsername.js';
 
 function Copyright() {
@@ -179,6 +178,17 @@ const useStyles = makeStyles((theme) => ({
   popoverEmail: {
     color: theme.palette.grey.A500,
     marginBottom: theme.spacing(3)
+  },
+  spacer: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
+  changeUsernameButton: {
+    marginBottom: theme.spacing(1.5),
+    color: theme.palette.common.white,
+  },
+  signOutButton: {
+    color: theme.palette.common.white,
   }
 }));
 
@@ -258,14 +268,18 @@ export default function Main(props) {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const changeUsername = () => {
-    console.log('change username pressed');
+    // console.log('change username pressed');
+    setChangeUsernameShow(true);
+    // console.log(changeUsernameShow);
   };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root}>
         <CssBaseline />
-        <ChangeUsername show={changeUsernameShow}></ChangeUsername>
+        <ChangeUsername show={changeUsernameShow} setShow={setChangeUsernameShow} currentUsername={props.username} setNewUsername={props.setNewUsername}></ChangeUsername>
+        {/* <ChangeUsername></ChangeUsername> */}
         <AppBar elevation={1} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
           <Toolbar className={classes.toolbar}>
             <IconButton
@@ -316,12 +330,11 @@ export default function Main(props) {
                 <Typography className={classes.popoverUsername}>{props.username}</Typography>
                 {/* <Typography className={classes.popoverName}>{name}</Typography> */}
                 <Typography className={classes.popoverEmail}>{email}</Typography>
-                <Button variant='contained' color='primary' onClick={changeUsername}
-                  style={{ "color": theme.palette.common.white, "display": "inline-block" }}>
+                <Button variant='contained' color='primary' onClick={changeUsername} className={classes.changeUsernameButton}>
                   Change Username
                 </Button>
-                <br />
-                <SignOut />
+                <br className={classes.spacer} />
+                <SignOut className={classes.signOutButton} />
               </Box>
             </Popover>
           </Toolbar>

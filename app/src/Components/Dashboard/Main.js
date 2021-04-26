@@ -154,6 +154,8 @@ class Main extends React.Component {
     super(props);
     this.state = { user: props.user, extensionAdded: true, moodLog: [], webLog: [], isLoading: true, allTimeWebByMood: {}, allTimeMoodByWeb: {}, usernameAdded: true, username: "" };
     this.changeUsernameStatus = this.changeUsernameStatus.bind(this);
+    this.changeUsername = this.changeUsername.bind(this);
+
   }
 
   async componentDidMount() {
@@ -169,7 +171,7 @@ class Main extends React.Component {
       const ref = database.ref(`users/${uid}`);
       ref.on('value', (snapshots) => {
         const val = snapshots.val();
-        console.log(val);
+        // console.log(val);
         // Check for extension
         if ("extension" in val && val.extension) {
           // console.log("With extension");
@@ -220,8 +222,12 @@ class Main extends React.Component {
   //   const { history } = useHistory();
   // }
   changeUsernameStatus(b) {
-    console.log(b);
+    // console.log(b);
     this.setState({ usernameAdded: b });
+  }
+  changeUsername(name) {
+    this.setState({ username: name });
+
   }
 
   render() {
@@ -292,7 +298,7 @@ class Main extends React.Component {
               {/* <Router history={history}> */}
               <Router>
                 {alert}
-                <SideDrawer username={this.state.username} />
+                <SideDrawer username={this.state.username} setNewUsername={this.changeUsername} />
                 <Switch>
                   {/* <Route path='/' exact component={() => <Dashboard />} />
                   <Route path='/dashboard' exact component={() => <Dashboard />} /> */}

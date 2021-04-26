@@ -16,21 +16,21 @@ async function getMoodLog() {
     return (timeAsInt);
   }
 
-    const ref = database.ref('moods/'+uid+'/'+date);
-    await ref.once('value', (snapshot) => {
-        snapshot.forEach((a) => {
-            const t = a.key;
-            const time = timeToInteger(t);
-            const m = a.val();
-            const mood = m[Object.keys(m)[0]];
+  const ref = database.ref('moods/' + uid + '/' + date);
+  await ref.once('value', (snapshot) => {
+    snapshot.forEach((a) => {
+      const t = a.key;
+      const time = timeToInteger(t);
+      const m = a.val();
+      const mood = m[Object.keys(m)[0]];
 
-            moodObj = {
-                'time' : time,
-                'mood' : mood
-            }
-            moods.push(moodObj);
-        })
-    })
-    return(moods);
+      moodObj = {
+        'time': time,
+        'mood': mood
+      }
+      moods.push(moodObj);
+    });
+  });
+  return (moods);
 }
 export default getMoodLog;

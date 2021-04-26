@@ -7,7 +7,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-import { getUsers } from "../../Data/UserData.js";
+import { getUsers, sendFriendRequest, getFriends, getUserFromUID, acceptFriendRequest } from "../../Data/UserData.js";
 
 function Copyright() {
   return (
@@ -73,12 +73,6 @@ const styles = theme => ({
     width: '100%',
     // marginLeft: theme.spacing(8)
   },
-  infoText: {
-
-  },
-  centerPieCharts: {
-
-  },
   fixedHeight: {
     height: 240,
   },
@@ -105,11 +99,6 @@ const styles = theme => ({
   grid1: {
     width: 700,
   },
-  moodGrid: {
-    // display: 'flex',
-    // flexDirection: 'row',
-    // alignItems: 'stretch'
-  },
   card: {
     display: 'flex',
     width: '100%'
@@ -128,16 +117,51 @@ const styles = theme => ({
 class Friends extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchName: "", results: [] };
+    this.state = { searchName: "", results: [], friends: [], requests: [] };
+
   };
+  async componentDidMount() {
+    const friendStatuses = await getFriends();
+    // console.log(friendStatuses);
+    var friends = [];
+    var requests = [];
+
+    for (let friend_uid in friendStatuses) {
+      // console.log(friend_uid, friendStatuses[friend_uid]);
+      var friend_data = await getUserFromUID(friend_uid);
+      if (friendStatuses[friend_uid] === 3) {
+        friends.push(friend_data);
+      } else if (friendStatuses[friend_uid] === 2) {
+        requests.push(friend_data);
+      }
+      // friend_data["status"] = friendStatuses[friend_uid];
+      // console.log(friend_data);
+      // friends.push(friend_data);
+    }
+    // console.log(friends);
+    this.setState({ friends: friends, requests: requests });
+  }
 
   async handleSubmit() {
     // console.log('handleSubmit');
     // console.log(event);
-    console.log(this.state.searchName);
+    // console.log(this.state.searchName);
     const users = await getUsers(this.state.searchName);
     this.setState({ results: users });
     console.log(users);
+  }
+
+  handleSendRequest(x) {
+    console.log("send friend request");
+    console.log(x);
+    sendFriendRequest(x);
+  }
+
+  async handleAcceptRequest(x) {
+    console.log("accept friend request");
+    console.log(x);
+    let ret = await acceptFriendRequest(x);
+    console.log(ret);
   }
 
 
@@ -160,6 +184,10 @@ class Friends extends React.Component {
                 </Button>
               </Grid>
 
+              {/* Table for Users */}
+              <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                Users
+              </Typography>
               <Grid item xs={12} sm={12} className={classes.card}>
                 <TableContainer component={Paper}>
                   <Table className={classes.table} aria-label="simple table">
@@ -168,6 +196,8 @@ class Friends extends React.Component {
                         <TableCell>Photo</TableCell>
                         <TableCell align="right">Username</TableCell>
                         <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Add Friend</TableCell>
+
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -178,6 +208,11 @@ class Friends extends React.Component {
                           </TableCell>
                           <TableCell align="right">{row.username}</TableCell>
                           <TableCell align="right">{row.name}</TableCell>
+                          <TableCell align="right">
+                            <Button variant='contained' color='primary' onClick={(event) => { this.handleSendRequest(row.uid) }}>
+                              Send Request
+                            </Button>
+                          </TableCell>
 
                         </TableRow>
                       ))}
@@ -185,6 +220,72 @@ class Friends extends React.Component {
                   </Table>
                 </TableContainer>
               </Grid>
+
+              <br />
+              <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+                Friend Requests
+              </Typography>
+
+              {/* Table for Friend Request*/}
+              <Grid item xs={12} sm={12} className={classes.card}>
+                <TableContainer component={Paper}>
+                  <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Photo</TableCell>
+                        <TableCell align="right">Username</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Request</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.requests.map((row) => (
+                        <TableRow key={row.username}>
+                          <TableCell component="th" scope="row">
+                            <Avatar alt={row.name} src={row.photoUrl} />
+                          </TableCell>
+                          <TableCell align="right">{row.username}</TableCell>
+                          <TableCell align="right">{row.name}</TableCell>
+                          <TableCell align="right">
+                            <Button variant='contained' color='primary' onClick={(event) => { this.handleAcceptRequest(row.uid) }}>
+                              Accept Request
+                            </Button>
+                          </TableCell>
+
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            </Grid>
+            {/* Table for Friends */}
+            <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
+              Friends
+              </Typography>
+            <Grid item xs={12} sm={12} className={classes.card}>
+              <TableContainer component={Paper}>
+                <Table className={classes.table} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Photo</TableCell>
+                      <TableCell align="right">Username</TableCell>
+                      <TableCell align="right">Name</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.state.friends.map((row) => (
+                      <TableRow key={row.username}>
+                        <TableCell component="th" scope="row">
+                          <Avatar alt={row.name} src={row.photoUrl} />
+                        </TableCell>
+                        <TableCell align="right">{row.username}</TableCell>
+                        <TableCell align="right">{row.name}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
           </Container>
           <div className={classes.bottom}>
