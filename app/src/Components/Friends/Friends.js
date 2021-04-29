@@ -117,7 +117,8 @@ const styles = theme => ({
 class Friends extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchName: "", results: [], friends: [], requests: [] };
+    this.state = { searchName: "", results: [], friends: [], requests: [], userUid: props.user.uid };
+    // console.log(props.user.uid);
 
   };
   async componentDidMount() {
@@ -139,29 +140,93 @@ class Friends extends React.Component {
       // friends.push(friend_data);
     }
     // console.log(friends);
-    this.setState({ friends: friends, requests: requests });
+    this.setState({ friendStatuses: friendStatuses, friends: friends, requests: requests });
+    // console.log("Friends Loaded");
+    // console.log(friendStatuses);
+    console.log(friendStatuses);
+    console.log(friends);
+    console.log(requests);
+
+
   }
 
   async handleSubmit() {
     // console.log('handleSubmit');
     // console.log(event);
     // console.log(this.state.searchName);
-    const users = await getUsers(this.state.searchName);
-    this.setState({ results: users });
+    var users = await getUsers(this.state.searchName);
+    users = users.filter(obj => {
+      return obj.uid !== this.state.userUid
+    });
     console.log(users);
+    this.setState({ results: users });
+    // console.log(users);
   }
 
   handleSendRequest(x) {
     console.log("send friend request");
     console.log(x);
+    // console.log(this.state.friends);
     sendFriendRequest(x);
+    // Change Friend Status
+    var tempFriends = this.state.friendStatuses;
+    tempFriends[x] = 1;
+    this.setState({ friendStatuses: tempFriends });
+  }
+  requestButtonText(uid) {
+    // console.log(uid);
+    if (uid in this.state.friendStatuses) {
+      if (this.state.friendStatuses[uid] === 1) {
+        return "Request Sent";
+      } else if (this.state.friendStatuses[uid] === 3) {
+        return "Friend";
+      }
+    }
+    return "Send Request";
+  }
+  requestButtonDisabled(uid) {
+    // console.log(uid);
+    console.log(this.state.friendStatuses);
+    if (uid in this.state.friendStatuses) {
+      if (this.state.friendStatuses[uid] === 1) {
+        return true;
+      } else if (this.state.friendStatuses[uid] === 3) {
+        return true;
+      }
+    }
+    return false;
   }
 
   async handleAcceptRequest(x) {
+    // console.log(this.state.requests);
+    // console.log(this.state.friends);
     console.log("accept friend request");
-    console.log(x);
+    // console.log(x);
     let ret = await acceptFriendRequest(x);
-    console.log(ret);
+    // console.log(ret);
+    var newFriendStatuses = this.state.friendStatuses;
+    newFriendStatuses[x] = 3;
+
+    // Remove from Requests list
+    // console.log(this.state.requests);
+    // console.log(this.state.friends);
+
+    var friendObjs = this.state.requests.filter(obj => {
+      return obj.uid === x
+    });
+    if (friendObjs.length > 1) {
+      throw TypeError("Multiple Friend Objects with same UID");
+    } else {
+      let newRequests = this.state.requests.filter(function (obj) {
+        return obj.uid !== x;
+      });
+      var newFriends = this.state.friends;
+      newFriends.push(friendObjs[0]);
+      this.setState({ friendStatuses: newFriendStatuses, friends: newFriends, requests: newRequests });
+    }
+    // console.log(this.state.requests);
+    // console.log(this.state.friends);
+
   }
 
 
@@ -209,8 +274,8 @@ class Friends extends React.Component {
                           <TableCell align="right">{row.username}</TableCell>
                           <TableCell align="right">{row.name}</TableCell>
                           <TableCell align="right">
-                            <Button variant='contained' color='primary' onClick={(event) => { this.handleSendRequest(row.uid) }}>
-                              Send Request
+                            <Button variant='contained' color='primary' disabled={this.requestButtonDisabled(row.uid)} onClick={(event) => { this.handleSendRequest(row.uid) }}>
+                              {this.requestButtonText(row.uid)}
                             </Button>
                           </TableCell>
 

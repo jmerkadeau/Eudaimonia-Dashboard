@@ -306,7 +306,7 @@ class Main extends React.Component {
                   <Route path='/dashboard' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/web' exact component={() => <WebPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
-                  <Route path='/dashboard/friends' exact component={() => <Friends />} />
+                  <Route path='/dashboard/friends' exact component={() => <Friends user={this.state.user} />} />
                   <Route path='/privacy' exact component={() => <Policy />} />
                   <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                 </Switch>

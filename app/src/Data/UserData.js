@@ -9,6 +9,7 @@ const capitalize = (s) => {
   }
   return (words.join(" "));
 };
+
 async function getUsers(username) {
   var users = [];
   const uid = auth.currentUser.uid;
@@ -17,9 +18,9 @@ async function getUsers(username) {
   const ref = database.ref('users');
   await ref.once('value', (snapshot) => {
     snapshot.forEach((a) => {
-      console.log(a.val());
+      // console.log(a.val());
       let v = a.val();
-      if ('username' in v && v.username.includes(username)) {
+      if ('username' in v && v.username.toLowerCase().includes(username.toLowerCase())) {
         console.log(v);
         users.push(v);
       }
