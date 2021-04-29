@@ -4,7 +4,7 @@ import TopWebGraph from './../Web/TopWebGraph.js';
 import { getWebData, getTimeByDomainToday, getTimeByDomainAllTime } from '../../Data/MoodByWebsite';
 import {
   Typography, Link, createMuiTheme, ThemeProvider, Container,
-  Grid, Paper, Box, Button, Card, Divider
+  Grid, Paper, Box, Button, Card, CardContent, Divider
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
@@ -133,7 +133,7 @@ const styles = theme => ({
   },
   pieChartTypography: {
     marginRight: theme.spacing(-60),
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
 
     // marginTop: theme.spacing(10)
     // marginBottom: theme.spacing(4),
@@ -254,9 +254,16 @@ class WebPage extends React.Component {
                       webFrequency={this.state.graphData}></WebList> */}
 
                       <Typography color={'primary'} variant='h5' className={classes.pieChartTypography}>
-                        <div className={classes.pieTitleStyle}>
+                        {/* <div className={classes.pieTitleStyle}>
                           {this.state.currentSite}
-                        </div>
+                        </div> */}
+                        <Card>
+                          <CardContent>
+                            <Typography color='primary' variant='h5'>
+                              {this.state.currentSite}
+                            </Typography>
+                          </CardContent>
+                        </Card>
                       </Typography>
                     </Box>
                     <Box item xs={3} className={classes.pieChart}>

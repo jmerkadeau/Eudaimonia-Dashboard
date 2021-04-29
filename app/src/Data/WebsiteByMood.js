@@ -293,7 +293,8 @@ function getTimeByPeriodToday(webLog, moodLog) {
     let dataPoint = {
       'name': timesOfDayNames[k],
       'period': timesOfDay[k],
-      'time': parseFloat((webTimePerPeriod[k]/60).toFixed(1))
+      'time': parseFloat((webTimePerPeriod[k]/60).toFixed(1)),
+      'label': 'Time of Day',
     }
     areaData.push(dataPoint)
   }
@@ -301,12 +302,21 @@ function getTimeByPeriodToday(webLog, moodLog) {
   // let moodsToday = [];
 
   for (var l = 0; l<moodLog.length; l++){
-    let mood = {
+    let mood1 = {
       'name': moodLog[l].time,
       'period': moodLog[l].mood,
-      'moodTime': 0
+      'moodTime': 0,
+      'label': 'Mood',
+    };
+    let mood2 = {
+      'name': moodLog[l].time,
+      'period': moodLog[l].mood,
+      'moodTime': 80,
+      'label': 'Mood',
     }
-    areaData.push(mood);
+    areaData.push(mood1);
+    areaData.push(mood2);
+
   }
 
   console.log(areaData)
