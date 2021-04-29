@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(5)
   },
   tableContainer: {
-    marginTop: theme.spacing(-8),
+    marginTop: theme.spacing(-9.5),
     minWidth: '450px'
   },
   arrowIcon: {
