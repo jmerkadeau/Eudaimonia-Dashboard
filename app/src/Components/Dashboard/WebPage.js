@@ -149,7 +149,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(2),
     borderRadius: 5,
-  }
+  },
 });
 
 
@@ -257,7 +257,7 @@ class WebPage extends React.Component {
                         {/* <div className={classes.pieTitleStyle}>
                           {this.state.currentSite}
                         </div> */}
-                        <Card>
+                        <Card elevation={4}>
                           <CardContent>
                             <Typography color='primary' variant='h5'>
                               {this.state.currentSite}

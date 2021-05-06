@@ -24,6 +24,7 @@ import clsx from 'clsx';
 import { withStyles } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js'
+import { Autocomplete } from '@material-ui/lab';
 
 function Copyright() {
   return (
@@ -92,7 +93,12 @@ const styles = theme => ({
     flexDirection: 'column',
     elevation: 3,
     alignItems: 'center',
-    width: '113%'
+    width: '113%',
+    [theme.breakpoints.down('md')]: {
+      width: '50%',
+      // marginLeft: 'auto',
+      // marginRight: 'auto'
+    },
   },
   paperDiv: {
     textAlign: 'center',
@@ -135,9 +141,6 @@ const styles = theme => ({
   },
   flex: {
     display: 'flex',
-  },
-  grid1: {
-    width: 700,
   },
   moodGrid: {
     // display: 'flex',
@@ -317,7 +320,7 @@ class MoodPage extends React.Component {
             </Grid>
 
             <Grid container className={classes.moodGrid}>
-              <Grid item xs={12} sm={6} className={classes.card}>
+              <Grid item xs={12} sm={12} md={12} lg={6} className={classes.card}>
                 {/* <Paper className={classes.altpaper}>
                   <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
                     Moods Logged {this.state.headerText}
@@ -347,6 +350,7 @@ class MoodPage extends React.Component {
                     {/* </div>
                   </div>
                 </Paper> */}
+                {/* <div> */}
                 
                 <Paper className={classes.altpaper}>
                   <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
@@ -356,11 +360,12 @@ class MoodPage extends React.Component {
                   
 
                 </Paper>
+                {/* </div> */}
 
 
               </Grid>
-              <Grid item xs={12} sm={6} className={classes.card}>
-                <div>
+              <Grid item xs={12} sm={12} md={12} lg={6} className={classes.card}>
+                {/* <div> */}
                   <Paper className={classes.altpaper}>
                     <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
                       Moods Distribution
@@ -376,7 +381,7 @@ class MoodPage extends React.Component {
                       </div>
                     </div>
                   </Paper>
-                </div>
+                {/* </div> */}
               </Grid>
             </Grid>
             <Grid container>
