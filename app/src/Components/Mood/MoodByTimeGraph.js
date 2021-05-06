@@ -66,7 +66,7 @@ function MoodByTimeGraph(props) {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <div>
-                {/* <ResponsiveContainer width='100%' height='100%'> */}
+                <ResponsiveContainer width={400} height={300}>
                     {/* <AreaChart width={400} height={300} data={data}>
                         <XAxis dataKey='name' />
                         <YAxis />
@@ -83,11 +83,11 @@ function MoodByTimeGraph(props) {
 
                         <Tooltip content={<CustomTooltip />}/>
                         <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
-                        {
+                        {/* {
                             data.map((id) => {
                             return (<Line type='stepBefore' dataKey='moodTime' stroke='#dd7c85' connectNulls='False'/>)
                             })
-                        }
+                        } */}
                         {/* <Line type='monotone' dataKey='moodTime' stroke='#dd7c85' /> */}
 
                         <Scatter dataKey='moodTime' fill='#dd7c85' />
@@ -95,7 +95,7 @@ function MoodByTimeGraph(props) {
                         
 
                     </ComposedChart>
-                {/* </ResponsiveContainer> */}
+                </ResponsiveContainer>
             </div>
         </ThemeProvider>
     )

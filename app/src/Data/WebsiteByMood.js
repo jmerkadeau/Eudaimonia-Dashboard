@@ -308,14 +308,14 @@ function getTimeByPeriodToday(webLog, moodLog) {
       'moodTime': 0,
       'label': 'Mood',
     };
-    let mood2 = {
-      'name': moodLog[l].time,
-      'period': moodLog[l].mood,
-      'moodTime': 80,
-      'label': 'Mood',
-    }
+    // let mood2 = {
+    //   'name': moodLog[l].time,
+    //   'period': moodLog[l].mood,
+    //   'moodTime': 80,
+    //   'label': 'Mood',
+    // }
     areaData.push(mood1);
-    areaData.push(mood2);
+    // areaData.push(mood2);
 
   }
 
