@@ -27,7 +27,7 @@ async function getMoodLog() {
       moodObj = {
         'time': time,
         'mood': mood
-      }
+      };
       moods.push(moodObj);
     });
   });

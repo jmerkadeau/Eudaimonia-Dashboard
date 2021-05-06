@@ -7,8 +7,11 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
-import { getUsers, sendFriendRequest, getFriends, getUserFromUID, acceptFriendRequest } from "../../Data/UserData.js";
+import { getUsers, sendFriendRequest, getFriends, getUserFromUID, acceptFriendRequest, getFriendMoodData }
+  from "../../Data/UserData.js";
 
+
+import FriendMoodsPie from './FriendMoodsPie';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center" >
@@ -117,7 +120,7 @@ const styles = theme => ({
 class Friends extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { searchName: "", results: [], friends: [], requests: [], userUid: props.user.uid };
+    this.state = { searchName: "", results: [], friends: [], requests: [], userUid: props.user.uid, friendsMoodData: {} };
     // console.log(props.user.uid);
 
   };
@@ -126,11 +129,14 @@ class Friends extends React.Component {
     // console.log(friendStatuses);
     var friends = [];
     var requests = [];
-
+    var friendsMoodData = {};
+    // var friendData = await getFriendMoodData("2sZGRgNqIbhNpdkiEgzCAtT4ItE2");
+    // console.log(friendData);
     for (let friend_uid in friendStatuses) {
       // console.log(friend_uid, friendStatuses[friend_uid]);
       var friend_data = await getUserFromUID(friend_uid);
       if (friendStatuses[friend_uid] === 3) {
+        friendsMoodData[friend_uid] = await getFriendMoodData(friend_uid);
         friends.push(friend_data);
       } else if (friendStatuses[friend_uid] === 2) {
         requests.push(friend_data);
@@ -140,12 +146,13 @@ class Friends extends React.Component {
       // friends.push(friend_data);
     }
     // console.log(friends);
-    this.setState({ friendStatuses: friendStatuses, friends: friends, requests: requests });
+    this.setState({ friendStatuses: friendStatuses, friends: friends, requests: requests, friendsMoodData: friendsMoodData });
     // console.log("Friends Loaded");
     // console.log(friendStatuses);
-    console.log(friendStatuses);
-    console.log(friends);
-    console.log(requests);
+    // console.log(friendStatuses);
+    console.log(friendsMoodData);
+    // console.log(friends);
+    // console.log(requests);
 
 
   }
@@ -336,6 +343,7 @@ class Friends extends React.Component {
                       <TableCell>Photo</TableCell>
                       <TableCell align="right">Username</TableCell>
                       <TableCell align="right">Name</TableCell>
+                      <TableCell align="right">Moods</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -346,6 +354,11 @@ class Friends extends React.Component {
                         </TableCell>
                         <TableCell align="right">{row.username}</TableCell>
                         <TableCell align="right">{row.name}</TableCell>
+                        <TableCell align="right">
+                          <FriendMoodsPie moodData={this.state.friendsMoodData[row.uid]}></FriendMoodsPie>
+
+                        </TableCell>
+
                       </TableRow>
                     ))}
                   </TableBody>

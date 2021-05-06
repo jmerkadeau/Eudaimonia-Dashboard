@@ -60,6 +60,21 @@ async function getUserFromUID(uid) {
   return returnVal;
 }
 
+
+async function getFriendMoodData(uid) {
+  const ref = database.ref(`moods/${uid}/`);
+  var returnVal = {};
+  await ref.once('value', (snapshot) => {
+    if (snapshot.exists()) {
+      // console.log(`friend ${uid} found`);
+      returnVal = snapshot.val();
+    } else {
+      // console.log('friend mood data doesnt exist yet');
+    }
+  });
+  return returnVal;
+}
+
 async function setUsername(username) {
   const uid = auth.currentUser.uid;
   const ref = database.ref(`users/${uid}`);
@@ -145,4 +160,7 @@ async function getFriends() {
   return (returnVal);
 }
 
-export { getUsers, checkUsernameExists, setUsername, sendFriendRequest, getFriends, getUserFromUID, acceptFriendRequest };
+export {
+  getUsers, checkUsernameExists, setUsername, sendFriendRequest,
+  getFriends, getUserFromUID, acceptFriendRequest, getFriendMoodData
+};

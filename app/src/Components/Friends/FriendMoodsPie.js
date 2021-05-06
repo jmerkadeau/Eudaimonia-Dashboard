@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { getTopMoodsToday } from '../../Data/WebsiteByMood.js';
 import { PieChart, Pie, Tooltip, Cell, Sector, Label } from 'recharts';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from './../LandingPage/Sections/Theme.js'
-// I only imported the elements of recharts that I needed, there are a lot more you can use
+import theme from '../LandingPage/Sections/Theme.js';
+import { date } from './../../Data/GetDate.js';
 
-function TopMoodsPie(props) {
+// I only imported the elements of recharts that I needed, there are a lot more you can use
+var getOrderedMoods = (moodFrequency) => {
+  var orderedMoods = Object.keys(moodFrequency);
+  function compareFrequency(a, b) {
+    return moodFrequency[b] - moodFrequency[a];
+  }
+  orderedMoods.sort(compareFrequency);
+  return orderedMoods;
+};
+function FriendMoodsPie(props) {
   const [pieData, setPieData] = useState([]);
 
   useEffect(() => {
@@ -16,16 +24,28 @@ function TopMoodsPie(props) {
     // I initially get Anxious and Focused just to have two graphs up to start.
     // It is an async/await function so that it waits until
     function getData() {
-      console.log("get Data run");
+      // console.log("get Data run");
 
       // console.log(`current mood is ${currentMood}`);
 
       // var [orderedMoods, moodFrequency] = await getTopMoodsToday();
-      const orderedMoods = props.orderedMoods;
-      const moodFrequency = props.moodFrequency;
-      console.log(orderedMoods);
-      console.log(moodFrequency);
+      // const orderedMoods = props.orderedMoods;
+      const moodData = props.moodData;
       // console.log(orderedMoods);
+      const today = moodData[date];
+      console.log(today);
+      var moodFrequency = {};
+      for (var time in today) {
+        console.log(time, today[time].mood);
+        const mood = today[time].mood;
+        if (mood in moodFrequency) {
+          moodFrequency[mood] += 1;
+        } else {
+          moodFrequency[mood] = 1;
+        }
+      }
+      const orderedMoods = getOrderedMoods(moodFrequency);
+      console.log(orderedMoods);
       var pieChartData = [];
       orderedMoods.forEach(function (mood) {
         // console.log(mood);
@@ -41,7 +61,7 @@ function TopMoodsPie(props) {
 
     }
     getData();
-  }, [props.orderedMoods, props.moodFrequency]);
+  }, [props.moodFrequency]);
 
 
 
@@ -121,4 +141,4 @@ function TopMoodsPie(props) {
     // </PieChart>
   )
 }
-export default TopMoodsPie;
+export default FriendMoodsPie;
