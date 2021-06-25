@@ -39,9 +39,10 @@ import MoodIcon from '@material-ui/icons/Mood';
 import TodayIcon from '@material-ui/icons/Today';
 import PolicyIcon from '@material-ui/icons/Policy';
 import PeopleIcon from '@material-ui/icons/People';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import SignOut from './../LandingPage/SignOut.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from './../LandingPage/Sections/Theme.js'
+import theme from './../LandingPage/Sections/Theme.js';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import ChangeUsername from './ChangeUsername.js';
 
@@ -255,6 +256,9 @@ export default function Main(props) {
   const setFriends = () => {
     setTitle('Friends');
   }
+  const setSocial = () => {
+    setTitle('Social');
+  }
   const setPolicy = () => {
     setTitle('Privacy');
   }
@@ -371,9 +375,15 @@ export default function Main(props) {
               </ListItemIcon>
               <ListItemText primary='Web' />
             </MenuItem>
-            <MenuItem component={ReactLink} to="/dashboard/friends" icon={PeopleIcon} id='Friends' onClick={setFriends}>
+            <MenuItem component={ReactLink} to="/dashboard/social" icon={PeopleIcon} id='Social' onClick={setSocial}>
               <ListItemIcon>
                 <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary='Social' />
+            </MenuItem>
+            <MenuItem component={ReactLink} to="/dashboard/friends" icon={PersonAddIcon} id='Friends' onClick={setFriends}>
+              <ListItemIcon>
+                <PersonAddIcon />
               </ListItemIcon>
               <ListItemText primary='Friends' />
             </MenuItem>

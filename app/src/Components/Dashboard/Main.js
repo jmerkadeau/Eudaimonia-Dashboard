@@ -37,6 +37,8 @@ import WebPage from './WebPage.js';
 import Policy from './Policy.js';
 import MoodPage from './MoodPage.js';
 import Friends from "./../Friends/Friends.js";
+import Social from "./../Friends/Social.js";
+
 import { BrowserRouter as Router, Route, Switch, useHistory, Redirect } from "react-router-dom";
 import SideDrawer from './SideDrawer.js';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -231,7 +233,6 @@ class Main extends React.Component {
   }
 
   render() {
-
     const { classes } = this.props;
     const extensionAdded = this.state.extensionAdded;
     let alert;
@@ -261,7 +262,6 @@ class Main extends React.Component {
             justify="center"
             style={{ minHeight: '100vh' }}
           >
-
             <Grid item xs={3}>
               {/* <CircularProgress color="primary" size='10rem'></CircularProgress> */}
               <Box position="relative" display="inline-flex">
@@ -307,6 +307,7 @@ class Main extends React.Component {
                   <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
                   <Route path='/dashboard/web' exact component={() => <WebPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
                   <Route path='/dashboard/friends' exact component={() => <Friends user={this.state.user} />} />
+                  <Route path='/dashboard/social' exact component={() => <Social user={this.state.user} webLog={this.state.webLog} />} />
                   <Route path='/privacy' exact component={() => <Policy />} />
                   <Route path='/dashboard/privacy' exact component={() => <Policy />} />
                 </Switch>

@@ -33,10 +33,10 @@ function FriendMoodsPie(props) {
       const moodData = props.moodData;
       // console.log(orderedMoods);
       const today = moodData[date];
-      console.log(today);
+      // console.log(today);
       var moodFrequency = {};
       for (var time in today) {
-        console.log(time, today[time].mood);
+        // console.log(time, today[time].mood);
         const mood = today[time].mood;
         if (mood in moodFrequency) {
           moodFrequency[mood] += 1;
@@ -45,7 +45,7 @@ function FriendMoodsPie(props) {
         }
       }
       const orderedMoods = getOrderedMoods(moodFrequency);
-      console.log(orderedMoods);
+      // console.log(orderedMoods);
       var pieChartData = [];
       orderedMoods.forEach(function (mood) {
         // console.log(mood);

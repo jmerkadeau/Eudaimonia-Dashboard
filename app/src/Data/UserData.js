@@ -1,5 +1,9 @@
 import React from 'react';
 import { auth, database } from './Firebase.js';
+import { getGraphableWebByMoodData } from './WebsiteByMood.js';
+import { date } from './GetDate.js';
+import { ViewArray } from '@material-ui/icons';
+
 
 const capitalize = (s) => {
   const words = s.split(" ");
@@ -9,6 +13,32 @@ const capitalize = (s) => {
   }
   return (words.join(" "));
 };
+const timeToInteger = (time) => {
+  var t = time.split(':');
+  for (var i = 0; i < t.length; i++) {
+    t[i] = parseInt(t[i]);
+  }
+  const timeAsInt = ((t[0] * 3600) + (t[1] * 60) + t[2]);
+  return (timeAsInt);
+};
+
+function secondsToTime(secs) {
+  var hours = Math.floor(secs / (60 * 60));
+
+  var divisor_for_minutes = secs % (60 * 60);
+  var minutes = Math.floor(divisor_for_minutes / 60);
+
+  var divisor_for_seconds = divisor_for_minutes % 60;
+  var seconds = Math.ceil(divisor_for_seconds);
+
+  var obj = {
+    "h": hours,
+    "m": minutes,
+    "s": seconds
+  };
+  return obj;
+}
+
 
 async function getUsers(username) {
   var users = [];
@@ -74,6 +104,57 @@ async function getFriendMoodData(uid) {
   });
   return returnVal;
 }
+
+function calculateTotalWebTime(webData) {
+  var totalWebTime = 0;
+  console.log(webData);
+  for (const url in webData) {
+    const intervals = webData[url];
+    for (const startTime in intervals) {
+      const endTime = intervals[startTime];
+      // console.log(startTime, endTime);
+      var interval = timeToInteger(endTime) - timeToInteger(startTime);
+      if (interval === 0) {
+        interval = 1;
+      }
+      totalWebTime += interval;
+      // console.log(interval);
+    }
+  }
+  // console.log(totalWebTime);
+  return totalWebTime;
+}
+async function getFriendWebTime(uid) {
+  const ref = database.ref(`web/${uid}/`);
+  var returnVal = {
+    "h": 0,
+    "m": 0,
+    "s": 0
+  };
+  await ref.once('value', (snapshot) => {
+    if (snapshot.exists()) {
+      // console.log(`friend ${uid} found`);
+      var webData = snapshot.val();
+      if (date in webData) {
+        let todayData = webData[date];
+        // console.log(todayData);
+        const totalWebTimeSec = calculateTotalWebTime(todayData);
+        const totalWebTime = secondsToTime(totalWebTimeSec);
+        // console.log(totalWebTimeSec);
+
+        // console.log(totalWebTime);
+        returnVal = totalWebTime;
+        //   // return todayData
+      }
+      // console.log(returnVal);
+
+    } else {
+      // console.log('friend mood data doesnt exist yet');
+    }
+  });
+  return returnVal;
+}
+
 
 async function setUsername(username) {
   const uid = auth.currentUser.uid;
@@ -162,5 +243,6 @@ async function getFriends() {
 
 export {
   getUsers, checkUsernameExists, setUsername, sendFriendRequest,
-  getFriends, getUserFromUID, acceptFriendRequest, getFriendMoodData
+  getFriends, getUserFromUID, acceptFriendRequest, getFriendMoodData,
+  getFriendWebTime
 };

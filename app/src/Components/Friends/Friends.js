@@ -343,7 +343,6 @@ class Friends extends React.Component {
                       <TableCell>Photo</TableCell>
                       <TableCell align="right">Username</TableCell>
                       <TableCell align="right">Name</TableCell>
-                      <TableCell align="right">Moods</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -354,10 +353,7 @@ class Friends extends React.Component {
                         </TableCell>
                         <TableCell align="right">{row.username}</TableCell>
                         <TableCell align="right">{row.name}</TableCell>
-                        <TableCell align="right">
-                          <FriendMoodsPie moodData={this.state.friendsMoodData[row.uid]}></FriendMoodsPie>
 
-                        </TableCell>
 
                       </TableRow>
                     ))}
