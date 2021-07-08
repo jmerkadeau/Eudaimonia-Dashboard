@@ -4,98 +4,99 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid,
 import { ThemeProvider, Card, Typography, CardContent } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from './../LandingPage/Sections/Theme.js';
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryTheme, VictoryScatter, VictoryArea, VictoryLabel, VictoryTooltip } from 'victory';
+import Spline from 'cubic-spline';
+
 
 function MoodByTimeGraph(props) {
-    const [data, setData] = useState([]);
+ 
+    const [aSpline, setASpline] = useState(new Spline([0],[0]));
+    const [moodScatter, setMoodScatter] = useState([]);
+    const [firstPoint, setFirstPoint] = useState(0);
+    const [lastPoint, setLastPoint] = useState(0);
+    
 
     useEffect(() => {
         function getData(){
 
             var areaChartData = props.areaData;
+            setASpline(areaChartData);
 
-            setData(areaChartData)
+
+            var moodScatterData = props.scatterData;
+            setMoodScatter(moodScatterData);
+
+            var first = props.startStop[0];
+            var last = props.startStop[1];
+
+            setFirstPoint(first);
+            setLastPoint(last);
+            console.log(firstPoint, lastPoint)
 
         }
         getData();
+
     }, [props.areaData]);
-    console.log(data);
 
-    let moodsToday = [
-        {'name': 30000, 'time': 40, 'period': 'Tired' },
-        {'name': 30400, 'time': 40, 'period': 'Energized' },
-        {'name': 45900, 'time': 40, 'period': 'Distracted' },
-        {'name': 65580, 'time': 40, 'period': 'Focused' },
-    ];
+    console.log(aSpline)
+    console.log(firstPoint, lastPoint)
 
-    const CustomizedAxisTick = (tick) => {
-        
-        let newTick = 'time';
-        if (tick==21600){
-            newTick = 'Morning'
+    const timeToInteger = (time) => {
+        var t = time.split(':');
+        for (var i = 0; i < t.length; i++) {
+          t[i] = parseInt(t[i]);
         }
-        else if(tick==43200){
-            newTick='Afternoon'
-        }
-        // else if (tick==36000){
-        //     newTick='10:00 AM'
-        // }
-        // else if (tick==50400){
-        //     newTick='2:00 PM'
-        // }
-        else if (tick==64800){
-            newTick='Evening'
-        }
-        return(newTick);
+        const timeAsInt = ((t[0] * 3600) + (t[1] * 60) + t[2]);
+        return (timeAsInt);
     }
 
-    const CustomTooltip = ({ active, payload, label }) => {
-        if (active && payload && payload.length) {
-          return (
-            <div className="custom-tooltip">
-              <p className="label">{`${payload[0].payload.label} : ${payload[0].payload.period}`}</p>
-            </div>
-          );
-        }
-      
-        return null;
-      };
+    const integerToTime = (integer) => {
+        let hrs = String(Math.floor(integer / 3600));
+        let mins = String(Math.floor( (integer % 3600) / 60));
+        let secs = String(Math.floor(integer % 60));
 
+        if (secs < 10){
+            secs = 0 + secs
+        }
+
+        const time = `${hrs}:${mins}:${secs}`;
+
+        return (time);
+    }
 
 
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <div>
-                <ResponsiveContainer width={400} height={300}>
-                    {/* <AreaChart width={400} height={300} data={data}>
-                        <XAxis dataKey='name' />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
-                        <Scatter data={moodsToday} dataKey='time' fill='#dd7c85' />
-                    </AreaChart> */}
-                    <ComposedChart width={400} height={300} data={data}>
-                        {/* <XAxis dataKey='name' /> */}
-                        
-                        <XAxis dataKey='name' type='number' height={60} angle={30} textAnchor='start' ticks={[21600, 43200, 64800]} domain={[7200, 79200]} tickFormatter={CustomizedAxisTick}/>
-                        {/* tickFormatter={CustomizedAxisTick} */}
-                        {/* <YAxis domain={[0, 'auto']}/> */}
 
-                        <Tooltip content={<CustomTooltip />}/>
-                        <Area type='monotone' dataKey='time' stroke='#1E7291' fill='#58A1C1' />
-                        {/* {
-                            data.map((id) => {
-                            return (<Line type='stepBefore' dataKey='moodTime' stroke='#dd7c85' connectNulls='False'/>)
-                            })
-                        } */}
-                        {/* <Line type='monotone' dataKey='moodTime' stroke='#dd7c85' /> */}
+                <VictoryChart domain={{x: [7200, 79200], y: [0, 60]}} >
+                    {/* <VictoryAxis tickValues={21600, 43200, 64800} tickFormat={['morning', 'afternoon', 'evening']} /> */}
+                    <VictoryAxis standalone={false} tickValues={[21600, 43200, 68400]} tickFormat={['Morning', 'Afternoon', 'Evening']} />
+                    <VictoryAxis standalone={false} dependentAxis label='Minutes Per Hour'/>
+                    <VictoryArea 
+                        samples={150}
+                        y={(d) => ((d.x <= firstPoint || d.x >= lastPoint) ? 0: aSpline.at(d.x)/2)}
+                     
+                        style={{ data: { fill: "#58A1C1", fillOpacity: 0.7, stroke: '#58A1C1', strokeWidth: 2 } }}
+                
+                    />
+                    <VictoryScatter
+                        data={moodScatter}
+                        size={5}
+                        style={{ data: { fill: "#dd7c85" } }}
+                        x={(data) => (data.time)}
+                        y={(data) => aSpline.at(data.time)/2}
+                        labels={({ datum }) => `${datum.mood} - ${integerToTime(datum.time)}`}
+                        labelComponent={<VictoryTooltip  pointerLength={20} 
+                        style={{fill: '#dd7c85'}}
+                        flyoutStyle={{ fill: '#FFFFFF', stroke: '#dd7c85'}} />}
+                    />
+                    
+                </VictoryChart>
+        
 
-                        <Scatter dataKey='moodTime' fill='#dd7c85' />
 
-                        
-
-                    </ComposedChart>
-                </ResponsiveContainer>
             </div>
         </ThemeProvider>
     )

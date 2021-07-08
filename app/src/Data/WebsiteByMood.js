@@ -1,3 +1,4 @@
+import Spline from 'cubic-spline';
 // hourBeforeArray creates an array with all of
 // the logged web visirs that a start time within one
 // hour before the time of the specified mood log
@@ -255,80 +256,157 @@ function getTimeByPeriodToday(webLog, moodLog) {
     };
     webLogWithStartAndTime.push(a);
   }
-  console.log(webLogWithStartAndTime)
+  // console.log(webLogWithStartAndTime)
   // console.log(webLogWithTime);
   // need to separate by time of day
-  const timesOfDay = ['0:00 - 4:00', '4:00 - 8:00', '8:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 24:00'];
+  // const timesOfDay = ['0:00 - 4:00', '4:00 - 8:00', '8:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 24:00'];
   // const timesOfDayNames = ['Early Morning', 'Dawn', 'Morning', 'Afternoon', 'Evening', 'Night' ];
   // const timesOfDayNames = ['2:00', '6:00', '10:00', '14:00', '18:00', '22:00'];
-  const timesOfDayNames = [7200, 21600, 36000, 50400, 64800, 79200];
-  let webTimePerPeriod = [0, 0, 0, 0, 0, 0]
+  // const timesOfDay = [0, 14400, 28800, 43200, 57600, 72000, 86400];
+  // const timesOfDay = [0, 3600, 7200, 10800, 14400, 18000, 21600, 25200, 28800, 32400, 36000, 39600, 43200, 
+  // 46800, 50400, 54000, 57600, 61200, 64800, 68400, 72000, 75600, 79200, 82800, 86400]
+  // let webTimePerPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  const timesOfDay = [0, 7200, 14400, 21600, 28800, 36000, 43200, 
+    50400, 57600, 64800, 72000, 79200, 86400]
+    let webTimePerPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 
   for (var j = 0; j < webLogWithStartAndTime.length; j++){
-    let check = webLogWithStartAndTime[j].start;
-    if (check <= 14400){
-      webTimePerPeriod[0] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 14400 && check <= 28800){
-      webTimePerPeriod[1] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 28800 && check <= 43200){
-      webTimePerPeriod[2] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 43200 && check <= 57600){
-      webTimePerPeriod[3] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 57600 && check <= 72000){
-      webTimePerPeriod[4] += webLogWithStartAndTime[j].timeSpent;
-    }
-    else if (check > 72000 && check <= 86400){
-      webTimePerPeriod[5] += webLogWithStartAndTime[j].timeSpent; 
+    for (var k = 0; k < webTimePerPeriod.length; k++){
+      let check = webLogWithStartAndTime[j].start;
+      if (check > timesOfDay[k] && check <= timesOfDay[k+1]){
+        webTimePerPeriod[k] += webLogWithStartAndTime[j].timeSpent;
+      }
     }
   }
 
-  console.log(webTimePerPeriod)
+  // console.log(webTimePerPeriod)
 
-  let areaData = []
+  // let areaData = []
+  let splineX = [];
+  let splineY = [];
+  // let splineMood = [];
   for (var k = 0; k < webTimePerPeriod.length; k++){
-    let dataPoint = {
-      'name': timesOfDayNames[k],
-      'period': timesOfDay[k],
-      'time': parseFloat((webTimePerPeriod[k]/60).toFixed(1)),
-      'label': 'Time of Day',
-    }
-    areaData.push(dataPoint)
+    splineX.push(timesOfDay[k+1]);
+    splineY.push(parseFloat((webTimePerPeriod[k]/60).toFixed(1)));
+
   }
 
-  // let moodsToday = [];
 
-  for (var l = 0; l<moodLog.length; l++){
-    let mood1 = {
-      'name': moodLog[l].time,
-      'period': moodLog[l].mood,
-      'moodTime': 0,
-      'label': 'Mood',
+
+
+  const testSpline = new Spline(splineX, splineY);
+  // console.log(testSpline);
+
+  return testSpline;
+}
+function getStartStopValues(webLog) {
+  const webLogWithStartAndTime = [];
+  for (var i = 0; i < webLog.length; i++) {
+    var start = webLog[i].start;
+    var end = webLog[i].end;
+    var timeSpent = end - start;
+    const a = {
+      'domain': webLog[i].domain,
+      'start': start,
+      'timeSpent': timeSpent
     };
-    // let mood2 = {
-    //   'name': moodLog[l].time,
-    //   'period': moodLog[l].mood,
-    //   'moodTime': 80,
-    //   'label': 'Mood',
-    // }
-    areaData.push(mood1);
+    webLogWithStartAndTime.push(a);
+  }
+  // console.log(webLogWithStartAndTime)
+  // console.log(webLogWithTime);
+  // need to separate by time of day
+  // const timesOfDay = ['0:00 - 4:00', '4:00 - 8:00', '8:00 - 12:00', '12:00 - 16:00', '16:00 - 20:00', '20:00 - 24:00'];
+  // const timesOfDayNames = ['Early Morning', 'Dawn', 'Morning', 'Afternoon', 'Evening', 'Night' ];
+  // const timesOfDayNames = ['2:00', '6:00', '10:00', '14:00', '18:00', '22:00'];
+  // const timesOfDay = [0, 14400, 28800, 43200, 57600, 72000, 86400];
+  // const timesOfDay = [0, 3600, 7200, 10800, 14400, 18000, 21600, 25200, 28800, 32400, 36000, 39600, 43200, 
+  // 46800, 50400, 54000, 57600, 61200, 64800, 68400, 72000, 75600, 79200, 82800, 86400]
+  // let webTimePerPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  const timesOfDay = [0, 7200, 14400, 21600, 28800, 36000, 43200, 
+    50400, 57600, 64800, 72000, 79200, 86400]
+    let webTimePerPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+
+  for (var j = 0; j < webLogWithStartAndTime.length; j++){
+    for (var k = 0; k < webTimePerPeriod.length; k++){
+      let check = webLogWithStartAndTime[j].start;
+      if (check > timesOfDay[k] && check <= timesOfDay[k+1]){
+        webTimePerPeriod[k] += webLogWithStartAndTime[j].timeSpent;
+      }
+    }
+  }
+
+  // let areaData = []
+  let splineX = [];
+  let splineY = [];
+  // let splineMood = [];
+  for (var k = 0; k < webTimePerPeriod.length; k++){
+    splineX.push(timesOfDay[k+1]);
+    splineY.push(parseFloat((webTimePerPeriod[k]/60).toFixed(1)));
+
+  }
+
+
+
+
+  const testSpline = new Spline(splineX, splineY);
+  // console.log(testSpline);
+
+  let firstPoint = 0;
+  let lastPoint = 86400;
+
+  for (var i=0; i < testSpline.ys.length; i++){
+    if (testSpline.ys[i] != 0){
+        if (i == 0){
+            firstPoint = 0;
+        }
+        else{
+            firstPoint = (testSpline.xs[i-1])
+        }
+        break;
+    }
+  }
+
+  for (var j = (testSpline.ys.length - 1); j >= 0; j--){
+    if (testSpline.ys[j] != 0){
+        if ( (j == (testSpline.ys.length - 1)) || (j == (testSpline.ys.length - 2)) ){
+            lastPoint = 86400
+        }
+        else{
+            lastPoint = (testSpline.xs[j+2])
+        }
+        break;
+    }
+  }
+
+  return [firstPoint, lastPoint];
+
+}
+
+function getMoodByPeriodToday(moodLog) {
+  let todaysMoods = []
+  for (var i = 0; i<moodLog.length; i++){
+    let mood1 = {
+      'time': moodLog[i].time,
+      'mood': moodLog[i].mood,
+      // 'moodTime': 0,
+    };
+  
+    todaysMoods.push(mood1);
     // areaData.push(mood2);
 
   }
+  // console.log(todaysMoods);
 
-  console.log(areaData)
+  return todaysMoods;
 
-  // let earlyMorning = 0;
-  // let dawn = 0;
-  // let morning = 0;
-  // let afternoon = 0;
-  // let evening = 0;
-  // let night = 0;
+}
 
-  return (areaData);
+function getSortedMoods(moodLog) {
+  // console.log(moodLog)
+
+  return [];
 }
 
 export {
@@ -340,5 +418,8 @@ export {
   getOrderedMoods,
   getMoodCount,
   getMoodScore,
-  getTimeByPeriodToday
+  getTimeByPeriodToday,
+  getMoodByPeriodToday,
+  getStartStopValues,
+  getSortedMoods
 };

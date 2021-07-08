@@ -51,7 +51,7 @@ import FacebookSpinner from './FacebookSpinner.js';
 
 import getMoodLog from '../../Data/MoodData.js';
 import getWebLog from '../../Data/WebData.js';
-import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb } from './../../Data/AllTimeData.js';
+import { getAllTimeWebByMood, getAllTimeMoodByWeb, getAllTimeMood, getAllTimeWeb, getAllMoodsByTime } from './../../Data/AllTimeData.js';
 import logo from "./logo192.png";
 
 
@@ -205,6 +205,7 @@ class Main extends React.Component {
     const allTimeMoodByWeb = await getAllTimeMoodByWeb();
     const allTimeMood = await getAllTimeMood();
     const allTimeWeb = await getAllTimeWeb();
+    const allMoodsByTime = await getAllMoodsByTime();
     // console.log(allTimeWeb);
     // console.log(allTimeMood);
     this.setState({
@@ -214,6 +215,7 @@ class Main extends React.Component {
       allTimeMoodByWeb: allTimeMoodByWeb,
       allTimeMood: allTimeMood,
       allTimeWeb: allTimeWeb,
+      allMoodsByTime: allMoodsByTime,
       isLoading: false
     });
     // console.log("end loading");
@@ -303,8 +305,8 @@ class Main extends React.Component {
                   {/* <Route path='/' exact component={() => <Dashboard />} />
                   <Route path='/dashboard' exact component={() => <Dashboard />} /> */}
                   <Route path='/' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
-                  <Route path='/dashboard' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
-                  <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} />} />
+                  <Route path='/dashboard' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} allMoodsByTime={this.state.allMoodsByTime}/>} />
+                  <Route path='/dashboard/mood' exact component={() => <MoodPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeMood={this.state.allTimeMood} allTimeWebByMood={this.state.allTimeWebByMood} allMoodsByTime={this.state.allMoodsByTime}/>} />
                   <Route path='/dashboard/web' exact component={() => <WebPage webLog={this.state.webLog} moodLog={this.state.moodLog} allTimeWeb={this.state.allTimeWeb} allTimeMoodByWeb={this.state.allTimeMoodByWeb} />} />
                   <Route path='/dashboard/friends' exact component={() => <Friends user={this.state.user} />} />
                   <Route path='/dashboard/social' exact component={() => <Social user={this.state.user} webLog={this.state.webLog} />} />

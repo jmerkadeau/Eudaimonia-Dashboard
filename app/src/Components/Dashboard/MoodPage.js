@@ -4,6 +4,7 @@ import MoodsList from './../Mood/MoodsList.js';
 import TopMoodsPie from './../Mood/TopMoodsPie.js';
 import PositivityScore from './../Mood/PositivityScore.js';
 import MoodByTimeGraph from './../Mood/MoodByTimeGraph.js';
+import MoodByTimeAllTime from '../Mood/MoodByTimeAllTime.js';
 
 import {
   getWebByMoodToday,
@@ -13,6 +14,8 @@ import {
   getMoodCount,
   getMoodScore,
   getTimeByPeriodToday,
+  getMoodByPeriodToday,
+  getStartStopValues
   
 } from '../../Data/WebsiteByMood';
 
@@ -188,7 +191,13 @@ class MoodPage extends React.Component {
     var moodScoreToday = getMoodScore(moodToday);
     var moodScoreAllTime = getMoodScore(moodAllTime);
 
-    var timeByPeriodToday = getTimeByPeriodToday(props.webLog, props.moodLog)
+    var timeByPeriodToday = getTimeByPeriodToday(props.webLog, props.moodLog);
+    var moodByPeriodToday = getMoodByPeriodToday(props.moodLog);
+    var startStopValues = getStartStopValues(props.webLog);
+
+    // var sortedMoodValues = getSortedMoods(moodAllTime);
+    const sortedMoodValues = props.allMoodsByTime;
+    console.log(props.allMoodsByTime)
 
     // console.log(props.moodLog);
     // console.log(orderedMoodsToday[0]);
@@ -223,6 +232,10 @@ class MoodPage extends React.Component {
       moodScoreAllTime: moodScoreAllTime,
       // Area Chart
       areaData: timeByPeriodToday,
+      scatterData: moodByPeriodToday,
+      startStop: startStopValues,
+      // Bar Chart
+      sortedMoods: sortedMoodValues
     };
     // Bind functions to this object so can use this object's state
     this.onCurrentMoodChange = this.onCurrentMoodChange.bind(this);
@@ -305,6 +318,7 @@ class MoodPage extends React.Component {
   render() {
     const { classes } = this.props;
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -321,46 +335,22 @@ class MoodPage extends React.Component {
 
             <Grid container className={classes.moodGrid}>
               <Grid item xs={12} sm={12} md={12} lg={6} className={classes.card}>
-                {/* <Paper className={classes.altpaper}>
-                  <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
-                    Moods Logged {this.state.headerText}
-                  </Typography>
-                  <Typography color={'primary'} variant='h1' className={classes.pieTitle}>
-                    {this.state.moodCount}
-                  </Typography>
-                </Paper> */}
-                {/* <Paper className={classes.altpaper}>
-                  <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
-                    Positivity Score {this.state.headerText}
-                  </Typography> */}
-                  {/* <Typography color={'primary'} variant='h1' className={classes.pieTitle}>
-                    {this.state.moodCount}
-                  </Typography> */}
-                  {/* <PositivityScore classNames={classes.centerIt} moodScore={this.state.moodScore}></PositivityScore>
-                  <div className={classes.paperDiv}>
-                    <Divider className={classes.divider} />
-                    <div className={classes.infoDiv}>
-                      <Typography variant='h6' className={classes.positivityText}>
-                        {this.comparePositivity()}
-                      </Typography> */}
-                      {/* <Typography color={'inherit'} variant='h6' >
-                        Top Mood {this.state.headerText}: {this.state.orderedMoods[0]}
-                      </Typography> */}
-
-                    {/* </div>
-                  </div>
-                </Paper> */}
-                {/* <div> */}
+  
                 
                 <Paper className={classes.altpaper}>
                   <Typography color={'primary'} variant='h5' className={classes.pieTitle}>
                     Mood By Time {this.state.headerText}
                   </Typography>
-                  <MoodByTimeGraph className={classes.centerIt} areaData={this.state.areaData}></MoodByTimeGraph>
+                  <div>
+                    {this.state.allTime
+                    ? <MoodByTimeAllTime className={classes.centerIt} sortedMoods={this.state.sortedMoods} />
+                    : <MoodByTimeGraph className={classes.centerIt} areaData={this.state.areaData} scatterData={this.state.scatterData} startStop={this.state.startStop} />}
+                  </div>
+
+                  {/* <MoodByTimeGraph className={classes.centerIt} areaData={this.state.areaData} scatterData={this.state.scatterData} startStop={this.state.startStop}></MoodByTimeGraph> */}
                   
 
                 </Paper>
-                {/* </div> */}
 
 
               </Grid>
